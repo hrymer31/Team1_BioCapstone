@@ -9,7 +9,7 @@ STEPS = (steps∙day-1)<br>
 kg of fat mass-1 = (1/kg of fat mass)<br>
 day-1 = (1/day)<br>
 
-variable needed per new pdf:
+variable needed per new pdf:<br>
 sex <br>
 current weight(lb)<br>
 current weight(kg): (current weight(lb) * .45467)<br>
