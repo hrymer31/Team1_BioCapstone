@@ -28,6 +28,7 @@
 //<label>
   //Start:
 // <select value>
+//<input type = int>
 //Day:
 //Month:
 //Year:
@@ -36,6 +37,7 @@
 //<label>
   //End:
 // <select value>
+//<input type = int>
 //Day:
 //Month:
 //Year:
@@ -49,12 +51,14 @@
   //Age min:
 // <select value>
 //Minimum age
+//<input type = int>
 //</label>
 
 //<label>
   //Age max:
 // <select value>
 //Maximum age
+//<input type = int>
 //</label>
 
 //<label>
@@ -72,8 +76,8 @@
 //<input type = int>
 //</label>
 
-//<button onClick: Export to Excel: </button>
+//<button onClick: Export to Excel </button>
 // data from selected date range exported to Excel
 
-//<button onClick: Submit to Database: </button>
+//<button onClick: Submit to Database </button>
 // new equation constants exported to database in selected age range
