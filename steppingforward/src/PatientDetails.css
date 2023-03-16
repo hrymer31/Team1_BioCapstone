@@ -1,0 +1,33 @@
+.PatientDetails {
+    margin-top: 30px;
+    width: 50%;
+    height: 1000px;
+}
+.MuiInputBase-root.MuiOutlinedInput-root {
+    width: 100px;
+}
+
+.MuiFormControl-root.PatientDetails {
+    width: 50%;
+    height: 1000px;
+    display: flex;
+}
+.MuiFormLabel-root.MuiInputLabel-root {
+    display: flex;
+    margin-right: 20px;
+    top: auto;
+}
+.MuiButtonBase-root.MuiMenuItem-root {
+    background-color: white;
+}
+.ageLabel {
+    margin-right: 10px;
+}
+#demo-select-small {
+    width: 100px;
+}
+.inputSection {
+    display: flex;
+    margin-bottom: 30px;
+    flex-direction: column;
+}
