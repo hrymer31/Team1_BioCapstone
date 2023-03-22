@@ -11,7 +11,7 @@ import {
     OutlinedInput,
     Button
  } from '@mui/material'
-import Quotes from './InspirationalQuotes';
+import Quotes from '../InspirationalQuotes';
 
 const ageArray = [];
 

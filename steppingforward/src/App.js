@@ -1,10 +1,10 @@
 import logo from './logo.svg';
 import './App.css';
 import {BrowserRouter as Router,Routes,Route} from "react-router-dom"
-import Resources from './Resources'
-import PatientDetails from './PatientDetails';
-import EmailReminderPage from './EmailReminderPage';
-import SignUp from './SignUp'
+import Resources from './Pages/Resources'
+import PatientDetails from './Pages/PatientDetails';
+import EmailReminderPage from './Pages/EmailReminderPage';
+import SignUp from './Pages/SignUp'
 
 function App() {
   return (
