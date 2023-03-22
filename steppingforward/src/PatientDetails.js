@@ -194,7 +194,10 @@ const PatientDetails = () => {
                 >
                     Get Results!
                 </Button>
-            </FormControl>                                        
+            </FormControl>     
+            <div>
+                Prescribed daily step count: {Math.trunc(results)}
+            </div>                                        
         </div>
     )
 }
@@ -202,7 +205,6 @@ const PatientDetails = () => {
 export default PatientDetails;
 
     /*
-
     <div className='inputSection'>
                     <InputLabel id="demo-simple-select-label">Age</InputLabel>
                     <Select
@@ -219,5 +221,4 @@ export default PatientDetails;
                         )}
                     </Select>
                 </div>
-
                 */
