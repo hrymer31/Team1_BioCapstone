@@ -1,0 +1,54 @@
+/* CSS for ageCheck page */
+
+.ageCheck {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #B0E19D;
+    background-size: cover;
+    min-height: 100vh;
+}
+
+.selectBox {
+    width: 35%;
+}
+
+.btn {
+    background-color: black;
+    color: white;
+}
+
+/* CSS for disqualification page */
+
+.disqualify {
+    display: flex;
+    flex-direction: column;
+    background-color: #B0E19D;
+    background-size: cover;
+    min-height: 100vh;
+    align-items: center;
+    justify-content: center;
+}
+
+.disqualifyForm {
+    display: flex;
+    height: 5%;
+    width: 40%;
+    padding: 1%;
+    margin-top: 1%;
+    justify-content: center;
+}
+
+.formText {
+    align-items: left;
+    justify-content: left;
+    padding: 5px;
+}
+
+.formField {
+    align-items: right;
+    justify-content: right;
+    margin-left: 10%;
+    background-color: white;
+}
