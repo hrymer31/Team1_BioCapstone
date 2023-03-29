@@ -38,3 +38,8 @@ npm install moment-timezone
 npm install --save @fortawesome/fontawesome-free
 
 npm install @fortawesome/free-solid-svg-icons
+
+if your interested in using incons, you can download some here and simply import them into the project!
+
+https://fontawesome.com/icons/
+
