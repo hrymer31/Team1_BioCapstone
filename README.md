@@ -28,3 +28,9 @@ Females: 261425.4/(target body fat(%)^1.8797) = STEPS∙kg of fat mass∙day<br>
 
 steps/day = ((STEPS∙kg of fat mass∙day)* current fat mass(kg))
 
+
+NPM Install Commands for files contactform, navbar, and app.js:
+npm install @emailjs/browser
+npm install moment-timezone
+npm install --save @fortawesome/fontawesome-free
+npm install @fortawesome/free-solid-svg-icons
