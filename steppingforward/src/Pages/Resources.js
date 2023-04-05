@@ -1,5 +1,5 @@
 import React from 'react'
-import './Resources.css'
+import '../Css/Resources.css'
 import DirectionsWalkIcon from '@mui/icons-material/DirectionsWalk';
 import LocalDrinkIcon from '@mui/icons-material/LocalDrink';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
