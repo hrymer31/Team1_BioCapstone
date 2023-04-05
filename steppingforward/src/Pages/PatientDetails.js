@@ -2,27 +2,18 @@ import React, { useState } from 'react'
 import '../Css/PatientDetails.css'
 import { 
     FormControl, 
-    InputLabel, 
-    Select, 
-    MenuItem, 
-    TextField,
-    InputAdornment,
-    FormHelperText,
-    OutlinedInput,
     Button
  } from '@mui/material'
 import Quotes from '../InspirationalQuotes';
-import { borderRadius, Box } from '@mui/system';
+import { Box } from '@mui/system';
 
 const ageArray = [];
-ageArray[0] = ' '
 for (var i = 19; i < 46; i++) {
-    ageArray[i - 18] = i;
+    ageArray[i - 19] = i;
 }
-const sexArray = [" ","Female","Male"]
+const sexArray = ["Female","Male"]
 
 const raceArray = [
-    "",
     "American Indian or Alaska Native",
     "Asian",
     "Black or African American",
@@ -32,19 +23,23 @@ const raceArray = [
 ]
 
 const PatientDetails = () => {
-    const [age, setAge] = useState(null)
-    const [sex, setSex] = useState(null)
-    const [race, setRace] = useState(null)
-    const [height, setHeight] = useState(null)
+    const [age, setAge] = useState()
+    const [sex, setSex] = useState()
+    const [race, setRace] = useState()
+    const [height, setHeight] = useState()
+
+    const [weightlb, setWeightlb] = useState()
+    const [bodyFatPerc, setBodyFatPerc] = useState()
+    const [targetWeightLossPerc, setTargetWeightLossPerc] = useState()
 
     const [ageError, setAgeError] = useState(false)
     const [sexError, setSexError] = useState(false)
     const [raceError, setRaceError] = useState(false)
-
-    const [weightlb, setWeightlb] = useState(null)
-    const [bodyFatPerc, setBodyFatPerc] = useState(null)
-    const [targetWeightLossPerc, setTargetWeightLossPerc] = useState(null)
-
+    const [heightError, setHeightError] = useState(false)
+    const [weightError, setWeightError] = useState(false)
+    const [bodyFatError, setBodyFatError] = useState(false)
+    const [targetWeightError, setTargetWeightError] = useState(false)
+ 
     const [weightkg, setWeightkg] = useState(null)
     const [currentFatMass, setCurrentFatMass] = useState(null)
     const [currentFatFreeMass, setCurrentFatFreeMass] = useState(null)
@@ -56,52 +51,75 @@ const PatientDetails = () => {
     const [results, setResults] = useState(null)
 
     const validate = () => {
-         if (age === null || " ") {
+        if(age === undefined){
             setAgeError(true)
-        } 
-        if (sex === null || " ") {
+        }
+        if(sex === undefined){
             setSexError(true)
-        } 
-        if (race === null || " ") {
+        }
+        if(race === undefined){
             setRaceError(true)
-        } 
-        if((!ageError)&&(!sexError)&&(!raceError)){
-            console.log('calculating')
+        }
+        if(height === undefined) {
+            setHeightError(true)
+        }
+        if (weightlb === undefined) {
+            setWeightError(true)
+        }
+        if (bodyFatPerc === undefined) {
+            setBodyFatError(true)
+        }
+        if (targetWeightLossPerc === undefined) {
+            setTargetWeightError(true)
+        }
+        if(
+            (age !== undefined) && 
+            (sex !== undefined) && 
+            (race !== undefined) &&
+            (height !== undefined) && 
+            (weightlb !== undefined) && 
+            (bodyFatPerc !== undefined) &&
+            (targetWeightLossPerc !== null)
+        ){
             calculate()
-        } 
+        }
     }
     const calculate = () => {
             setWeightkg(
-                weightlb / 2.20462
+                (weightlb / 2.20462)
             )
             setCurrentFatMass(
-                weightkg * bodyFatPerc
+                (weightkg * bodyFatPerc)
             )
             setCurrentFatFreeMass(
-                weightkg - currentFatMass
+                (weightkg - currentFatMass)
             )
             setTargetWeightLosskg(
-                weightkg * targetWeightLossPerc
+                (weightkg * targetWeightLossPerc)
             )
             setTargetBodyWeightkg(
-                weightkg - targetWeightLosskg
+                (weightkg - targetWeightLosskg)
             )
             setNewFatMass(
-                currentFatMass - targetWeightLosskg
+                (currentFatMass - targetWeightLosskg)
             )
             setTargetBodyfatPerc(
-                (newFatMass / 95.1) * 100
-            )
+                ((newFatMass / targetBodyWeightkg) * 100)
+            )            
             if (sex === 'Male') {
-                const results = (39377.3357744) / (Math.pow(newFatMass, 1.304048257))
+                const results = ((39377.3357744) / (Math.pow(targetBodyFatPerc, 1.304048257)))
                 setResults(results)
             } else if (sex === 'Female') {
-                const results = (261425.44) / (Math.pow(targetBodyFatPerc, 1.87969924))
+                const results = ((261425.44) / (Math.pow(targetBodyFatPerc, 1.87969924)))
                 setResults(results)
             }  
             setAgeError(false)
             setSexError(false)
-            setRaceError(false)   
+            setRaceError(false)
+            setHeightError(false)
+            setWeightError(false)
+            setBodyFatError(false)
+            setTargetWeightError(false)   
     };
     return (
         <div className='PatientDetails'>
@@ -127,6 +145,7 @@ const PatientDetails = () => {
                         <div className='inputSection'>
                             <label htmlFor="age">Age</label>
                             <select id="age" value={age} onChange={(e) => setAge(e.target.value)}>
+                                <option value=""></option>
                                 {
                                     ageArray.map(ageOption => {
                                         return (
@@ -142,6 +161,7 @@ const PatientDetails = () => {
                         <div className='inputSection'>
                             <label htmlFor="sex">Sex</label>
                             <select id='sex' value={sex} onChange={(e) => setSex(e.target.value)}>
+                                <option value=""></option>
                                 {sexArray.map(sexOption => {
                                     return (
                                         <option value={sexOption}>{sexOption}</option>
@@ -155,6 +175,7 @@ const PatientDetails = () => {
                         <div className='inputSection'>
                             <label htmlFor="race">Race</label>
                             <select id='race' value={race} onChange={(e) => setRace(e.target.value)}>
+                                <option value=""></option>
                                 {
                                     raceArray.map(raceOption => {
                                         return (
@@ -171,19 +192,31 @@ const PatientDetails = () => {
                             <label htmlFor='height'>Height(cm)</label>
                             <input id='height' type='number' placeholder='cm' onChange={(e) => setHeight(e.target.value)} /> 
                         </div>
+                        {
+                            (heightError) && <div style={{ color: 'red' }} className='error'>You must select a valid height</div>
+                        }
                         <p> Enter all calculations below to the nearest tenths place (e.g. 250.5, 22.0)</p>
                         <div className='inputSection'>
                             <label htmlFor='weight'>Weight(lb)</label>
                             <input id='weight' type='number' placeholder='lb' onChange={(e) => setWeightlb(e.target.value)} /> 
                         </div>
+                        {
+                            (weightError) && <div style={{ color: 'red' }} className='error'>You must select a valid weight</div>
+                        }
                         <div className='inputSection'>
                             <label form='bodyFatPerc'>Body Fat %</label>
                             <input id='bodyFatPerc' type='number' placeholder='%' onChange={(e) => setBodyFatPerc((e.target.value) / 100)} />
                         </div>
+                        {
+                            (bodyFatError) && <div style={{ color: 'red' }} className='error'>You must select a valid body fat %</div>
+                        }
                         <div className='inputSection'>
                             <label form='targetWeightLossPerc'>Target Weight Loss %</label>
                             <input id='targetWeightLossPerc' type='number' placeholder='%' onChange={(e) => setTargetWeightLossPerc((e.target.value) / 100)} />
                         </div>
+                        {
+                            (targetWeightError) && <div style={{ color: 'red' }} className='error'>You must select a valid target weight %</div>
+                        }
                     </div>
                     <Button
                         onClick={validate}
@@ -200,22 +233,3 @@ const PatientDetails = () => {
 }
 
 export default PatientDetails;
-
-    /*
-    <div className='inputSection'>
-                    <InputLabel id="demo-simple-select-label">Age</InputLabel>
-                    <Select
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
-                        value={age}
-                        label="Age"
-                        onChange={handleAgeChange}
-                    >
-                        {ageArray.map((age) =>
-                            <MenuItem
-                                selected={false}
-                            >{age}</MenuItem>
-                        )}
-                    </Select>
-                </div>
-                */

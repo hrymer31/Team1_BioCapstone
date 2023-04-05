@@ -5,6 +5,7 @@ import Resources from './Pages/Resources'
 import PatientDetails from './Pages/PatientDetails';
 //import EmailReminderPage from './Pages/';
 import SignUp from './Pages/SignUp'
+import Quotes from './InspirationalQuotes';
 
 function App() {
   return (
