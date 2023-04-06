@@ -1,0 +1,17 @@
+.username{
+    margin: 10px;
+}
+
+.password{
+    margin: 10px;
+}
+
+.signIn{
+    margin: 10px;
+}
+
+.WellstarLogo{
+    position: absolute;
+    top: 0;
+    right: 0;
+}
