@@ -6,11 +6,30 @@ import 'react-datepicker/dist/react-datepicker.css';
 function DataAdmin (){
     const [startDate, setStartDate] = useState(null);
     const [endDate,   setEndDate]   = useState(null);
+    const [y,         setYValue]    = useState(null);
+    const [x,         setXValue]    = useState(null);
+    const [R,         setRValue]    = useState(null);
 
     function handleExcelExport() {
         alert('Export Successful');
         window.location.reload();
-      }
+    }
+    function handleYTextChange(event) {
+        setYValue(event.target.value);
+    }
+
+    function handleXTextChange(event) {
+        setXValue(event.target.value);
+    }
+
+    function handleRTextChange(event) {
+        setRValue(event.target.value);
+    }
+
+    function handleEquationSubmit() {
+        alert('Submit Successful');
+        window.location.reload();
+    }
 
     return (
         <div className='DataAdmin'>
@@ -30,6 +49,35 @@ function DataAdmin (){
             
             <div className='exportExcel'>
             <button onClick={handleExcelExport}>Export to Excel</button>
+            </div>
+
+            <div className='ageRange'>
+            <h3>Age range equation</h3>
+            </div>
+
+            <div className='ageRangeY'>
+            <label>
+            y=
+            <input type="text" value={y} onChange={handleYTextChange} />
+            </label>
+            </div>
+
+            <div className='ageRangeX'>
+            <label>
+            x-exponent 
+            <input type="text" value={x} onChange={handleXTextChange} />
+            </label>
+            </div>
+
+            <div className='ageRangeR'>
+            <label>
+            R=
+            <input type="text" value={R} onChange={handleRTextChange} />
+            </label>
+            </div>
+
+            <div className='submitEquation'>
+            <button onClick={handleEquationSubmit}>Submit to Database</button>
             </div>
         </div>
     );

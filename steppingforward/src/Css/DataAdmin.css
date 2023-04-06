@@ -17,6 +17,26 @@
     margin: 10px;
 }
 
+.ageRange{
+    margin: 10px;
+}
+
+.ageRangeY{
+    margin: 10px;
+}
+
+.ageRangeX{
+    margin: 10px;
+}
+
+.ageRangeR{
+    margin: 10px;
+}
+
+.submitEquation{
+    margin: 10px;
+}
+
 body {
     background-color: #B0E19D;
 }
