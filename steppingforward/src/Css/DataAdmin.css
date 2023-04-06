@@ -1,0 +1,22 @@
+.title{
+    justify-content: left;
+    margin: 10px;
+}
+
+.startDate{
+    display: inline-block;
+    margin: 10px;
+}
+
+.endDate{
+    display: inline-block;
+    margin: 10px;
+}
+
+.exportExcel{
+    margin: 10px;
+}
+
+body {
+    background-color: #B0E19D;
+}
