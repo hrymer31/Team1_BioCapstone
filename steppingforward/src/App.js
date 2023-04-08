@@ -33,6 +33,7 @@ function App() {
           <Route path='/admin'     element={<DataAdmin/>}/>
           <Route path='/wellstar'  element={<WellstarLogin/>}/>
           <Route path='/signup'    element={<SignUp />} />
+          <Route path='/contactForm'    element={<contactForm />} />
         </Routes>
     
       </div>
