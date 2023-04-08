@@ -3,7 +3,7 @@ import './Css/App.css';
 import { Route, Routes } from "react-router-dom"
 import Resources from './Pages/Resources'
 import PatientDetails from './Pages/PatientDetails';
-import EmailReminderPage from './Pages/EmailReminderPage';
+import contactForm, { ContactUs } from './Pages/contactForm';
 import DataAdmin from './Pages/DataAdmin';
 import WellstarLogin from './Pages/WellstarLogin';
 import SignUp from './Pages/SignUp'
@@ -18,6 +18,7 @@ function App() {
   return (
     <>
      <Navbar />
+  
       <div className="container">
      
         <Routes>
@@ -28,7 +29,7 @@ function App() {
           <Route path='/resources' element={<Resources/>}/>
           <Route path='/details'   element={<PatientDetails />}/>
           <Route path='/goals'   element={<Goals />}/>
-          <Route path='/reminders' element={<EmailReminderPage />} />
+          <Route path='/reminders' element={<contactForm />} />
           <Route path='/admin'     element={<DataAdmin/>}/>
           <Route path='/wellstar'  element={<WellstarLogin/>}/>
           <Route path='/signup'    element={<SignUp />} />

@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import '../Css/PatientDetails.css'
+
 import { 
     FormControl, 
     Button
@@ -100,6 +101,7 @@ const PatientDetails = () => {
     };
 
     return (
+       
         <div className='PatientDetails'>
             <Box 
                 className='box'
@@ -196,7 +198,9 @@ const PatientDetails = () => {
                         Prescribed daily step count: {Math.trunc(result)}
                     </div>  
                 }
-            </Box>                           
+            
+            </Box>
+                                  
         </div>
     )
 }

@@ -8,7 +8,7 @@ export default function Navbar() {
   return (
     <nav className="nav">
       <img src={feetlogo} alt="footprint" width="70px" />
-      <Link to="/" className="site-title">
+      <Link to="/home" className="site-title">
         Stepping Forward
       </Link>
       <img src={feetlogo} alt="footprint" width="70px" />
@@ -16,7 +16,7 @@ export default function Navbar() {
    
               
              
-     
+      <CustomLink to="/details"> My Account </CustomLink>  
       <CustomLink to="/resources"> Resources </CustomLink>  
       <CustomLink to="/goals"> Goals </CustomLink> 
       <CustomLink to="/reminders"> Email Reminders </CustomLink>   
