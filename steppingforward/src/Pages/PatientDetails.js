@@ -58,8 +58,8 @@ const PatientDetails = () => {
     function handleRaceChange(e) { userDetails.race = e.target.value; setRace(e.target.value);}
     function handleHeightChange(e) { userDetails.height = Number(e.target.value);}
     function handleWeightChange(e) { userDetails.weightlb = Number(e.target.value);}
-    function handleBodyFatChange(e) { userDetails.bodyFatPerc = Number(((e.target.value) / 100));}
-    function handleTargetWeightChange(e) { userDetails.targetWeightLossPerc = Number(((e.target.value) / 100));}
+    function handleBodyFatChange(e) { userDetails.bodyFatPerc = Number(e.target.value);}
+    function handleTargetWeightChange(e) { userDetails.targetWeightLossPerc = Number(e.target.value);}
 
     const validate = () => {
         console.log(userDetails)
@@ -83,23 +83,23 @@ const PatientDetails = () => {
         }
     }
     const calculate = () => {
-        userDetails.weightkg = (userDetails.weightlb / 2.20462) ;
-        userDetails.currentFatMass = (userDetails.weightkg * userDetails.bodyFatPerc);
+        userDetails.weightkg = (userDetails.weightlb / 2.205) ;
+        userDetails.currentFatMass = (userDetails.weightkg * (userDetails.bodyFatPerc/100));
         userDetails.currentFatFreeMass = (userDetails.weightkg - userDetails.currentFatMass);
-        userDetails.targetWeightLosskg = (userDetails.weightkg * userDetails.targetWeightLossPerc);
+        userDetails.targetWeightLosskg = (userDetails.weightkg * (userDetails.targetWeightLossPerc/100));
         userDetails.targetBodyWeightkg = (userDetails.weightkg - userDetails.targetWeightLosskg);
         userDetails.newFatMass = (userDetails.currentFatMass - userDetails.targetWeightLosskg);
         userDetails.targetBodyFatPerc = ((userDetails.newFatMass / userDetails.targetBodyWeightkg)*100);
 
         if (sex === 'Male') {
             userDetails.stepsPerDay = ((39377.3357744) / (Math.pow(userDetails.targetBodyFatPerc, 1.304048257)))
-            setResult((39377.3357744) / (Math.pow(userDetails.targetBodyFatPerc, 1.304048257)))
+         
         } else if (sex === 'Female') {
             userDetails.stepsPerDay = ((261425.44) / (Math.pow(userDetails.targetBodyFatPerc, 1.87969924)))
-            setResult((261425.44) / (Math.pow(userDetails.targetBodyFatPerc, 1.87969924)))
+          
         }
         
-        userDetails.totalStepTarget = (userDetails.stepsPerDay * userDetails.currentFatMass)
+        setResult(userDetails.totalStepTarget = (userDetails.stepsPerDay * userDetails.currentFatMass))
 
         setAgeError(false)
         setSexError(false)
@@ -192,6 +192,7 @@ const PatientDetails = () => {
                         {
                             (weightError) && <div style={{ color: 'red' }} className='error'>You must select a valid weight</div>
                         }
+                       
                         <div className='inputSection'>
                             <label form='bodyFatPerc'>Body Fat %</label>
                             <input id='bodyFatPerc' type='number' placeholder='%' onChange={(e) => handleBodyFatChange(e)} />
@@ -199,6 +200,8 @@ const PatientDetails = () => {
                         {
                             (bodyFatError) && <div style={{ color: 'red' }} className='error'>You must select a valid body fat %</div>
                         }
+
+                        <p>For Target Weight Loss, please choose a number between 5% through 10% </p>
                         <div className='inputSection'>
                             <label form='targetWeightLossPerc'>Target Weight Loss %</label>
                             <input id='targetWeightLossPerc' type='number' placeholder='%' onChange={(e) => handleTargetWeightChange(e)} />
@@ -225,3 +228,4 @@ const PatientDetails = () => {
 }
 
 export default PatientDetails;
+
