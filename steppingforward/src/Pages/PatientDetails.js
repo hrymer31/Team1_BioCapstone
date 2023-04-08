@@ -12,23 +12,15 @@ for (var i = 19; i < 46; i++) {
 }
 const sexArray = ["Female","Male"]
 
-const raceArray = [
-    "American Indian or Alaska Native",
-    "Asian",
-    "Black or African American",
-    "Hispanic or Latino",
-    "Native Hawaiian or Other Pacific Islander",
-    "White"
-]
 
 const PatientDetails = () => {
     const [age, setAge] = useState()
     const [sex, setSex] = useState()
-    const [race, setRace] = useState()
+  
 
     const [ageError, setAgeError] = useState(false)
     const [sexError, setSexError] = useState(false)
-    const [raceError, setRaceError] = useState(false)
+
     const [heightError, setHeightError] = useState(false)
     const [weightError, setWeightError] = useState(false)
     const [bodyFatError, setBodyFatError] = useState(false)
@@ -55,7 +47,7 @@ const PatientDetails = () => {
     })
     function handleAgeChange(e) { userDetails.age = Number(e.target.value); setAge(Number(e.target.value));}
     function handleSexChange(e) { userDetails.sex = e.target.value; setSex(e.target.value);}
-    function handleRaceChange(e) { userDetails.race = e.target.value; setRace(e.target.value);}
+    
     function handleHeightChange(e) { userDetails.height = Number(e.target.value);}
     function handleWeightChange(e) { userDetails.weightlb = Number(e.target.value);}
     function handleBodyFatChange(e) { userDetails.bodyFatPerc = Number(e.target.value);}
@@ -65,7 +57,6 @@ const PatientDetails = () => {
         console.log(userDetails)
         if(userDetails.age === 0){ setAgeError(true) }
         if(userDetails.sex === ''){ setSexError(true) }
-        if(userDetails.race === ''){ setRaceError(true) }
         if(userDetails.height === 0){ setHeightError(true) }
         if(userDetails.weightlb === 0){ setWeightError(true) }
         if(userDetails.bodyFatPerc === 0){ setBodyFatError(true) }
@@ -73,7 +64,6 @@ const PatientDetails = () => {
         if(
             (userDetails.age !== 0) && 
             (userDetails.sex !== '') && 
-            (userDetails.race !== '') &&
             (userDetails.height !== 0) && 
             (userDetails.weightlb !== 0) && 
             (userDetails.bodyFatPerc !== 0) &&
@@ -103,7 +93,6 @@ const PatientDetails = () => {
 
         setAgeError(false)
         setSexError(false)
-        setRaceError(false)
         setHeightError(false)
         setWeightError(false)
         setBodyFatError(false)
@@ -161,22 +150,7 @@ const PatientDetails = () => {
                         {
                             (sexError) && <div style={{ color: 'red' }} className='error'>You must select a valid sex</div>
                         }
-                        <div className='inputSection'>
-                            <label htmlFor="race">Race</label>
-                            <select id='race' value={race} onChange={(e) => handleRaceChange(e)}>
-                                <option value=""></option>
-                                {
-                                    raceArray.map(raceOption => {
-                                        return (
-                                            <option>{raceOption}</option>
-                                        )
-                                    })
-                                }
-                            </select>          
-                        </div>
-                        {
-                            (raceError) && <div style={{ color: 'red' }} className='error'>You must select a valid race</div>
-                        }
+                       <p> Enter all calculations below to the nearest tenths place (e.g. 250.5, 22.0)</p>
                         <div className='inputSection'>
                             <label htmlFor='height'>Height(cm)</label>
                             <input id='height' type='number' placeholder='cm' onChange={(e) => handleHeightChange(e)} /> 
@@ -184,7 +158,7 @@ const PatientDetails = () => {
                         {
                             (heightError) && <div style={{ color: 'red' }} className='error'>You must select a valid height</div>
                         }
-                        <p> Enter all calculations below to the nearest tenths place (e.g. 250.5, 22.0)</p>
+                       
                         <div className='inputSection'>
                             <label htmlFor='weight'>Weight(lb)</label>
                             <input id='weight' type='number' placeholder='lb' onChange={(e) => handleWeightChange(e)} /> 

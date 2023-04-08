@@ -47,5 +47,5 @@ router.route('/patients/add').post((request, response) => {
 
 var port = process.env.PORT || 1433
 app.listen(port, () =>
-    console.log('Chart of Account API is running at ' + port)
+    console.log('Capstone Project is running at ' + port)
 )

@@ -10,6 +10,7 @@ import SignUp from './Pages/SignUp'
 import Goals from './Pages/Goals'
 import Dashboard from './Pages/Dashboard'
 
+
 import Navbar from './Pages/Navbar';
 
 
@@ -22,6 +23,7 @@ function App() {
         <Routes>
       
           <Route path='/'/>
+         
           <Route exact path='/home'  element={<Dashboard />} />
           <Route path='/resources' element={<Resources/>}/>
           <Route path='/details'   element={<PatientDetails />}/>
