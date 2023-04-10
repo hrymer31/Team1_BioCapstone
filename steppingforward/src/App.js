@@ -9,6 +9,8 @@ import WellstarLogin from './Pages/WellstarLogin';
 import SignUp from './Pages/SignUp'
 import Goals from './Pages/Goals'
 import Dashboard from './Pages/Dashboard'
+import AgeCheck from './Pages/ageCheck'
+import Disqualify from './Pages/disqualify'
 
 
 import Navbar from './Pages/Navbar';
@@ -34,6 +36,8 @@ function App() {
           <Route path='/wellstar'  element={<WellstarLogin/>}/>
           <Route path='/signup'    element={<SignUp />} />
           <Route path='/contactForm'    element={<contactForm />} />
+          <Route path='/ageCheck' element={<AgeCheck/>} />
+          <Route path='/disqualify' element={<Disqualify/>} />
         </Routes>
     
       </div>
