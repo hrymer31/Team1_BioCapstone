@@ -1,75 +1,55 @@
-import React, { useState } from "react";
-import ReactDOM from "react-dom";
+import React, { useState, useRef, useEffect } from 'react';
+import GoalList from './GoalHelper/GoalList'
+import { v4 as uuidv4 } from 'uuid';
 import "../Css/styles.css";
-import Stack from '@mui/material/Stack';  
-import Button from '@mui/material/Button';
-  
 
-
-
+const LOCAL_STORAGE_KEY = 'goalApp.goals'
 
 function Goals() {
+  const [goals, setGoals] = useState([])
+  const goalNameRef = useRef()
 
+  useEffect(() => {
+    const storedGoals = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY))
+    if (storedGoals) setGoals(storedGoals)
+  }, [])
 
-  // State with list of all checked item
-  const [checked, setChecked] = useState([]);
-  const checkList = ["Drink 40ozs of water", "Eat breakfast", "Leave 5 minutes earlier for work", "Complete daily steps", "Go to bed by 11", "Buy one new fruit at Publix", ];
+  useEffect(() => {
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(goals))
+  }, [goals])
 
-  // Add/Remove checked item from list
-  const handleCheck = (event) => {
-    var updatedList = [...checked];
-    if (event.target.checked) {
-      updatedList = [...checked, event.target.value];
-    } else {
-      updatedList.splice(checked.indexOf(event.target.value), 1);
-    }
-    setChecked(updatedList);
-  };
+  function toggleGoal(id) {
+    const newGoals = [...goals]
+    const goal = newGoals.find(goal => goal.id === id)
+    goal.complete = !goal.complete
+    setGoals(newGoals)
+  }
 
-  // Generate string of checked items
-  const checkedItems = checked.length
-    ? checked.reduce((total, item) => {
-        return total + ", " + item;
-      })
-    : "";
+  function handleAddGoal(e) {
+    const name = goalNameRef.current.value
+    if (name === '') return
+    setGoals(prevGoals => {
+      return [...prevGoals, { id: uuidv4(), name: name, complete: false}]
+    })
+    goalNameRef.current.value = null
+  }
 
-  // Return classes based on whether item is checked
-  var isChecked = (item) =>
-    checked.includes(item) ? "checked-item" : "not-checked-item";
+  function handleClearGoals() {
+    const newGoals = goals.filter(goal => !goal.complete)
+    setGoals(newGoals)
+  }
 
   return (
-    <div className="app">
-  
-
-      <div className="checkList">
-        <div className="title">Your Daily Goals:</div>
-        <div className="list-container">
-        
-  
-
-          {checkList.map((item, index) => (
-            <div key={index}>
-              <input value={item} type="checkbox" onChange={handleCheck} />
-              <span className={isChecked(item)}>{item}</span>
-             
-       
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <div>
-        {`Goals Completed Today: ${checkedItems}`}
-      </div>
-    </div>
-
- 
-
-
-  );
+    <>
+    <div className="title">Your Daily Goals:</div>
+    
+      <GoalList goals={goals} toggleGoal={toggleGoal} />
+      <input ref={goalNameRef} type="text" />
+      <button onClick={handleAddGoal}>Add Goal</button>
+      <button onClick={handleClearGoals}>Clear Complete</button>
+      <div>{goals.filter(goal => !goal.complete).length} Goals Left to Complete</div>
+    </>
+  )
 }
-
-const rootElement = document.getElementById("root");
-ReactDOM.render(<Goals />, rootElement);
 
 export default Goals;
