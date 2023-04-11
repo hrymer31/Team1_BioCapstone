@@ -2,9 +2,9 @@ import * as React from 'react'
 import { useState } from 'react'
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
-import './agePages.css'
+import '../Css/agePages.css'
 
-export const Disqualify = () => {
+ const Disqualify = () => {
 
     const [email, setEmail] = useState(null)
     const [age, setAge] = useState(null)
@@ -70,3 +70,4 @@ export const Disqualify = () => {
         </div>
     )
 }
+export default Disqualify;

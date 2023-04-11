@@ -5,7 +5,7 @@ import Typography from '@mui/material/Typography';
 import InputLabel from '@mui/material/InputLabel';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
-import './agePages.css'
+import '../Css/agePages.css'
 
 const options = ["Yes", "No"]
 
