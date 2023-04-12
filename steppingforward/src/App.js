@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './Css/App.css';
 import './Css/contactForm.css';
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Route, Routes } from "react-router-dom"
 import Resources from './Pages/Resources'
 import PatientDetails from './Pages/PatientDetails';
 import contactForm, { ContactUs } from './Pages/contactForm';
@@ -15,6 +15,7 @@ import Disqualify from './Pages/disqualify.js';
 import Login from './Pages/Login'
 
 
+
 import Navbar from './Pages/Navbar';
 
 
@@ -23,19 +24,14 @@ function App() {
     <>
      <Navbar />
   
-     <AuthProvider>
-        <Router>
-          <Routes>
-     
-     
-      
-          <Route path='/'/>
-         
-          <Route  path='/home'  element={<Dashboard />} />
-          <Route path='/resources' element={<Resources/>}/>
-          <Route path='/details'   element={<PatientDetails />}/>
+  
+        
+          <Routes> 
+          <Route path="/" element={<Dashboard />}></Route>
+          <Route path="/resources" element={<Resources />}></Route>
+          <Route path="/details" element={<PatientDetails />}></Route>
           <Route path='/goals'   element={<Goals />}/>
-          <Route path='/reminders' element={<contactForm />} />
+          <Route path='/contactForm' element={<contactForm />} />
           <Route path='/admin'     element={<DataAdmin/>}/>
           <Route path='/login'  element={<Login/>}/>
           <Route path='/signup'    element={<SignUp />} />
@@ -43,8 +39,8 @@ function App() {
           <Route path='/ageCheck' element={<ageCheck/>} />
           <Route path='/disqualify' element={<Disqualify/>} />
           </Routes>
-        </Router>
-      </AuthProvider>
+       
+  
     </>
   );
 }
