@@ -6,7 +6,7 @@ import InputLabel from '@mui/material/InputLabel';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import '../Css/agePages.css'
-import Navbar from './Pages/Navbar';
+import Navbar from './Navbar';
   
 const options = ["Yes", "No"]
 

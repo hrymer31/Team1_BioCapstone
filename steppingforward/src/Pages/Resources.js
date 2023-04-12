@@ -6,7 +6,7 @@ import RestaurantIcon from '@mui/icons-material/Restaurant';
 import NewspaperIcon from '@mui/icons-material/Newspaper';
 import Link from '@mui/material/Link'
 import { Box } from '@mui/system';
-import Navbar from './Pages/Navbar';
+import Navbar from './Navbar';
 
  const Resources = () => {
     return (

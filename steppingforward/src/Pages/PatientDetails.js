@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import '../Css/PatientDetails.css'
-import Navbar from './Pages/Navbar';
+import Navbar from './Navbar';
 
 import { 
     FormControl, 

@@ -4,7 +4,7 @@ import result from './PatientDetails';
 import '../Css/dashboard.css'
 import { Box } from '@mui/system';
 import Link from '@mui/material/Link'
-import Navbar from './Pages/Navbar';
+import Navbar from './Navbar';
 
 const Dashboard = () => {
   return (

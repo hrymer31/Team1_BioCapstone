@@ -15,11 +15,6 @@ import ageCheck from './Pages/ageCheck'
 import Disqualify from './Pages/disqualify.js';
 import Login from './Pages/Login'
 
-
-
-
-
-
 function App() {
   return (
     <>

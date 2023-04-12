@@ -3,7 +3,7 @@ import emailjs from 'emailjs-com';
 import moment from 'moment-timezone';
 import { faArrowRightFromBracket,faUser,faWeightScale,faShoePrints } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Navbar from './Pages/Navbar';
+import Navbar from './Navbar';
 
 
 
