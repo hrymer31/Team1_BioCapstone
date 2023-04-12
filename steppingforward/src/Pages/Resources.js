@@ -6,10 +6,12 @@ import RestaurantIcon from '@mui/icons-material/Restaurant';
 import NewspaperIcon from '@mui/icons-material/Newspaper';
 import Link from '@mui/material/Link'
 import { Box } from '@mui/system';
+import Navbar from './Pages/Navbar';
 
  const Resources = () => {
     return (
         <div className='Resources'> 
+        <Navbar />
             <h5 className='title'>Resources</h5>
             <div className='sections'>
                 <Box className="resourceBox step">

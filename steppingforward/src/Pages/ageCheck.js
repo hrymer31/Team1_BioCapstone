@@ -6,7 +6,8 @@ import InputLabel from '@mui/material/InputLabel';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import '../Css/agePages.css'
-
+import Navbar from './Pages/Navbar';
+  
 const options = ["Yes", "No"]
 
 export const AgeCheck = () => {
@@ -22,6 +23,7 @@ export const AgeCheck = () => {
 
     return (
         <div className = "ageCheck">
+            <Navbar />
             <Typography variant = "h3" gutterBottom>Before we begin...</Typography>
 
             <Typography variant = "h6" gutterBottom>Are you between the ages of 19 and 40?</Typography>

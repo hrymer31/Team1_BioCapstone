@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import '../Css/PatientDetails.css'
+import Navbar from './Pages/Navbar';
 
 import { 
     FormControl, 
@@ -103,6 +104,7 @@ const PatientDetails = () => {
     return (
        
         <div className='PatientDetails'>
+            <Navbar />
             <Box 
                 className='box'
                 sx={{

@@ -3,31 +3,9 @@ import emailjs from 'emailjs-com';
 import moment from 'moment-timezone';
 import { faArrowRightFromBracket,faUser,faWeightScale,faShoePrints } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Navbar from './Pages/Navbar';
 
 
-const Icons = () => {
-    return (
-        <div className="icon-button-container">
-        <div>
-          <FontAwesomeIcon icon={faArrowRightFromBracket} size="2x"/>
-          <button>Log Out</button>
-        </div>
-        <div>
-          <FontAwesomeIcon icon={faWeightScale} size="2x"/>
-          <button>Update Weight</button>
-        </div>
-        <div>
-          <FontAwesomeIcon icon={faShoePrints} size="2x"/>
-          <button>Update Steps</button>
-        </div>
-        <div>
-          <FontAwesomeIcon icon={faUser} size="2x"/>
-          <button>My account</button>
-        </div>
-      </div>
-      
-    );
-  };
 
 export const ContactUs = () => {
   const form = useRef();
@@ -44,6 +22,8 @@ export const ContactUs = () => {
   };
 
   return (
+    <div>
+    <Navbar />
      
     <form ref={form} onSubmit={sendEmail}>
       <label>Name:</label>
@@ -74,7 +54,8 @@ export const ContactUs = () => {
      
       <input type="submit" value="Send" />
  
-      <Icons />
+     
     </form>
+    </div>
   );
 };

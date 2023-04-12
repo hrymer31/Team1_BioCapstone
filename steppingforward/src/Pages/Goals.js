@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import GoalList from './GoalHelper/GoalList'
 import { v4 as uuidv4 } from 'uuid';
 import "../Css/styles.css";
+import Navbar from './Pages/Navbar';
 
 const LOCAL_STORAGE_KEY = 'goalApp.goals'
 
@@ -41,6 +42,7 @@ function Goals() {
 
   return (
     <>
+    <Navbar />
     <div className="title">Your Daily Goals:</div>
     
       <GoalList goals={goals} toggleGoal={toggleGoal} />
