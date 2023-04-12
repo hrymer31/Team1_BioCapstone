@@ -42,6 +42,12 @@ const Login = () => {
         } else if (password === "") {
             alert("Password can't be empty");
         }
+      try {
+        signIn(username, password)
+        
+      } catch (error) {
+        console.log(error)
+      }
         
     }
 

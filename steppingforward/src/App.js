@@ -1,8 +1,9 @@
 import logo from './logo.svg';
 import './Css/App.css';
 import './Css/contactForm.css';
-import { Route, Routes } from "react-router-dom"
+import { Routes, Route } from "react-router-dom";
 import Resources from './Pages/Resources'
+import { AuthProvider } from "./Pages/AuthContext";
 import PatientDetails from './Pages/PatientDetails';
 import contactForm, { ContactUs } from './Pages/contactForm';
 import DataAdmin from './Pages/DataAdmin';
@@ -24,23 +25,22 @@ function App() {
     <>
      <Navbar />
   
-  
-        
-          <Routes> 
-          <Route path="/" element={<Dashboard />}></Route>
-          <Route path="/resources" element={<Resources />}></Route>
-          <Route path="/details" element={<PatientDetails />}></Route>
-          <Route path='/goals'   element={<Goals />}/>
-          <Route path='/contactForm' element={<contactForm />} />
-          <Route path='/admin'     element={<DataAdmin/>}/>
-          <Route path='/login'  element={<Login/>}/>
-          <Route path='/signup'    element={<SignUp />} />
-          <Route path='/contactForm' element={<ContactUs />} />
-          <Route path='/ageCheck' element={<ageCheck/>} />
-          <Route path='/disqualify' element={<Disqualify/>} />
+     <AuthProvider>
+          <Routes>
+            <Route path='/'/>
+            <Route path='/home'  element={<Dashboard />} />
+            <Route path='/resources' element={<Resources/>}/>
+            <Route path='/details'   element={<PatientDetails />}/>
+            <Route path='/goals'   element={<Goals />}/>
+            <Route path='/reminders' element={<contactForm />} />
+            <Route path='/admin'     element={<DataAdmin/>}/>
+            <Route path='/login'  element={<Login/>}/>
+            <Route path='/signup'    element={<SignUp />} />
+            <Route path='/contactForm' element={<ContactUs />} />
+            <Route path='/ageCheck' element={<ageCheck/>} />
+            <Route path='/disqualify' element={<Disqualify/>} />`
           </Routes>
-       
-  
+      </AuthProvider>
     </>
   );
 }

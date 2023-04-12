@@ -83,13 +83,13 @@ export const AuthProvider = ({ children }) => {
       signInWithEmailAndPassword(auth, doc.data().email, password)
         .then((userCredential) => {
           const user = userCredential.user;
-          setUser(user);
+  /*           setUser(user);
           setUserData(doc.data());
           setIsLoggedIn(true);
           
           console.log(doc.data());
           window.localStorage.setItem("userData", JSON.stringify(doc.data()));
-         
+          */
         
         })
         .catch((error) => {
