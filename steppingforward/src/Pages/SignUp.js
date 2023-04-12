@@ -1,77 +1,134 @@
-import React, { useState } from 'react';
+import React from "react";
+import PasswordChecklist from "react-password-checklist"
+import { useNavigate } from "react-router-dom";
+import Select from 'react-select';
+import { UserAuth } from './AuthContext'
+import { FormControl, Container, TextField } from "@mui/material";
+import Button from '@mui/material/Button'
+import DoneIcon from '@mui/icons-material/Done';
+import ClearIcon from '@mui/icons-material/Clear';
+import 'simplebar-react/dist/simplebar.min.css';
 
-function SignUp() {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [email, setEmail] = useState('');
-  const [frequency, setFrequency] = useState('daily');
+const SignUp =()=> {
+  const navigate = useNavigate();
 
+  const [goToHome, setgoToHome] = React.useState(false);
+  if (goToHome) {
+      navigate('/home')
+  };
 
-  function handleFrequencyChange(event) {
-    setFrequency(event.target.value);
-  }
-  
-  function handleFirstNameChange(event) {
-    setFirstName(event.target.value);
-  }
+  const [name, setName] =React.useState("")
+  const [UserId, setUserId] =React.useState("")
+  const [Email, setEmail] = React.useState("")
+  const [Password, setPassword] = React.useState("")
+  const [error, setError] = React.useState("")
+  const [passwordAgain, setPasswordAgain] = React.useState("")
 
-  function handleLastNameChange(event) {
-    setLastName(event.target.value);
-  }
+  const { createUser } = UserAuth();
 
-  function handleUsernameChange(event) {
-    setUsername(event.target.value);
-  }
+    const userInfo = {
+        name: name,
+        UserId: UserId,
+        Email: Email,
+     
+    }
 
-  function handlePasswordChange(event) {
-    setPassword(event.target.value);
-  }
-
-  function handleEmailChange(event) {
-    setPassword(event.target.value);
-  }
-
-  function handleSubmit(event) {
-    event.preventDefault();
-    // handle form submission here
+    const handleSumbit = async (e) => {
+      e.preventDefault()
+      setError("")
+      try {
+          await createUser(Email, Password, userInfo);
+          navigate('/home')
+      } catch (e) {
+          setError(e.message)
+          console.log(e.message)
+      }
   }
 
   return (
-    <div>
-      <h1>Registration Form</h1>
-      <form onSubmit={handleSubmit}>
-        <label>
-          First Name:
-          <input type="text" value={firstName} onChange={handleFirstNameChange} />
-        </label>
-        <br />
-        <label>
-          Last Name:
-          <input type="text" value={lastName} onChange={handleLastNameChange} />
-        </label>
-        <br />
-        <label>
-          Username:
-          <input type="text" value={username} onChange={handleUsernameChange} />
-        </label>
-        <br />
-        <label>
-          Password:
-          <input type="password" value={password} onChange={handlePasswordChange} />
-        </label>
-        <br />
-        <br />
-        <label>
-          Email:
-          <input type="text" value={email} onChange={handleEmailChange} />
-        </label>
-      <br />
-        <button type="submit">Sign Up</button>
-      </form>
-    </div>
-  );
+    <div className="SignUp">
+      <h1>Sign Up</h1>
+      <Container className="form" style={{width: 800}}>
+      <div id='formHeader'>
+      </div>
+      <FormControl id="formcontrol" onSubmit={handleSumbit}>
+                    <div id="personalInfo">
+                        <TextField
+                            id="outlined-password-input Name"
+                            label="Name"
+                            type="text"
+                            style={{ marginRight: 10,}}
+                            onChange={(e) => setName(e.target.value)}
+                        />
+                        <TextField
+                            id="outlined-password-input Email"
+                            label="Email"
+                            type="text"
+                            onChange={(e) => setEmail(e.target.value)}
+                        /> 
+                    </div>
+                    <div id="passwords">
+                        <TextField
+                            id="outlined-password-input password"
+                            label="Password"
+                            type="password"
+                            autoComplete="current-password"
+                            style={{marginRight: 10}}
+                            onChange={e => setPasswordAgain(e.target.value)}
+                        />
+                        <TextField
+                            id="outlined-password-input password"
+                            label="Confirm Password"
+                            type="password"
+                            autoComplete="current-password"
+                            style={{ marginRight: 10 }}
+                            onChange={e => setPasswordAgain(e.target.value)}
+                        />
+                        <span id="passwordCheck">
+                            <PasswordChecklist
+                                rules={['minLength', 'specialChar', 'number', 'letter', "match", "firstLetter"]}
+                                minLength={8}
+                                value={Password}
+                                valueAgain={passwordAgain}
+                                onChange={(isValid) => { }}
+                                style={{ marginBottom: 10 }}    
+                            />
+                        </span>
+                    </div>
+                    
+                    
+                    <div id="buttons" style={{ marginTop: -10 }} >
+                            <Button
+                                variant='outlined'
+                                size='large'
+                                type='submit'
+                                style={{width: 225, marginRight: 10}}
+                                startIcon={<DoneIcon />}
+                                className='submit'
+                                onClick={() => { setgoToHome(true) }}
+                                sx={{ ':hover': { bgcolor: 'rgb(161, 252, 134,0.2)' } }}
+                            >
+                                Sumbit Request
+                            </Button>
+                            <Button
+                                variant='outlined'
+                                size='large'
+                                style={{ width: 225, hover: {backgroundColor: 'red'} }} 
+                                startIcon={<ClearIcon />}
+                                className='cancel'
+                                onClick={() => { setgoToHome(true) }}
+                                sx={{ ':hover': { bgcolor: 'rgb(252, 83, 83,0.2)' } }}
+                            >
+                                Cancel
+                            </Button>
+                    </div>
+                </FormControl>
+            </Container>
+            
+            
+          
+        </div>
+    );
 }
 
 export default SignUp;
