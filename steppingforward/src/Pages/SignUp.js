@@ -5,6 +5,7 @@ function SignUp() {
   const [lastName, setLastName] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
   const [frequency, setFrequency] = useState('daily');
 
 
@@ -25,6 +26,10 @@ function SignUp() {
   }
 
   function handlePasswordChange(event) {
+    setPassword(event.target.value);
+  }
+
+  function handleEmailChange(event) {
     setPassword(event.target.value);
   }
 
@@ -58,18 +63,10 @@ function SignUp() {
         </label>
         <br />
         <br />
-      <label>
-    Target Body Fat%:
-        <select value={frequency} onChange={handleFrequencyChange}>
-          <option value="daily">5</option>
-          <option value="weekly">6</option>
-          <option value="monthly">7</option>
-          <option value="daily">8</option>
-          <option value="weekly">9</option>
-          <option value="monthly">10</option>
-       
-        </select>
-      </label>
+        <label>
+          Email:
+          <input type="text" value={email} onChange={handleEmailChange} />
+        </label>
       <br />
         <button type="submit">Sign Up</button>
       </form>
