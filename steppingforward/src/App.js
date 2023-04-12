@@ -1,5 +1,6 @@
 import logo from './logo.svg';
 import './Css/App.css';
+import './Css/contactForm.css';
 import { Route, Routes } from "react-router-dom"
 import Resources from './Pages/Resources'
 import PatientDetails from './Pages/PatientDetails';
@@ -10,7 +11,7 @@ import SignUp from './Pages/SignUp'
 import Goals from './Pages/Goals'
 import Dashboard from './Pages/Dashboard'
 import ageCheck from './Pages/ageCheck'
-import Disqualify from './Pages/Disqualify'
+import Disqualify from './Pages/disqualify.js';
 
 
 import Navbar from './Pages/Navbar';
@@ -35,7 +36,7 @@ function App() {
           <Route path='/admin'     element={<DataAdmin/>}/>
           <Route path='/wellstar'  element={<WellstarLogin/>}/>
           <Route path='/signup'    element={<SignUp />} />
-          <Route path='/contactForm'    element={<contactForm />} />
+          <Route path='/contactForm' element={<ContactUs />} />
           <Route path='/ageCheck' element={<ageCheck/>} />
           <Route path='/disqualify' element={<Disqualify/>} />
         </Routes>
