@@ -10,6 +10,9 @@ import ClearIcon from '@mui/icons-material/Clear';
 import 'simplebar-react/dist/simplebar.min.css';
 
 const SignUp =()=> {
+    const style = {
+        width: 500,
+    }
   const navigate = useNavigate();
 
   const [goToHome, setgoToHome] = React.useState(false);
@@ -27,9 +30,9 @@ const SignUp =()=> {
   const { createUser } = UserAuth();
 
     const userInfo = {
-        name: name,
-        UserId: UserId,
-        Email: Email,
+        Name: name,
+        userId: UserId,
+        email: Email,
      
     }
 
@@ -74,7 +77,7 @@ const SignUp =()=> {
                             type="password"
                             autoComplete="current-password"
                             style={{marginRight: 10}}
-                            onChange={e => setPasswordAgain(e.target.value)}
+                            onChange={e => setPassword(e.target.value)}
                         />
                         <TextField
                             id="outlined-password-input password"
@@ -84,16 +87,7 @@ const SignUp =()=> {
                             style={{ marginRight: 10 }}
                             onChange={e => setPasswordAgain(e.target.value)}
                         />
-                        <span id="passwordCheck">
-                            <PasswordChecklist
-                                rules={['minLength', 'specialChar', 'number', 'letter', "match", "firstLetter"]}
-                                minLength={8}
-                                value={Password}
-                                valueAgain={passwordAgain}
-                                onChange={(isValid) => { }}
-                                style={{ marginBottom: 10 }}    
-                            />
-                        </span>
+                        
                     </div>
                     
                     

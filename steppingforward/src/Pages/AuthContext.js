@@ -97,7 +97,7 @@ export const AuthProvider = ({ children }) => {
           const errorMessage = error.message;
           if (errorCode === "auth/wrong-password") {
             alert(
-              "Incorrect passcode, please try again"
+              "Incorrect password, please try again"
               
             );
         
