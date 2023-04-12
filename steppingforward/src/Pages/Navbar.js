@@ -19,7 +19,8 @@ export default function Navbar() {
       <CustomLink to="/details"> Calculate Steps </CustomLink>  
       <CustomLink to="/resources"> Resources </CustomLink>  
       <CustomLink to="/goals"> Goals </CustomLink> 
-      <CustomLink to="/reminders"> Email Reminders </CustomLink>   
+      //<CustomLink to="/reminders"> Email Reminders </CustomLink>   
+  <CustomLink to="/contactForm"> Email Reminders </CustomLink>  
       <CustomLink to="/profile"> My Account </CustomLink> 
       <CustomLink to="/logout"> Log Out </CustomLink>    
     
