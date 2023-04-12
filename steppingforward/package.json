@@ -4,6 +4,7 @@
   "proxy": "http://localhost:1433",
   "private": true,
   "dependencies": {
+    "sql": "file:../backend",
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
     "@mui/icons-material": "^5.11.11",
@@ -43,5 +44,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "bin":{
+    "api.js": "../../backend/api.js"
   }
 }
