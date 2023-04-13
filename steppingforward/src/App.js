@@ -19,8 +19,6 @@ import Profile from './Pages/Profile';
 function App() {
   return (
     <>
-    
-  
      <AuthProvider>
           <Routes>
             <Route path='/'/>

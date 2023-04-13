@@ -19,17 +19,20 @@ const sexArray = ["Female","Male"]
 const PatientDetails = () => {
     const [age, setAge] = useState()
     const [sex, setSex] = useState()
-  
+    const [neckCircumference, setNeckCircumference] = useState()
+    const [waistCircumference, setWaistCircumference] = useState()
+
     const [ageError, setAgeError] = useState(false)
     const [sexError, setSexError] = useState(false)
-
+    const [neckError, setNeckError] = useState(false)
+    const [waistError, setWaistError] = useState(false)
     const [heightError, setHeightError] = useState(false)
     const [weightError, setWeightError] = useState(false)
     const [bodyFatError, setBodyFatError] = useState(false)
     const [targetWeightError, setTargetWeightError] = useState(false)
 
     const [result, setResult] = useState(null)
-    const { auth, user } = UserAuth();
+    const { user } = UserAuth();
 
     //uid, will use to access current users data base
     const [uid, setUid] = useState(user.uid)
@@ -38,6 +41,8 @@ const PatientDetails = () => {
         uid: uid,
         age: 0,
         sex: '',
+        neckCircumference: 0,
+        waistCircumference: 0,
         height: 0,
         weightlb: 0,
         bodyFatPerc: 0,
@@ -54,14 +59,14 @@ const PatientDetails = () => {
     })
     function handleAgeChange(e) { userDetails.age = Number(e.target.value); setAge(Number(e.target.value));}
     function handleSexChange(e) { userDetails.sex = e.target.value; setSex(e.target.value);}
-    
+    function handleNeckChange(e) { userDetails.neckCircumference = Number(e.target.value); setNeckCircumference(e.target.value)}
+    function handleWaistChange(e) { userDetails.waistCircumference = Number(e.target.value); setWaistCircumference(e.target.value)}
     function handleHeightChange(e) { userDetails.height = Number(e.target.value);}
     function handleWeightChange(e) { userDetails.weightlb = Number(e.target.value);}
     function handleBodyFatChange(e) { userDetails.bodyFatPerc = Number(e.target.value);}
     function handleTargetWeightChange(e) { userDetails.targetWeightLossPerc = Number(e.target.value);}
 
     const validate = () => {
-        console.log(userDetails)
         if(userDetails.age === 0){ setAgeError(true) }
         if(userDetails.sex === ''){ setSexError(true) }
         if(userDetails.height === 0){ setHeightError(true) }
@@ -100,11 +105,14 @@ const PatientDetails = () => {
 
         setAgeError(false)
         setSexError(false)
+        setNeckError(false)
+        setWaistError(false)
         setHeightError(false)
         setWeightError(false)
         setBodyFatError(false)
         setTargetWeightError(false)   
 
+        console.log(user.uid)
         console.log(userDetails)
         fetch("api/patients/addDetails", {
             method: "POST",
@@ -114,8 +122,7 @@ const PatientDetails = () => {
             body: JSON.stringify(userDetails)
         }).then((response) => {
             alert(response.statusText)
-        })
-       //setDoc(doc(db, "users", uid), userDetails)
+        }) 
     };
 
     return (
@@ -129,7 +136,7 @@ const PatientDetails = () => {
                     width: 500,
                     marginLeft: 'auto',
                     marginRight: 'auto',
-                    height: 700,
+                    height: 750,
                     overflow: 'auto',
                     borderRadius: 2
                 }}>
@@ -171,6 +178,16 @@ const PatientDetails = () => {
                         {
                             (sexError) && <div style={{ color: 'red' }} className='error'>You must select a valid sex</div>
                         }
+                        <div className='inputSection'>
+                            <label htmlFor='neck'>Neck Circumference(cm)</label>
+                            <input id='neck' type='number' placeholder='cm' onChange={(e) => handleNeckChange(e)} />
+                            <label style={{'fontSize': 12, 'color': 'red'}}> *optional</label>
+                        </div>
+                        <div className='inputSection'>
+                            <label htmlFor='waist'>Waist Circumference(cm)</label>
+                            <input id='waist' type='number' placeholder='cm' onChange={(e) => handleWaistChange(e)} />
+                            <label style={{ 'fontSize': 12, 'color': 'red' }}> *optional</label>
+                        </div>
                        <p> Enter all calculations below to the nearest tenths place (e.g. 250.5, 22.0)</p>
                         <div className='inputSection'>
                             <label htmlFor='height'>Height(cm)</label>

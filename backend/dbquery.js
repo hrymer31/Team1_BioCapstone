@@ -63,6 +63,8 @@ async function addPatientDetails(patientDetails) {
             .input('uid', sql.VarChar, patientDetails.uid)
             .input('age', sql.Int, patientDetails.age)
             .input('sex', sql.VarChar, patientDetails.sex)
+            .input('neckCircumference', sql.Float, patientDetails.neckCircumference)
+            .input('waistCircumference', sql.Float, patientDetails.waistCircumference)
             .input('height', sql.Int, patientDetails.height)
             .input('weightlb', sql.Int, patientDetails.weightlb)
             .input('bodyFatPerc', sql.Int, patientDetails.bodyFatPerc)
@@ -77,7 +79,7 @@ async function addPatientDetails(patientDetails) {
             .input('stepsPerDay', sql.Float, patientDetails.stepsPerDay)
             .input('totalStepTarget', sql.Float, patientDetails.totalStepTarget)
             .query("UPDATE patientDetails " +
-            "SET " + "age=@age, sex=@sex, height=@height, weightlb=@weightlb, bodyFatPerc=@bodyFatPerc, targetWeightLossPerc=@targetWeightLossPerc, weightkg=@weightkg, currentFatMass=@currentFatMass, targetWeightLossKg=@targetWeightLossKg, targetBodyWeightKg=@targetBodyWeightKg, newFatMass=@newFatMass, targetBodyFatPerc=@targetBodyFatPerc, stepsPerDay=@stepsPerDay, totalStepTarget=@totalStepTarget"
+            "SET " + "age=@age, sex=@sex, neckCircumference=@neckCircumference, waistCircumference=@waistCircumference, height=@height, weightlb=@weightlb, bodyFatPerc=@bodyFatPerc, targetWeightLossPerc=@targetWeightLossPerc, weightkg=@weightkg, currentFatMass=@currentFatMass, targetWeightLossKg=@targetWeightLossKg, targetBodyWeightKg=@targetBodyWeightKg, newFatMass=@newFatMass, targetBodyFatPerc=@targetBodyFatPerc, stepsPerDay=@stepsPerDay, totalStepTarget=@totalStepTarget"
                 /* "(age,sex,height,weightlb,bodyFatPerc,targetWeightLossPerc,weightkg,currentFatMass,currentFatFreeMass,targetWeightLossKg,targetBodyWeightKg,newFatMass,targetBodyFatPerc,stepsPerDay,totalStepTarget)"
             + "VALUES(@age,@sex,@height,@weightlb,@bodyFatPerc,@targetWeightLossPerc,@weightkg,@currentFatMass,@currentFatFreeMass,@targetWeightLossKg,@targetBodyWeightKg,@newFatMass,@targetBodyFatPerc,@stepsPerDay,@totalStepTarget)" */ +
                 " WHERE uid = @uid")
