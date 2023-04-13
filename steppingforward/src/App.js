@@ -14,6 +14,7 @@ import ageCheck from './Pages/ageCheck'
 import Disqualify from './Pages/disqualify.js';
 import Login from './Pages/Login'
 import ForgotPassword from './Pages/ForgotPassword';
+import Profile from './Pages/Profile';
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
             <Route path='/contactForm' element={<ContactUs />} />
             <Route path='/ageCheck' element={<ageCheck/>} />
             <Route path='/disqualify' element={<Disqualify/>} />
+            <Route path='/profile' element={<Profile/>} />
             <Route path='/forgotpassword' element={<ForgotPassword/>}/>
           </Routes>
       </AuthProvider>
