@@ -1,31 +1,32 @@
-import React from "react";
-import PasswordChecklist from "react-password-checklist"
-import { useNavigate } from "react-router-dom";
+import React , {useEffect, useState} from "react";
+//import PasswordChecklist from "react-password-checklist"
 import Select from 'react-select';
 import { UserAuth } from './AuthContext'
+import { useNavigate } from "react-router-dom";
 import { FormControl, Container, TextField } from "@mui/material";
 import Button from '@mui/material/Button'
 import DoneIcon from '@mui/icons-material/Done';
 import ClearIcon from '@mui/icons-material/Clear';
 import 'simplebar-react/dist/simplebar.min.css';
 
-const SignUp =()=> {
+const SignUp = () => {
     const style = {
         width: 500,
     }
+    
   const navigate = useNavigate();
 
-  const [goToHome, setgoToHome] = React.useState(false);
-  if (goToHome) {
+  const [goToHome, setgoToHome] = useState(false);
+   if (goToHome) {
       navigate('/home')
-  };
+  }; 
 
-  const [name, setName] =React.useState("")
-  const [UserId, setUserId] =React.useState("")
-  const [Email, setEmail] = React.useState("")
-  const [Password, setPassword] = React.useState("")
-  const [error, setError] = React.useState("")
-  const [passwordAgain, setPasswordAgain] = React.useState("")
+  const [name, setName] = useState("")
+  const [UserId, setUserId] = useState("")
+  const [Email, setEmail] = useState("")
+  const [Password, setPassword] = useState("")
+  const [error, setError] = useState("")
+  const [passwordAgain, setPasswordAgain] = useState("")
 
   const { createUser } = UserAuth();
 

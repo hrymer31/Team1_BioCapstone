@@ -33,7 +33,7 @@ function App() {
             <Route path='/signup'    element={<SignUp />} />
             <Route path='/contactForm' element={<ContactUs />} />
             <Route path='/ageCheck' element={<ageCheck/>} />
-            <Route path='/disqualify' element={<Disqualify/>} />`
+            <Route path='/disqualify' element={<Disqualify/>} />
           </Routes>
       </AuthProvider>
     </>

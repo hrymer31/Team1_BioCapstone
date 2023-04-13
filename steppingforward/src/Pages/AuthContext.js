@@ -1,28 +1,15 @@
 import React, { useContext, useState, useEffect } from "react";
 
 import { auth, db } from "../firebase";
-import { useNavigate, Navigate } from "react-router-dom";
-import { Link } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
-  onAuthStateChanged,
-  updatePassword,
-  getAuth,
-  reauthenticateWithCredential,
-  signInWithCredential,
-  EmailAuthProvider,
-  setPersistence,
-  browserLocalPersistence,
 } from "firebase/auth";
 import {
-  getFirestore,
   collection,
   getDocs,
-  addDoc,
-  deleteDoc,
   setDoc,
   doc,
   query,
@@ -41,13 +28,15 @@ export const AuthProvider = ({ children }) => {
 
     auth.onAuthStateChanged(user => {
         if(user) {
-            const data = JSON.parse(window.localStorage.getItem('userData'));
-            setUserData(data)
+          console.log(user.auth.currentUser)
+          setUser(user.auth.currentUser)
+            /* const data = JSON.parse(window.localStorage.getItem('userData'));
+            setUserData(data) */
         } else {
             console.log('user logged out')
         }  
     })
-    
+    console.log(user)
 
     const createUser = async (email, password, userInfo) => {
       const userCredential = await createUserWithEmailAndPassword(
@@ -56,8 +45,21 @@ export const AuthProvider = ({ children }) => {
         password
       );
       const user = userCredential.user;
-      setDoc(doc(db, "users", user.uid), userInfo);
-     
+      const patientInfo = {
+        uid: user.uid,
+        name: userInfo.name,
+        email: userInfo.Email
+      }
+      console.log(patientInfo)
+      fetch("api/patients/add", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(patientInfo)
+      }).then((response) => {
+        alert(response.statusText)
+      })
     };
 
     const logout = () => {
@@ -83,18 +85,18 @@ export const AuthProvider = ({ children }) => {
       signInWithEmailAndPassword(auth, doc.data().email, password)
         .then((userCredential) => {
           const user = userCredential.user;
-  /*           setUser(user);
+          setUser(user);
           setUserData(doc.data());
           setIsLoggedIn(true);
           
           console.log(doc.data());
           window.localStorage.setItem("userData", JSON.stringify(doc.data()));
-          */
+  
         
         })
         .catch((error) => {
           const errorCode = error.code;
-          const errorMessage = error.message;
+          //const errorMessage = error.message;
           if (errorCode === "auth/wrong-password") {
             alert(
               "Incorrect password, please try again"

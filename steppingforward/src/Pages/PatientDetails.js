@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import '../Css/PatientDetails.css'
 import Navbar from './Navbar';
 
+import { UserAuth } from "./AuthContext";
 import { 
     FormControl, 
     Button
@@ -19,7 +20,6 @@ const PatientDetails = () => {
     const [age, setAge] = useState()
     const [sex, setSex] = useState()
   
-
     const [ageError, setAgeError] = useState(false)
     const [sexError, setSexError] = useState(false)
 
@@ -29,10 +29,15 @@ const PatientDetails = () => {
     const [targetWeightError, setTargetWeightError] = useState(false)
 
     const [result, setResult] = useState(null)
+    const { auth, user } = UserAuth();
+
+    //uid, will use to access current users data base
+    const [uid, setUid] = useState(user.uid)
+
     const [userDetails, setUserDetails] = useState({
+        uid: uid,
         age: 0,
         sex: '',
-        race: '',
         height: 0,
         weightlb: 0,
         bodyFatPerc: 0,
@@ -99,6 +104,18 @@ const PatientDetails = () => {
         setWeightError(false)
         setBodyFatError(false)
         setTargetWeightError(false)   
+
+        console.log(userDetails)
+        fetch("api/patients/addDetails", {
+            method: "POST",
+            headers: {
+                "Content-type": "application/json",
+            },
+            body: JSON.stringify(userDetails)
+        }).then((response) => {
+            alert(response.statusText)
+        })
+       //setDoc(doc(db, "users", uid), userDetails)
     };
 
     return (

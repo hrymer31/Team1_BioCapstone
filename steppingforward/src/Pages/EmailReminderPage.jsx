@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import '../Css/App.css';
+import { UserAuth } from "./AuthContext";
 
 function EmailReminderPage() {
   const [isEnabled, setIsEnabled] = useState(false);
   const [reminderText, setReminderText] = useState('');
   const [frequency, setFrequency] = useState('daily');
   const [timezone, setTimezone] = useState('UTC');
+  const { auth } = UserAuth();
 
   function handleToggleEnabled() {
     setIsEnabled(!isEnabled);

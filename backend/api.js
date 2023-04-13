@@ -44,6 +44,14 @@ router.route('/patients/add').post((request, response) => {
         response.status(201).json(result);
     })
 })
+router.route('/patients/addDetails').post((request, response) => {
+    console.log("post is working")
+
+    let patientDetails = request.body
+    dbqueries.addPatientDetails(patientDetails).then(result => {
+        response.status(201).json(result);
+    })
+})
 
 var port = process.env.PORT || 1433
 app.listen(port, () =>
