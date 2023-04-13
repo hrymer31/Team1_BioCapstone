@@ -7,7 +7,6 @@ import { AuthProvider } from "./Pages/AuthContext";
 import PatientDetails from './Pages/PatientDetails';
 import contactForm, { ContactUs } from './Pages/contactForm';
 import DataAdmin from './Pages/DataAdmin';
-import WellstarLogin from './Pages/WellstarLogin';
 import SignUp from './Pages/SignUp'
 import Goals from './Pages/Goals'
 import Dashboard from './Pages/Dashboard'
