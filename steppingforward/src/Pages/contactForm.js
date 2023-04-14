@@ -1,14 +1,38 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import emailjs from 'emailjs-com';
 import moment from 'moment-timezone';
 import { faArrowRightFromBracket,faUser,faWeightScale,faShoePrints } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Navbar from './Navbar';
-
+import { UserAuth } from "./AuthContext";
 
 
 export const ContactUs = () => {
+  const { user } = UserAuth();
   const form = useRef();
+  const userData = {
+    name: '',
+    email: ''
+  }
+
+  useEffect(() => {
+    if(user.uid === undefined){
+      console.log('user is null')
+    } else {
+      fetch('api/patients/' + user.uid, {
+        method: 'GET',
+        headers: {
+          "Content-Type": "application/json",
+        }
+      }).then(response => 
+          response.clone().json()
+      ).then((data) => {
+          userData.name = data[0].name;
+          userData.email = data[0].email;
+      })
+    }
+  }, [user])
+  
   const sendEmail = (e) => {
     e.preventDefault();
 

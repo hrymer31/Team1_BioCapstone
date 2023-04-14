@@ -6,6 +6,7 @@ import Button from "@mui/material/Button";
 import LoginIcon from "@mui/icons-material/Login";
 import ClearIcon from "@mui/icons-material/Clear";
 import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
+import '../Css/Login.css'
 
 
 
@@ -43,9 +44,8 @@ const Login = () => {
             alert("Password can't be empty");
         }
       try {
-        signIn(username, password)
+        signIn(username,password)
         handleNavigation()
-        
       } catch (error) {
         console.log(error)
       }
@@ -53,17 +53,8 @@ const Login = () => {
     }
 
     function handleNavigation() {
-      if (user) {
-          if (goToDashboard) {
-              let role = window.localStorage.getItem('userRole')
-              if (role === "Administrator") {
-                  navigate('/admindashboard')
-                
-             
-              }
-              else
-              navigate('/home')
-          };
+      if (isLoggedIn) {
+          navigate('/home')
       }
   }
 
@@ -108,7 +99,7 @@ const Login = () => {
               style={{ width: 225, marginBottom: 10 }}
               startIcon={<LoginIcon />}
               className="submit"
-              onClick={handleSignIn}
+              onClick={(e) => handleSignIn(e)}
               sx={{ ":hover": { bgcolor: "rgb(161, 252, 134,0.2)" } }}
             >
               Login

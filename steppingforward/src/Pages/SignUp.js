@@ -32,9 +32,7 @@ const SignUp = () => {
 
     const userInfo = {
         Name: name,
-        userId: UserId,
         email: Email,
-     
     }
 
     const handleSumbit = async (e) => {

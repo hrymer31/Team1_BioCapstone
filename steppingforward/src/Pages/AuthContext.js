@@ -76,23 +76,12 @@ export const AuthProvider = ({ children }) => {
     };
 
   const signIn = async (username, password) => {
-    const userName = username;
-   
-    const q = query(collection(db, "users"), where("userId", "==", userName));
-
-    const querySnapshot = await getDocs(q);
-    querySnapshot.forEach((doc) => {
-      signInWithEmailAndPassword(auth, doc.data().email, password)
+    const email = username;
+      signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
           const user = userCredential.user;
           setUser(user);
-          setUserData(doc.data());
           setIsLoggedIn(true);
-          
-          console.log(doc.data());
-          window.localStorage.setItem("userData", JSON.stringify(doc.data()));
-  
-        
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -105,7 +94,6 @@ export const AuthProvider = ({ children }) => {
         
           }
         });
-    });
   };
 
   const forgotPassword = async (email, username, secretQ1A, secretQ2A) => {

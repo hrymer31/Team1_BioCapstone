@@ -1,5 +1,6 @@
+ import React, { useState, useEffect } from 'react'
+ import './Css/InspirationalQuotes.css'
  
-import React, { useState, useEffect } from 'react'
 const quotesArray = [
         "Remember why you started",
         "'You didn't gain all your weight in one day; you wont lose it in one day. Be patient with yourself' - Jenna Wolfe",

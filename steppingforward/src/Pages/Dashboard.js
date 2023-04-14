@@ -14,7 +14,7 @@ const Dashboard = () => {
   return (
     <>
       <Navbar />
-      <p> <Quotes /> </p>
+      <div className='quote'> <Quotes /> </div>
       <Box
         className="dashboard"
         sx={{
@@ -33,8 +33,6 @@ const Dashboard = () => {
           }}
         >
           <h1>Your Results: </h1>
-
-
 
           <div className='sections'>
             <Box className="dashboardBox steps">
@@ -65,10 +63,8 @@ const Dashboard = () => {
           </div>
         </FormControl>
       
-
       </Box>
     
-
     </>
   );
 }

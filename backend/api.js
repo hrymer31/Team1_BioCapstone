@@ -29,10 +29,10 @@ router.route('/patients').get((request, response) => {
     })
 })
 
-router.route('/patients/:patientID').get((request, response) => {
-
-    dbqueries.getPatient(request.params.patientID).then(result => {
-        response.json(result[0])
+router.route('/patients/:patientUID').get((request, response) => {
+    console.log(request.params.patientUID)
+    dbqueries.getPatient(request.params.patientUID).then(result => {
+        response.json(result)
     })
 })
 

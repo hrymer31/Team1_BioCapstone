@@ -10,13 +10,13 @@ async function getPatients() {
         console.log(error);
     }
 }
-async function getPatient(patientID) {
+async function getPatient(patientUID) {
     try {
         let pool = await sql.connect(config);
         let patient = await pool.request()
-            .input('input_parameter', sql.Int, patientID)
-            .query("SELECT * from patientInfo WHERE patientID = @input_parameter")
-        return patient.recordsets;
+            .input('uid', sql.VarChar, patientUID)
+            .query("SELECT * FROM patientDetails WHERE uid = @uid")
+        return patient.recordsets[0];
     } catch (error) {
         console.log(error)
     }
