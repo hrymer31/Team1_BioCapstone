@@ -85,23 +85,24 @@ const PatientDetails = () => {
         }
     }
     const calculate = () => {
-        userDetails.weightkg = (userDetails.weightlb / 2.205) ;
-        userDetails.currentFatMass = (userDetails.weightkg * (userDetails.bodyFatPerc/100));
-        userDetails.currentFatFreeMass = (userDetails.weightkg - userDetails.currentFatMass);
-        userDetails.targetWeightLosskg = (userDetails.weightkg * (userDetails.targetWeightLossPerc/100));
-        userDetails.targetBodyWeightkg = (userDetails.weightkg - userDetails.targetWeightLosskg);
-        userDetails.newFatMass = (userDetails.currentFatMass - userDetails.targetWeightLosskg);
-        userDetails.targetBodyFatPerc = ((userDetails.newFatMass / userDetails.targetBodyWeightkg)*100);
+        (userDetails.weightkg = (userDetails.weightlb / 2.20462).toFixed(1) );
+       
+      (userDetails.currentFatMass = (userDetails.weightkg * (userDetails.bodyFatPerc/100)).toFixed(2));
+        (userDetails.currentFatFreeMass = (userDetails.weightkg - userDetails.currentFatMass)).toFixed(0) ;
+         (userDetails.targetWeightLosskg = (userDetails.weightkg * (userDetails.targetWeightLossPerc/100)).toFixed(1));
+        (userDetails.targetBodyWeightkg = (userDetails.weightkg - userDetails.targetWeightLosskg).toFixed(1));
+       (userDetails.newFatMass = (userDetails.currentFatMass - userDetails.targetWeightLosskg).toFixed(1));
+       (userDetails.targetBodyFatPerc = ((userDetails.newFatMass / userDetails.targetBodyWeightkg)*100).toFixed(1));
 
         if (sex === 'Male') {
-            userDetails.stepsPerDay = ((39377.3357744) / (Math.pow(userDetails.targetBodyFatPerc, 1.304048257)))
+           (userDetails.stepsPerDay = (39377.34 / (userDetails.targetBodyFatPerc ** 1.3405)).toFixed(1))
          
         } else if (sex === 'Female') {
-            userDetails.stepsPerDay = ((261425.44) / (Math.pow(userDetails.targetBodyFatPerc, 1.87969924)))
+            userDetails.stepsPerDay = ((261425.4) / (Math.pow(userDetails.targetBodyFatPerc, 1.8797)).toFixed(1))
           
         }
         
-        setResult(userDetails.totalStepTarget = (userDetails.stepsPerDay * userDetails.currentFatMass))
+        setResult (userDetails.totalStepTarget = (userDetails.stepsPerDay * userDetails.currentFatMass))
 
         setAgeError(false)
         setSexError(false)
