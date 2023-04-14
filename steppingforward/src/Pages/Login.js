@@ -44,12 +44,28 @@ const Login = () => {
         }
       try {
         signIn(username, password)
+        handleNavigation()
         
       } catch (error) {
         console.log(error)
       }
         
     }
+
+    function handleNavigation() {
+      if (user) {
+          if (goToDashboard) {
+              let role = window.localStorage.getItem('userRole')
+              if (role === "Administrator") {
+                  navigate('/admindashboard')
+                
+             
+              }
+              else
+              navigate('/home')
+          };
+      }
+  }
 
     
 
