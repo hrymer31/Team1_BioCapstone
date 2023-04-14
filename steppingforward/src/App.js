@@ -15,13 +15,14 @@ import Disqualify from './Pages/disqualify.js';
 import Login from './Pages/Login'
 import ForgotPassword from './Pages/ForgotPassword';
 import Profile from './Pages/Profile';
+import Home from "./Pages/Home.js";
 
 function App() {
   return (
     <>
      <AuthProvider>
           <Routes>
-            <Route path='/'/>
+            <Route path='/' element={<Home/>} />
             <Route path='/home'  element={<Dashboard />} />
             <Route path='/resources' element={<Resources/>}/>
             <Route path='/details'   element={<PatientDetails />}/>
