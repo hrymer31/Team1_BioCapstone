@@ -1,10 +1,21 @@
 import { Link, useMatch, useResolvedPath } from "react-router-dom"
 import feetlogo from '../footprint.png';
+import { useNavigate } from 'react-router-dom';
+import { UserAuth } from './AuthContext';
 
 
-
-//WILL NEED TO ADD MYACCOUNT ROUTE for my account 
-export default function Navbar() {
+ 
+const Navbar = () => {
+  const { logout } = UserAuth();
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    try {
+      logout()
+      navigate('/home')
+    } catch (e) {
+      console.log(e.message)
+    }
+  }
   return (
     <nav className="nav">
       <img src={feetlogo} alt="footprint" width="70px" />
@@ -19,10 +30,10 @@ export default function Navbar() {
       <CustomLink to="/details"> Calculate Steps </CustomLink>  
       <CustomLink to="/resources"> Resources </CustomLink>  
       <CustomLink to="/goals"> Goals </CustomLink>  
-  <CustomLink to="/contactForm"> Email Reminders </CustomLink>  
+      <CustomLink to="/contactForm"> Email Reminders </CustomLink>  
       <CustomLink to="/profile"> My Account </CustomLink> 
-      <CustomLink to="/logout"> Log Out </CustomLink>    
-    
+      <CustomLink to="/" onClick={handleLogout}> Log Out </CustomLink>    
+     
           </ul>
     </nav>
   )
@@ -41,3 +52,4 @@ function CustomLink({ to, children, ...props }) {
   )
 }
 
+export default Navbar;
