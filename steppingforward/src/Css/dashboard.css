@@ -1,6 +1,8 @@
 .dashboard {
+    justify-content: center;
     display: flex;
     flex-direction: column;
+    margin: 30px auto 0 auto;
 }
 
 .sections {
@@ -20,6 +22,9 @@ padding: 0 10px;
 box-shadow: 8px 8px 3px rgb(130, 199, 168);
 display: grid;
 
+}
+.dashboard{
+    box-shadow: 10px 10px 5px rgb(130, 199, 168);
 }
 .dashboardBox.step{
 grid-column: 1/2;
