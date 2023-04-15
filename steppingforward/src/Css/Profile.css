@@ -1,0 +1,53 @@
+.Profile {
+
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.box {
+
+    box-shadow: 10px 10px 5px rgb(130, 199, 168);
+
+}
+
+.profileDisplay {
+
+    display: flex;
+    flex-direction: column;
+    margin-top: 23px; 
+    margin-left: 20px;
+    align-items: center;
+
+}
+
+p {
+
+    margin: 20px auto 30px auto;
+    font-size: 14px;
+    font-weight: 400;
+
+}
+
+.form{
+    margin: 0 0 30px 0;
+}
+
+.form .inputSection {
+    display: flex;
+    margin-top: 23px; 
+    margin-left: 20px;
+    align-items: center;
+}
+
+.form div input {
+    width: 200px;
+    height: 30px;
+    border: 1px solid rgb(171, 170, 170);
+    border-radius: 3px;
+}
+
+.form div label {
+    margin-right: 10px;
+}
