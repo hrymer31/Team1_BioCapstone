@@ -15,6 +15,7 @@ import Disqualify from './Pages/disqualify.js';
 import Login from './Pages/Login'
 import ForgotPassword from './Pages/ForgotPassword';
 import Profile from './Pages/Profile';
+import EditProfile from './Pages/EditProfile'
 import Home from "./Pages/Home.js";
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
             <Route path='/ageCheck' element={<ageCheck/>} />
             <Route path='/disqualify' element={<Disqualify/>} />
             <Route path='/profile' element={<Profile/>} />
+            <Route path = '/edit' element = {<EditProfile/>}/>
             <Route path='/forgotpassword' element={<ForgotPassword/>}/>
           </Routes>
       </AuthProvider>
