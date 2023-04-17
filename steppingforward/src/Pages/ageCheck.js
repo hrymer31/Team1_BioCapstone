@@ -17,6 +17,7 @@ export const AgeCheck = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         //Navigation goes here
+        
         //If yes was selected --> proceed with making account
         //If no was selected --> navigate to disqualification page
     }

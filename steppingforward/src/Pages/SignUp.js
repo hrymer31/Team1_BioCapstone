@@ -18,7 +18,7 @@ const SignUp = () => {
 
   const [goToHome, setgoToHome] = useState(false);
    if (goToHome) {
-      navigate('/home')
+      navigate('/ageCheck')
   }; 
 
   const [name, setName] = useState("")
