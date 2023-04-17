@@ -23,8 +23,11 @@ export const AgeCheck = () => {
     }
 
     return (
+      
+        <Navbar />
+      
         <div className = "ageCheck">
-            <Navbar />
+            
             <Typography variant = "h3" gutterBottom>Before we begin...</Typography>
 
             <Typography variant = "h6" gutterBottom>Are you between the ages of 19 and 40?</Typography>
