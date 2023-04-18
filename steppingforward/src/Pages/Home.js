@@ -33,10 +33,12 @@ const Home = () => {
                 <h2>Welcome to Stepping Forward</h2>
                 <p>Hi, thank you so much for joining Stepping Forward. 
                     We hope this helps aid you on your weight loss journey. 
-                    We have a few things to note before stepping forward. 
-                    First, only your steps and weight will be monitored for the next 12 months. 
-                    Second, Dr. Robert Buresh created the equation to calculate the steps needed for weight loss. 
-                    Lastly, happy stepping.</p>
+                    We have a few things to note before "stepping forward."" 
+                    First, the step count, starting weight, and weight loss achieved will be occasionally monitored and recorded for up to twelve months 
+                    Second, Dr. Robert Buresh created the equation to calculate the steps needed for weight loss 
+                    and suggest that you only update your current weight every 2 to 3 months or after appoinment with your medical professional. 
+                    Lastly, happy stepping.
+                </p>
                     </FormControl>
 
                     </Box>
