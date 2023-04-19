@@ -5,7 +5,7 @@ import { faArrowRightFromBracket,faUser,faWeightScale,faShoePrints } from '@fort
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Navbar from './Navbar';
 import { UserAuth } from "./AuthContext";
-
+import { useLocation } from "react-router-dom";
 
 export const ContactUs = () => {
   const { user } = UserAuth();
@@ -14,6 +14,12 @@ export const ContactUs = () => {
     name: '',
     email: ''
   }
+
+  const ContactForm = () => {
+    const location = useLocation(); // get the current location object
+    const email = location.state?.email;
+  }
+
 
   useEffect(() => {
     if(user.uid === undefined){
@@ -50,18 +56,9 @@ export const ContactUs = () => {
     <Navbar />
      
     <form ref={form} onSubmit={sendEmail}>
-      <label>Name:</label>
-      <input type="text" name="user_name" />
-      <label>Email Address:</label>
-      <input type="email" name="user_email" />
-      <label>Timezone:</label>
-      <select name="timezone">
-        {moment.tz.names().map(timezone => (
-          <option key={timezone} value={timezone}>
-            {timezone}
-          </option>
-        ))}
-      </select>
+ 
+      <label for="email">Email Address:</label>
+      <input type="email" id="email" name="email" value="example@example.com"/>     
       <label>
         <input type="checkbox" name="email_reminders" value="true" />
         Enable email reminders
@@ -74,7 +71,12 @@ export const ContactUs = () => {
       </select>
       <input type="hidden" id="emailFrequency" name="email_frequency" value="daily" />
       <label>Remind me to:</label>
-      <textarea name="message" />
+<select name="message">
+  <option value="Remember to log your daily steps!">Remember to log your daily steps!</option>
+  <option value="Don't skip entering your steps today!">Don't skip entering your steps today!</option>
+  <option value="Don't neglect your progress - record your daily steps!">Don't neglect your progress - record your daily steps!</option>
+</select>
+
      
       <input type="submit" value="Send" />
  
