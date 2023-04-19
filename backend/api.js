@@ -30,33 +30,47 @@ router.route('/patients').get((request, response) => {
 })
 
 router.route('/patients/:patientUID').get((request, response) => {
-    console.log(request.params.patientUID)
     dbqueries.getPatient(request.params.patientUID).then(result => {
         response.json(result)
     })
 })
 
 router.route('/patients/add').post((request, response) => {
-    console.log("post is working")
-
+    console.log("post is starting")
     let patient = request.body
     dbqueries.addPatient(patient).then(result => {
         response.status(201).json(result);
     })
 })
+
 router.route('/patients/addDetails').post((request, response) => {
-    console.log("post is working")
+    console.log("post is starting")
 
     let patientDetails = request.body
     dbqueries.addPatientDetails(patientDetails).then(result => {
         response.status(201).json(result);
     })
 })
+
+router.route('/patients/updateSteps').post((request, response) => {
+    console.log("post is starting")
+    let stepInfo = request.body
+    dbqueries.updateSteps(stepInfo).then(result => {
+        response.status(201).json(result);
+    })
+})
+
 router.route('/patients/addSteps').post((request, response) => {
-    console.log("post is working")
+    console.log("post is starting")
 
     let stepInfo = request.body
-    dbqueries.addPatientDetails(stepInfo).then(result => {
+    dbqueries.addSteps(stepInfo).then(result => {
+        response.status(201).json(result);
+    })
+})
+
+router.route('/patients/getSteps/:patientData').get((request, response) => {
+    dbqueries.getSteps(JSON.parse(request.params.patientData)).then(result => {
         response.status(201).json(result);
     })
 })

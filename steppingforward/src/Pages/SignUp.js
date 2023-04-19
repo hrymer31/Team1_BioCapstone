@@ -21,6 +21,7 @@ const SignUp = () => {
         navigate('/login')
     }; 
 
+    const [AccessCode, setAccessCode] = ("")
     const [name, setName] = useState("")
     const [UserId, setUserId] = useState("")
     const [Email, setEmail] = useState("")
@@ -29,10 +30,10 @@ const SignUp = () => {
     const [passwordAgain, setPasswordAgain] = useState("")
     const [alreadySignedUp, setAlreadySignedUp] = useState(false);
 
-
     const { createUser } = UserAuth();
 
     const userInfo = {
+        accessCode: AccessCode,
         Name: name,
         email: Email,
     }
@@ -72,49 +73,57 @@ const SignUp = () => {
 
   return (
     <div className="SignUp">
-        <h1>Sign Up</h1>
+      <h1>Sign Up</h1>
         <Container className="form" style={{width: 800}}>
-            <div id='formHeader'></div>
+        <div id='formHeader'>
+        </div>
             <FormControl id="formcontrol" onSubmit={handleSumbit}>
-                <div id="personalInfo">
-                    <TextField
-                        id="outlined-password-input Name"
-                        label="Name"
-                        type="text"
-                        style={{ marginRight: 10,}}
-                        onChange={(e) => setName(e.target.value)}
-                    />
-                    <TextField
-                        id="outlined-password-input Email"
-                        label="Email"
-                        type="text"
-                        onChange={(e) => setEmail(e.target.value)}
-                    /> 
-                </div>
-                <div id="passwords">
-                    <TextField
-                        id="outlined-password-input password"
-                        label="Password"
-                        type="password"
-                        autoComplete="current-password"
-                        style={{marginRight: 10}}
-                        onChange={e => setPassword(e.target.value)}
-                    />
-                    <TextField
-                        id="outlined-password-input password"
-                        label="Confirm Password"
-                        type="password"
-                        autoComplete="current-password"
-                        style={{ marginRight: 10 }}
-                        onChange={e => setPasswordAgain(e.target.value)}
-                    />
-                    <div id="password-requirements">
-                        <h4>Password Requirements:</h4>
-                        <ul>
-                            <li style={{ textDecoration: passwordStrength >= 1 ? 'line-through' : 'none' }}>At least one uppercase letter</li>
-                            <li style={{ textDecoration: passwordStrength >= 2 ? 'line-through' : 'none' }}>Must be at least 6 characters</li>
+                    <div id="personalInfo">
+                        <TextField
+                            id="outlined-password-input Access"
+                            label="Access Code"
+                            type="text"
+                            style={{ marginRight: 10, }}
+                            onChange={(e) => setAccessCode(e.target.value)}
+                        />
+                        <TextField
+                            id="outlined-password-input Name"
+                            label="Name"
+                            type="text"
+                            style={{ marginRight: 10,}}
+                            onChange={(e) => setName(e.target.value)}
+                        />
+                        <TextField
+                            id="outlined-password-input Email"
+                            label="Email"
+                            type="text"
+                            onChange={(e) => setEmail(e.target.value)}
+                        /> 
+                    </div>
+                    <div id="passwords">
+                        <TextField
+                            id="outlined-password-input password"
+                            label="Password"
+                            type="password"
+                            autoComplete="current-password"
+                            style={{marginRight: 10}}
+                            onChange={e => setPassword(e.target.value)}
+                        />
+                        <TextField
+                            id="outlined-password-input password"
+                            label="Confirm Password"
+                            type="password"
+                            autoComplete="current-password"
+                            style={{ marginRight: 10 }}
+                            onChange={e => setPasswordAgain(e.target.value)}
+                        />
+                      <div id="password-requirements">
+                          <h4>Password Requirements:</h4>
+                          <ul>
+                              <li style={{ textDecoration: passwordStrength >= 1 ? 'line-through' : 'none' }}>At least one uppercase letter</li>
+                              <li style={{ textDecoration: passwordStrength >= 2 ? 'line-through' : 'none' }}>Must be at least 6 characters</li>
 
-                        </ul>
+                          </ul>
                     </div>
                 </div>
                     
@@ -145,11 +154,8 @@ const SignUp = () => {
                             </Button>
                     </div>
                 </FormControl>
-            </Container>
-            
-            
-          
-        </div>
+        </Container>    
+    </div>
     );
 }
 

@@ -47,6 +47,7 @@ export const AuthProvider = ({ children }) => {
       const user = userCredential.user;
       const patientInfo = {
         uid: user.uid,
+        accessCode: user.accessCode,
         name: userInfo.name,
         email: userInfo.Email
       }

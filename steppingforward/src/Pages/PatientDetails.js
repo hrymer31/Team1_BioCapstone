@@ -15,15 +15,25 @@ for (var i = 19; i < 46; i++) {
 }
 const sexArray = ["Female","Male"]
 
+const raceArray = [
+    "American Indian or Alaska Native",
+    "Asian",
+    "Black or African American",
+    "Hispanic or Latino",
+    "Native Hawaiian or Other Pacific Islander",
+    "White"
+]
 
 const PatientDetails = () => {
     const [age, setAge] = useState()
     const [sex, setSex] = useState()
+    const [race, setRace] = useState()
     const [neckCircumference, setNeckCircumference] = useState()
     const [waistCircumference, setWaistCircumference] = useState()
 
     const [ageError, setAgeError] = useState(false)
     const [sexError, setSexError] = useState(false)
+    const [raceError, setRaceError] = useState(false)
     const [neckError, setNeckError] = useState(false)
     const [waistError, setWaistError] = useState(false)
     const [heightError, setHeightError] = useState(false)
@@ -41,6 +51,7 @@ const PatientDetails = () => {
         uid: uid,
         age: 0,
         sex: '',
+        race: '',
         neckCircumference: 0,
         waistCircumference: 0,
         height: 0,
@@ -59,6 +70,7 @@ const PatientDetails = () => {
     })
     function handleAgeChange(e) { userDetails.age = Number(e.target.value); setAge(Number(e.target.value));}
     function handleSexChange(e) { userDetails.sex = e.target.value; setSex(e.target.value);}
+    function handleRaceChange(e) { console.log(e.target.value); userDetails.race = e.target.value; setRace(e.target.value); }
     function handleNeckChange(e) { userDetails.neckCircumference = Number(e.target.value); setNeckCircumference(e.target.value)}
     function handleWaistChange(e) { userDetails.waistCircumference = Number(e.target.value); setWaistCircumference(e.target.value)}
     function handleHeightChange(e) { userDetails.height = Number(e.target.value);}
@@ -69,6 +81,7 @@ const PatientDetails = () => {
     const validate = () => {
         if(userDetails.age === 0){ setAgeError(true) }
         if(userDetails.sex === ''){ setSexError(true) }
+        if(userDetails.race === '') { setRaceError(true) }
         if(userDetails.height === 0){ setHeightError(true) }
         if(userDetails.weightlb === 0){ setWeightError(true) }
         if(userDetails.bodyFatPerc === 0){ setBodyFatError(true) }
@@ -76,6 +89,7 @@ const PatientDetails = () => {
         if(
             (userDetails.age !== 0) && 
             (userDetails.sex !== '') && 
+            (userDetails.race !== '') && 
             (userDetails.height !== 0) && 
             (userDetails.weightlb !== 0) && 
             (userDetails.bodyFatPerc !== 0) &&
@@ -164,7 +178,7 @@ const PatientDetails = () => {
                             </select>                              
                         </div>
                         {
-                            (ageError) && <div style={{color: 'red'}} className='error'>You must select a valid age</div>   
+                            (ageError) && <div style={{color: 'red'}} className='error'>You must select a valid option</div>   
                         }    
                         <div className='detailsInputSection'>
                             <label htmlFor="sex">Sex</label>
@@ -178,7 +192,23 @@ const PatientDetails = () => {
                             </select>      
                         </div>
                         {
-                            (sexError) && <div style={{ color: 'red' }} className='error'>You must select a valid sex</div>
+                            (sexError) && <div style={{ color: 'red' }} className='error'>You must select a valid option</div>
+                        }
+                        <div className='inputSection'>
+                            <label htmlFor="race">Race</label>
+                            <select id='race' value={race} onChange={(e) => handleRaceChange(e)}>
+                                <option value=""></option>
+                                {
+                                    raceArray.map(raceOption => {
+                                        return (
+                                            <option>{raceOption}</option>
+                                        )
+                                    })
+                                }
+                            </select>
+                        </div>
+                        {
+                            (raceError) && <div style={{ color: 'red' }} className='error'>You must select a valid option</div>
                         }
                         <div className='detailsInputSection'>
                             <label htmlFor='neck'>Neck Circumference(cm)</label>
