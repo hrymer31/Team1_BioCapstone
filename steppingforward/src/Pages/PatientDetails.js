@@ -8,7 +8,6 @@ import {
     Button
  } from '@mui/material'
 import { Box } from '@mui/system';
-import { useNavigate } from 'react-router-dom';
 
 const ageArray = [];
 for (var i = 19; i < 46; i++) {
@@ -18,7 +17,6 @@ const sexArray = ["Female","Male"]
 
 
 const PatientDetails = () => {
-    const navigate = useNavigate();
     const [age, setAge] = useState()
     const [sex, setSex] = useState()
     const [neckCircumference, setNeckCircumference] = useState()
@@ -57,15 +55,14 @@ const PatientDetails = () => {
         newFatMass: 0,
         targetBodyFatPerc: 0,
         stepsPerDay: 0,
-        totalStepTarget: 0,
-        currentWeight: 0
+        totalStepTarget: 0
     })
     function handleAgeChange(e) { userDetails.age = Number(e.target.value); setAge(Number(e.target.value));}
     function handleSexChange(e) { userDetails.sex = e.target.value; setSex(e.target.value);}
     function handleNeckChange(e) { userDetails.neckCircumference = Number(e.target.value); setNeckCircumference(e.target.value)}
     function handleWaistChange(e) { userDetails.waistCircumference = Number(e.target.value); setWaistCircumference(e.target.value)}
     function handleHeightChange(e) { userDetails.height = Number(e.target.value);}
-    function handleWeightChange(e) { userDetails.weightlb = Number(e.target.value); userDetails.currentWeight = Number(e.target.value); }
+    function handleWeightChange(e) { userDetails.weightlb = Number(e.target.value);}
     function handleBodyFatChange(e) { userDetails.bodyFatPerc = Number(e.target.value);}
     function handleTargetWeightChange(e) { userDetails.targetWeightLossPerc = Number(e.target.value);}
 
@@ -89,12 +86,13 @@ const PatientDetails = () => {
     }
     const calculate = () => {
         (userDetails.weightkg = (userDetails.weightlb / 2.20462).toFixed(1) );
-        (userDetails.currentFatMass = (userDetails.weightkg * (userDetails.bodyFatPerc/100)).toFixed(2));
+       
+      (userDetails.currentFatMass = (userDetails.weightkg * (userDetails.bodyFatPerc/100)).toFixed(2));
         (userDetails.currentFatFreeMass = (userDetails.weightkg - userDetails.currentFatMass)).toFixed(0) ;
-        (userDetails.targetWeightLosskg = (userDetails.weightkg * (userDetails.targetWeightLossPerc/100)).toFixed(1));
+         (userDetails.targetWeightLosskg = (userDetails.weightkg * (userDetails.targetWeightLossPerc/100)).toFixed(1));
         (userDetails.targetBodyWeightkg = (userDetails.weightkg - userDetails.targetWeightLosskg).toFixed(1));
-        (userDetails.newFatMass = (userDetails.currentFatMass - userDetails.targetWeightLosskg).toFixed(1));
-        (userDetails.targetBodyFatPerc = ((userDetails.newFatMass / userDetails.targetBodyWeightkg)*100).toFixed(1));
+       (userDetails.newFatMass = (userDetails.currentFatMass - userDetails.targetWeightLosskg).toFixed(1));
+       (userDetails.targetBodyFatPerc = ((userDetails.newFatMass / userDetails.targetBodyWeightkg)*100).toFixed(1));
 
         if (sex === 'Male') {
            (userDetails.stepsPerDay = (39377.34 / (userDetails.targetBodyFatPerc ** 1.3405)).toFixed(1))
@@ -126,33 +124,33 @@ const PatientDetails = () => {
         }).then((response) => {
             alert(response.statusText)
         }) 
-        navigate('/home')
     };
 
     return (
        
         <div className='PatientDetails'>
             <Navbar />
-            <Box 
-                className='box'
+            <Box marginTop={10} marginBottom={10}
+                className='detailsBox'
                 sx={{
                     backgroundColor: 'white', 
                     width: 500,
                     marginLeft: 'auto',
                     marginRight: 'auto',
-                    height: 750,
+                    height: 900,
                     overflow: 'auto',
                     borderRadius: 2
                 }}>
+                    <h5 className='detailsTitle'>Calculate Steps</h5>
                 <FormControl 
                     fullWidth 
                     sx={{
                         display: 'flex'
                     }}
                 >
-                    <p> Enter details to get Daily Step Count</p>
-                    <div className='form'>
-                        <div className='inputSection'>
+                    <p> Enter details to get daily step count:</p>
+                    <div className='detailsForm'>
+                        <div className='detailsInputSection'>
                             <label htmlFor="age">Age</label>
                             <select id="age" value={age} onChange={(e) => handleAgeChange(e)}>
                                 <option value=""></option>
@@ -168,7 +166,7 @@ const PatientDetails = () => {
                         {
                             (ageError) && <div style={{color: 'red'}} className='error'>You must select a valid age</div>   
                         }    
-                        <div className='inputSection'>
+                        <div className='detailsInputSection'>
                             <label htmlFor="sex">Sex</label>
                             <select id='sex' value={sex} onChange={(e) => handleSexChange(e)}>
                                 <option value=""></option>
@@ -182,18 +180,18 @@ const PatientDetails = () => {
                         {
                             (sexError) && <div style={{ color: 'red' }} className='error'>You must select a valid sex</div>
                         }
-                        <div className='inputSection'>
+                        <div className='detailsInputSection'>
                             <label htmlFor='neck'>Neck Circumference(cm)</label>
                             <input id='neck' type='number' placeholder='cm' onChange={(e) => handleNeckChange(e)} />
                             <label style={{'fontSize': 12, 'color': 'red'}}> *optional</label>
                         </div>
-                        <div className='inputSection'>
+                        <div className='detailsInputSection'>
                             <label htmlFor='waist'>Waist Circumference(cm)</label>
                             <input id='waist' type='number' placeholder='cm' onChange={(e) => handleWaistChange(e)} />
                             <label style={{ 'fontSize': 12, 'color': 'red' }}> *optional</label>
                         </div>
                        <p> Enter all calculations below to the nearest tenths place (e.g. 250.5, 22.0)</p>
-                        <div className='inputSection'>
+                        <div className='detailsInputSection'>
                             <label htmlFor='height'>Height(cm)</label>
                             <input id='height' type='number' placeholder='cm' onChange={(e) => handleHeightChange(e)} /> 
                         </div>
@@ -201,7 +199,7 @@ const PatientDetails = () => {
                             (heightError) && <div style={{ color: 'red' }} className='error'>You must select a valid height</div>
                         }
                        
-                        <div className='inputSection'>
+                        <div className='detailsInputSection'>
                             <label htmlFor='weight'>Weight(lb)</label>
                             <input id='weight' type='number' placeholder='lb' onChange={(e) => handleWeightChange(e)} /> 
                         </div>
@@ -209,7 +207,7 @@ const PatientDetails = () => {
                             (weightError) && <div style={{ color: 'red' }} className='error'>You must select a valid weight</div>
                         }
                        
-                        <div className='inputSection'>
+                        <div className='detailsInputSection'>
                             <label form='bodyFatPerc'>Body Fat %</label>
                             <input id='bodyFatPerc' type='number' placeholder='%' onChange={(e) => handleBodyFatChange(e)} />
                         </div>
@@ -218,7 +216,7 @@ const PatientDetails = () => {
                         }
 
                         <p>For Target Weight Loss, please choose a number between 5% through 10% </p>
-                        <div className='inputSection'>
+                        <div className='detailsInputSection'>
                             <label form='targetWeightLossPerc'>Target Weight Loss %</label>
                             <input id='targetWeightLossPerc' type='number' placeholder='%' onChange={(e) => handleTargetWeightChange(e)} />
                         </div>
@@ -231,7 +229,14 @@ const PatientDetails = () => {
                     >
                         Get Results!
                     </Button>
-                </FormControl>       
+                </FormControl>    
+                {
+                    (result !== null) && 
+                    <div className='result'>
+                        Prescribed daily step count: {Math.trunc(result)}
+                    </div>  
+                }
+            
             </Box>
                                   
         </div>

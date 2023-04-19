@@ -10,10 +10,10 @@ import Navbar from './Navbar';
 
  const Resources = () => {
     return (
-        <div className='Resources'> 
+        <div className='Resource'> 
         <Navbar />
-            <h5 className='title'>Resources</h5>
-            <div className='sections'>
+            <h5 className='resourceTitle'>Resources</h5>
+            <div className='resourceSections'>
                 <Box className="resourceBox step">
                     <div className='steps'>
                         <DirectionsWalkIcon className='resourcesIcon'></DirectionsWalkIcon>
@@ -74,7 +74,7 @@ import Navbar from './Navbar';
                         >Tips for eating healthier</Link>
                     </div>
                 </Box>    
-                <Box className="resourceBox article">
+                <Box className="resourceBox article" marginBottom={10}>
                     <div className='article'>
                         <NewspaperIcon className='resourcesIcon'></NewspaperIcon>
                         <Link 

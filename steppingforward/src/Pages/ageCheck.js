@@ -31,13 +31,13 @@ export const AgeCheck = () => {
 
     return (
 
-        <div className="pages">
+        <div className="agePages">
 
             <HomeHeader />
 
             <Box
                 marginTop={10}
-                className='box'
+                className='ageBox'
                 sx={{
                     backgroundColor: 'white',
                     width: 500,
@@ -48,7 +48,7 @@ export const AgeCheck = () => {
                     borderRadius: 2
                 }}>
 
-                <div className="formDisplay">
+                <div className="ageFormDisplay">
 
                     <Typography variant="h5" align="center" gutterBottom>Before we begin...</Typography>
 
@@ -56,9 +56,9 @@ export const AgeCheck = () => {
 
                     <FormControl sx={{ display: 'flex' }} align="center">
 
-                        <div className="form">
+                        <div className="ageForm">
 
-                            <div className="inputSection">
+                            <div className="ageInputSection">
 
                                 <select label="Select" id='choice' value={choice} onChange={(e) => handleChoice(e)}>
                                     <option value=""></option>
@@ -70,9 +70,7 @@ export const AgeCheck = () => {
                                 </select>
 
                             </div>
-                        </div>
-
-                        <Button
+                            <Button
                             variant="outlined"
                             align="center"
                             type="submit"
@@ -80,6 +78,7 @@ export const AgeCheck = () => {
                         >
                             Submit
                         </Button>
+                        </div>
 
                     </FormControl>
                 </div>

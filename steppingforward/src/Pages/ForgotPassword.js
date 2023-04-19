@@ -1,27 +1,28 @@
 import React from 'react'
-
-
 import { useNavigate } from 'react-router-dom';
 import { UserAuth } from './AuthContext';
 import { query, where, collection, getDocs } from 'firebase/firestore';
-import { FormControl, Container, TextField } from "@mui/material";
+import { FormControl } from "@mui/material";
 import Button from '@mui/material/Button'
+import Box from '@mui/material/Box';
 import DoneIcon from '@mui/icons-material/Done';
 import ClearIcon from '@mui/icons-material/Clear';
+import HomeHeader from './HomeHeader';
+import '../Css/Auth.css'
 
 const ForgotPassword = () => {
     const navigate = useNavigate();
     const [error, setError] = React.useState('')
     const [username, setUserName] = React.useState("")
     const [email, setEmail] = React.useState("")
-    const { forgotPassword, isVerified, newPassword} = UserAuth();
+    const { forgotPassword, isVerified, newPassword } = UserAuth();
     const [password, setPassword] = React.useState("")
     const [passwordAgain, setPasswordAgain] = React.useState("")
 
     //navigates user to home screen
     const [goToHome, setgoToHome] = React.useState(false);
     if (goToHome) {
-        navigate('/home')
+        navigate('/')
     };
 
     //navigates user to login screen
@@ -40,132 +41,157 @@ const ForgotPassword = () => {
             alert("Email can't be empty");
         }
         try {
-            forgotPassword(email,username)
+            forgotPassword(email, username)
         } catch (e) {
             setError(e.message)
             console.log(error)
         }
     }
-   
+
     const handleNewPassword = (e) => {
         e.preventDefault();
         setError("")
         try {
             newPassword(email, username, password)
-           
+
         } catch (e) {
             setError(e.message)
             console.log(error)
         }
     }
-    
-    return(
-        <div className="forgotpassword">
-           
-            <Container className="form" style={{ width: 600, display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
-                <div id='formHeader'>
-                    <h1>Forgot Password</h1>
-                    <p>Please fill in this form to change your password.</p>
-                </div>
+
+    return (
+        <div className="Auth">
+
+            <HomeHeader />
+
+            <Box marginTop={10} marginBottom={10}
+                className='authBox'
+                sx={{
+                    backgroundColor: 'white',
+                    width: 500,
+                    marginLeft: 'auto',
+                    marginRight: 'auto',
+                    height: 550,
+                    overflow: 'auto',
+                    borderRadius: 2
+                }}>
+
+                <h5 className='authTitle'>Forgot Password</h5>
+                <p>Please fill out this form to change your password:</p>
+
                 {!isVerified &&
-                    <FormControl id="formcontrol" style={{marginTop: 10}}>
-                        <div id='emailuser' style={{ marginBottom: 10}}>
-                            <TextField
-                                id="outlined-password-input email"
-                                label="Email"
-                                type="text"
-                                onChange={(e) => setEmail(e.target.value)}
-                                style={{ width: 230, marginRight: 20 }}
-                            />
-                            <TextField
-                                id="outlined-password-input Username"
-                                label="Username"
-                                type="text"
-                                onChange={(e) => setUserName(e.target.value)}
-                                style={{  }}
-                            />
+                    <FormControl sx={{ display: 'flex' }}>
+
+                        <div className="authForm">
+
+                            <div className="authInputSection">
+                                <label htmlFor="Email">Email:</label>
+                                <input
+                                    id="outlined-password-input email"
+                                    type="email"
+                                    onChange={(e) => setEmail(e.target.value)}
+                                />
+                            </div>
+
+                            <div className="authInputSection">
+                                <label htmlFor="Username">Username:</label>
+                                <input
+                                    id="outlined-password-input Username"
+                                    type="text"
+                                    onChange={(e) => setUserName(e.target.value)}
+                                />
+                            </div>
                         </div>
-                        
+
                         <div>
-                            <Button
-                                variant='outlined'
-                                size='large'
-                                type='submit'
-                                style={{ width: 225, marginRight: 20}}
-                                startIcon={<DoneIcon />}
-                                className='submit'
-                                onClick={handleForgotPassword}
-                                sx={{ ':hover': { bgcolor: 'rgb(161, 252, 134,0.2)' } }}
-                            >
-                                Submit
-                            </Button>
-                            <Button
-                                variant='outlined'
-                                size='large'
-                                style={{ width: 225 }}
-                                startIcon={<ClearIcon />}
-                                className='cancel'
-                                onClick={() => { setgoToHome(true) }}
-                                sx={{ ':hover': { bgcolor: 'rgb(252, 83, 83,0.2)' } }}
-                            >
-                                Cancel
-                            </Button>
+
+                            <Box textAlign={'center'} marginTop={5}>
+
+                                <Button
+                                    variant='outlined'
+                                    type='submit'
+                                    startIcon={<DoneIcon />}
+                                    onClick={handleForgotPassword}
+                                    sx={{ ':hover': { bgcolor: 'rgb(161, 252, 134,0.2)' } }}
+                                >
+                                    Submit
+                                </Button>
+
+                            </Box>
+
+                            <Box textAlign={'center'}>
+
+                                <Button
+                                    variant='outlined'
+                                    startIcon={<ClearIcon />}
+                                    onClick={() => { setgoToHome(true) }}
+                                    sx={{ ':hover': { bgcolor: 'rgb(252, 83, 83,0.2)' } }}
+                                >
+                                    Cancel
+                                </Button>
+
+                            </Box>
+
                         </div>
-                    </FormControl> 
+                    </FormControl>
                 }
-                { isVerified && 
-                    <FormControl id="formcontrol" style={{ marginTop: 10 }}>
-                        <div style={{display: 'flex', flexDirection: 'column',alignItems: 'center'}}>
-                            <TextField
+
+                {isVerified &&
+                    <FormControl sx={{ display: 'flex' }}>
+                        <div className="authForm">
+                            <div className = "authInputSection">
+                            <label htmlFor = "Password">Password:</label>
+                            <input
                                 id="outlined-password-input password"
-                                label="Password"
                                 type="password"
                                 autoComplete="current-password"
-                                style={{ marginBottom: 10 }}
                                 onChange={e => setPassword(e.target.value)}
                             />
-                            <TextField
+                            </div>
+                            <div className = "authInputSection">
+                            <input htmlFor = "Confirm password">Confirm password:</input>
+                            <input
                                 id="outlined-password-input password"
-                                label="Confirm Password"
                                 type="password"
                                 autoComplete="current-password"
-                                style={{ marginBottom: 10 }}
                                 onChange={e => setPasswordAgain(e.target.value)}
                             />
-                            
+                            </div>
+
                         </div>
-                        <div style={{display: 'flex',justifyContent: 'center'}}>
+                        
+                        <Box textAlign={'center'} marginTop={5}>
+
                             <Button
                                 variant='outlined'
-                                size='large'
                                 type='submit'
-                                style={{ width: 225, marginRight: 20 }}
                                 startIcon={<DoneIcon />}
-                                className='submit'
                                 onClick={handleNewPassword}
                                 sx={{ ':hover': { bgcolor: 'rgb(161, 252, 134,0.2)' } }}
                             >
                                 Submit
                             </Button>
+
+                        </Box>
+
+                        <Box textAlign={'center'}>
+                            
                             <Button
                                 variant='outlined'
-                                size='large'
-                                style={{ width: 225 }}
                                 startIcon={<ClearIcon />}
-                                className='cancel'
                                 onClick={() => { setgoToHome(true) }}
                                 sx={{ ':hover': { bgcolor: 'rgb(252, 83, 83,0.2)' } }}
                             >
                                 Cancel
                             </Button>
-                        </div>
+
+                        </Box>
                     </FormControl>
                 }
-
-                
-            </Container>
+            </Box>
         </div>
-       
+
     );
 }
 
