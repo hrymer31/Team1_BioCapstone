@@ -1,42 +1,69 @@
-.title{
-    justify-content: left;
-    margin: 10px;
+.Admin {
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
 }
 
-.startDate{
-    display: inline-block;
-    margin: 10px;
+.adminTitle {
+    display: flex;
+    justify-content: center !important;
+    font-size: 30px;
+    margin: 50px auto;
+    font-weight: 400;
 }
 
-.endDate{
-    display: inline-block;
-    margin: 10px;
+.MuiFormControl-root.Admin {
+    width: 50%;
+    height: 1000px;
+    display: flex;
+}
+.MuiFormLabel-root.MuiInputLabel-root {
+    position: relative;
+    height: 100%;
+}
+.adminBox{
+    box-shadow: 10px 10px 5px rgb(130, 199, 168);
+}
+.Admin .adminForm p {
+    display: flex;
+    justify-content: center;
+    font-weight: 600;
+}
+.adminForm{
+    margin: 0 0 30px 0;
 }
 
-.exportExcel{
-    margin: 10px;
+.adminForm .adminInputSection {
+    display: flex;
+    margin-top: 23px; 
+    margin-left: 0px;
+    align-items: center;
+    text-align: center;
 }
 
-.ageRange{
-    margin: 10px;
+.adminForm p {
+    margin: 20px auto 30px auto;
+    font-size: 14px;
+    font-weight: 400;
+}
+.adminForm div select {
+    width: fit-content;
+    height: 30px;
+    border: 1px solid rgb(171, 170, 170);
+    border-radius: 3px;
+}
+.adminForm div input {
+    width: 200px;
+    height: 30px;
+    border: 1px solid rgb(171, 170, 170);
+    border-radius: 3px;
+    background-color: white;
+}
+.adminForm div label {
+    margin-left: 20px;
 }
 
-.ageRangeY{
-    margin: 10px;
-}
-
-.ageRangeX{
-    margin: 10px;
-}
-
-.ageRangeR{
-    margin: 10px;
-}
-
-.submitEquation{
-    margin: 10px;
-}
-
-body {
-    background-color: #B0E19D;
+.Admin Button {
+    margin-bottom: 10px;
+    width: 45%;
 }
