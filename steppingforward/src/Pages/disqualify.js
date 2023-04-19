@@ -45,13 +45,12 @@ import HomeHeader from './HomeHeader';
 
             <FormControl sx={{ display: 'flex' }} align="center">
 
-        <div className = "disqualifyForm">
+        <div className = "form">
 
-            <div className = "formText">
-                <Typography variant = "p">Please enter your email:</Typography>
-            </div>
+            <div className = "inputSection">
+                <label>Please enter your email:</label>
             <div className = "formField">
-                <TextField
+                <input
                 size = "small"
                 variant = "outlined"
                 type = "email"
@@ -60,16 +59,17 @@ import HomeHeader from './HomeHeader';
                 onChange = {(e) => setEmail(e.target.value)}
                 />
             </div>
+            </div>
 
         </div>
 
-        <div className = "disqualifyForm">
+        <div className = "form">
 
-            <div className = "formText">
+            <div className = "inputSection">
                 <Typography variant = "p">Please enter your age:</Typography>
             </div>
             <div className = "formField">
-                <TextField
+                <input
                 size = "small"
                 variant = "outlined"
                 type = "number"
@@ -81,13 +81,13 @@ import HomeHeader from './HomeHeader';
 
         </div>
 
-        <button
-        className = "btn"
+        <Button
+        variant = "outlined"
         type = "submit"
         onSubmit = {handleSubmit}
         >
             Submit
-        </button>
+        </Button>
         </FormControl>
         </div>
         
