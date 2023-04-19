@@ -1,79 +1,53 @@
-.pages {
+.agePages {
     justify-content: center;
     display: flex;
     flex-direction: column;
 }
 
-.box {
+.ageBox {
 
     box-shadow: 10px 10px 5px rgb(130, 199, 168);
 
 }
 
-.formDisplay {
+.ageFormDisplay {
     
     display: flex;
     flex-direction: column;
     margin-top: 23px; 
     margin-left: 20px;
     align-items: center;
+    text-align: center;
 }
 
-.form .inputSection {
+.ageForm .ageInputSection {
     display: flex;
     flex-direction: column;
     margin-top: 23px; 
-    margin-left: 20px;
-    align-items: center;
+    margin-left: 15px;
 }
 
-.form div input {
+.ageForm div input {
     width: 200px;
     height: 30px;
     border: 1px solid rgb(171, 170, 170);
     border-radius: 3px;
+    margin-bottom: 20px;
+    margin-right: 20px;
 }
 
-.form div select {
+.ageForm div select {
     width: 150px;
     height: 30px;
     border: 1px solid rgb(171, 170, 170);
     border-radius: 3px;
     align-items: center;
     margin-right: 20px;
+    margin-bottom: 20px;
     background-color: white;
 }
 
-.form div label {
-    margin-right: 10px;
-}
-
-/* CSS for disqualification page */
-
-.disqualify {
-    justify-content: center;
-    display: flex;
-    flex-direction: column;
-}
-
-.disqualifyForm {
-    display: flex;
-    height: 5%;
-    width: 40%;
-    padding: 1%;
-    margin-top: 1%;
-    justify-content: center;
-}
-
-.formText {
-    align-items: left;
-    justify-content: left;
-    padding: 5px;
-}
-
-.formField {
-    align-items: right;
-    justify-content: right;
-    margin-left: 10%;
-    background-color: white;
+.ageForm div label {
+    margin-right: 30px;
+    align-items: center;
 }

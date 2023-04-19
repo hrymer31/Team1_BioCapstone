@@ -5,8 +5,21 @@
     margin: 30px auto 0 auto;
 }
 
-.sections {
-margin-top: 10%;
+.dashTitle {
+    display: flex;
+    justify-content: center !important;
+    font-size: 30px;
+    font-weight: 400;
+}
+
+.dashboard p {
+    display: flex;
+    justify-content: center;
+    font-weight: 600;
+}
+
+.dashSections {
+
 display: grid;
 grid-template-columns: 33% 33% 33%;
 grid-template-rows: auto auto;
@@ -63,15 +76,5 @@ align-items: center;
 .quote {
     display: flex;
     justify-content: center;
-    margin-top: 10px;
-}
-p {
-    flex-wrap:  wrap !important;
-}
-
-.Modal {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
+    margin-top: 25px;
 }

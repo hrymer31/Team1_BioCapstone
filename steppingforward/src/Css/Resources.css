@@ -1,16 +1,15 @@
-.resources {
+.Resource {
         display: flex;
         flex-direction: column;
 }
-.title {
+.resourceTitle {
     display: flex;
     justify-content: center !important;
     font-size: 30px;
     margin: 50px auto;
     font-weight: 400;
 }
-.sections {
-    margin-top: 10%;
+.resourceSections {
     display: grid;
     grid-template-columns: 33% 33% 33%;
     grid-template-rows: auto auto;

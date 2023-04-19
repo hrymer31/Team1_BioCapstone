@@ -1,10 +1,10 @@
-.PatientDetails {
+.Auth {
     justify-content: center;
     display: flex;
     flex-direction: column;
 }
 
-.detailsTitle {
+.authTitle {
     display: flex;
     justify-content: center !important;
     font-size: 30px;
@@ -12,7 +12,7 @@
     font-weight: 400;
 }
 
-.MuiFormControl-root.PatientDetails {
+.MuiFormControl-root.Auth {
     width: 50%;
     height: 1000px;
     display: flex;
@@ -21,49 +21,48 @@
     position: relative;
     height: 100%;
 }
-.detailsBox{
+.authBox{
     box-shadow: 10px 10px 5px rgb(130, 199, 168);
 }
-p {
+.Auth p {
     display: flex;
     justify-content: center;
     font-weight: 600;
 }
-.detailsForm{
+.authForm{
     margin: 0 0 30px 0;
 }
 
-.detailsForm .detailsInputSection {
+.authForm .authInputSection {
     display: flex;
     margin-top: 23px; 
     margin-left: 20px;
     align-items: center;
 }
-.detailsForm .detailsError {
-    margin-left: 20px;
-}
-.detailsForm p {
+
+.authForm p {
     margin: 20px auto 30px auto;
     font-size: 14px;
     font-weight: 400;
 }
-.detailsForm div select {
+.authForm div select {
     width: fit-content;
+    height: 30px;
+    border: 1px solid rgb(171, 170, 170);
+    border-radius: 3px;
+}
+.authForm div input {
+    width: 200px;
     height: 30px;
     border: 1px solid rgb(171, 170, 170);
     border-radius: 3px;
     background-color: white;
 }
-.detailsForm div input {
-    width: 75px;
-    height: 30px;
-    border: 1px solid rgb(171, 170, 170);
-    border-radius: 3px;
-}
-.detailsForm div label {
+.authForm div label {
     margin-right: 10px;
 }
-.result {
-    display: flex;
-    justify-content: center;
+
+.Auth Button {
+    margin-bottom: 10px;
+    width: 45%;
 }
