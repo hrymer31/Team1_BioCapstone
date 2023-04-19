@@ -23,7 +23,7 @@ export const AgeCheck = () => {
     }
 
     return (
-      
+      <>
         <Navbar />
       
         <div className = "ageCheck">
@@ -60,5 +60,6 @@ export const AgeCheck = () => {
                 Submit
             </button>
         </div>
+        </>
     )
 }
