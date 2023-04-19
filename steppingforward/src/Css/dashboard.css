@@ -65,3 +65,13 @@ align-items: center;
     justify-content: center;
     margin-top: 10px;
 }
+p {
+    flex-wrap:  wrap !important;
+}
+
+.Modal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}

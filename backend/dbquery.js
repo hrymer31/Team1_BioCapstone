@@ -78,8 +78,9 @@ async function addPatientDetails(patientDetails) {
             .input('targetBodyFatPerc', sql.Float, patientDetails.targetBodyFatPerc)
             .input('stepsPerDay', sql.Float, patientDetails.stepsPerDay)
             .input('totalStepTarget', sql.Float, patientDetails.totalStepTarget)
+            .input('currentWeight', sql.Int, patientDetails.currentWeight)
             .query("UPDATE patientDetails " +
-            "SET " + "age=@age, sex=@sex, neckCircumference=@neckCircumference, waistCircumference=@waistCircumference, height=@height, weightlb=@weightlb, bodyFatPerc=@bodyFatPerc, targetWeightLossPerc=@targetWeightLossPerc, weightkg=@weightkg, currentFatMass=@currentFatMass, targetWeightLossKg=@targetWeightLossKg, targetBodyWeightKg=@targetBodyWeightKg, newFatMass=@newFatMass, targetBodyFatPerc=@targetBodyFatPerc, stepsPerDay=@stepsPerDay, totalStepTarget=@totalStepTarget"
+            "SET " + "age=@age, sex=@sex, neckCircumference=@neckCircumference, waistCircumference=@waistCircumference, height=@height, weightlb=@weightlb, bodyFatPerc=@bodyFatPerc, targetWeightLossPerc=@targetWeightLossPerc, weightkg=@weightkg, currentFatMass=@currentFatMass, targetWeightLossKg=@targetWeightLossKg, targetBodyWeightKg=@targetBodyWeightKg, newFatMass=@newFatMass, targetBodyFatPerc=@targetBodyFatPerc, stepsPerDay=@stepsPerDay, totalStepTarget=@totalStepTarget, currentWeight=@currentWeight"
                 /* "(age,sex,height,weightlb,bodyFatPerc,targetWeightLossPerc,weightkg,currentFatMass,currentFatFreeMass,targetWeightLossKg,targetBodyWeightKg,newFatMass,targetBodyFatPerc,stepsPerDay,totalStepTarget)"
             + "VALUES(@age,@sex,@height,@weightlb,@bodyFatPerc,@targetWeightLossPerc,@weightkg,@currentFatMass,@currentFatFreeMass,@targetWeightLossKg,@targetBodyWeightKg,@newFatMass,@targetBodyFatPerc,@stepsPerDay,@totalStepTarget)" */ +
                 " WHERE uid = @uid")
@@ -88,6 +89,21 @@ async function addPatientDetails(patientDetails) {
             "VALUES (@patientId, @currentWeight, @targetWeight, @waistCircumference, @neckCircumference, @bodyMassIndex, @age,@sex,@race,@username,@password)") */
         return insertPatient.recordsets;
     } catch (error) {
+        console.log(error)
+    }
+}
+async function addSteps(stepInfo){
+    try {
+        let pool = await sql.connect(config);
+        let inputSteps = await pool.request()
+            .input('date', sql.Date, stepInfo.date)
+            .input('stepCount', sql.Int, stepInfo.stepCount)
+            .query("UPDATE patientSteps " 
+            + "SET " + "date=@date, stepCount=@stepCount " +
+            "WHERE uid = @uid"
+            )
+        return inputSteps.recordsets;
+    } catch(error){
         console.log(error)
     }
 }
