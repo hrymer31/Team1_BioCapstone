@@ -1,8 +1,11 @@
 import * as React from 'react'
 import { useState } from 'react'
 import Typography from '@mui/material/Typography';
+import { FormControl, Button } from '@mui/material';
 import TextField from '@mui/material/TextField';
+import Box from '@mui/material/Box';
 import '../Css/agePages.css'
+import HomeHeader from './HomeHeader';
 
  const Disqualify = () => {
 
@@ -15,13 +18,32 @@ import '../Css/agePages.css'
     }
 
     return (
-        <div className = "disqualify">
+        <div className = "pages">
 
-            <Typography variant = "h3" gutterBottom>Thank you for your interest!</Typography>
-            <Typography variant = "h6">We're sorry, but your age does not qualify for this study.</Typography>
-            <Typography variant = "h6">If further research extends into your age range,</Typography>
-            <Typography variant = "h6">would you like us to contact you to participate?</Typography>
-            <Typography variant = "h6" marginTop={5}>If so, please enter your information below:</Typography>
+            <HomeHeader/>
+
+            <Box
+                marginTop={10}
+                className='box'
+                sx={{
+                    backgroundColor: 'white',
+                    width: 500,
+                    marginLeft: 'auto',
+                    marginRight: 'auto',
+                    height: 500,
+                    overflow: 'auto',
+                    borderRadius: 2
+                }}>
+
+                    <div className = "formDisplay">
+
+            <Typography variant = "h5" align = "center" gutterBottom>Thank you for your interest!</Typography>
+            <Typography variant = "p">We're sorry, but your age does not qualify for this study.</Typography>
+            <Typography variant = "p">If further research extends into your age range,</Typography>
+            <Typography variant = "p">would you like us to contact you to participate?</Typography>
+            <Typography variant = "p" marginTop={3}>If so, please enter your information below:</Typography>
+
+            <FormControl sx={{ display: 'flex' }} align="center">
 
         <div className = "disqualifyForm">
 
@@ -66,7 +88,11 @@ import '../Css/agePages.css'
         >
             Submit
         </button>
-
+        </FormControl>
+        </div>
+        
+        </Box>
+                
         </div>
     )
 }

@@ -1,65 +1,89 @@
 import * as React from 'react'
 import { useState } from 'react'
-import { FormControl } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import { FormControl, Button } from '@mui/material';
 import Typography from '@mui/material/Typography';
-import InputLabel from '@mui/material/InputLabel';
-import Select from '@mui/material/Select';
-import MenuItem from '@mui/material/MenuItem';
+import Box from '@mui/material/Box';
 import '../Css/agePages.css'
-import Navbar from './Navbar';
-  
+import HomeHeader from './HomeHeader';
+
 const options = ["Yes", "No"]
 
 export const AgeCheck = () => {
 
-    const [choice, setChoice] = useState(null)
+    const [choice, setChoice] = useState("")
+
+    const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        //Navigation goes here
-        
-        //If yes was selected --> proceed with making account
-        //If no was selected --> navigate to disqualification page
+
+        if (choice == "No") {
+            navigate("/disqualify");
+        }
+        else {
+            navigate("/signup");
+        }
+
     }
 
+    function handleChoice(e) { setChoice(e.target.value) }
+
     return (
-      <>
-        <Navbar />
-      
-        <div className = "ageCheck">
-            
-            <Typography variant = "h3" gutterBottom>Before we begin...</Typography>
 
-            <Typography variant = "h6" gutterBottom>Are you between the ages of 19 and 40?</Typography>
+        <div className="pages">
 
-            <FormControl className = "selectBox" margin = "normal">
+            <HomeHeader />
 
-                <InputLabel id="demo-simple-select-age-range">Select</InputLabel>
-                    <Select
-                    labelId="demo-simple-select-age-range"
-                    id="demo-simple-select-age-range"
-                    defaultValue=""
-                    value={choice}
-                    label="Choice"
-                    onChange={(e) => setChoice(e.target.value)}
-                    >
-                        {options.map(ageRange => {
-                            return (
-                                <MenuItem value={ageRange}>
-                                    {ageRange}
-                                </MenuItem>
-                            )
-                        })}
-                    </Select>
-            </FormControl>
-            <button 
-            className = "btn"
-            type = "submit"
-            onSubmit={handleSubmit}
-            >
-                Submit
-            </button>
+            <Box
+                marginTop={10}
+                className='box'
+                sx={{
+                    backgroundColor: 'white',
+                    width: 500,
+                    marginLeft: 'auto',
+                    marginRight: 'auto',
+                    height: 250,
+                    overflow: 'auto',
+                    borderRadius: 2
+                }}>
+
+                <div className="formDisplay">
+
+                    <Typography variant="h5" align="center" gutterBottom>Before we begin...</Typography>
+
+                    <Typography variant="p" gutterBottom>Are you between the ages of 19 and 40?</Typography>
+
+                    <FormControl sx={{ display: 'flex' }} align="center">
+
+                        <div className="form">
+
+                            <div className="inputSection">
+
+                                <select label="Select" id='choice' value={choice} onChange={(e) => handleChoice(e)}>
+                                    <option value=""></option>
+                                    {options.map(option => {
+                                        return (
+                                            <option value={option}>{option}</option>
+                                        )
+                                    })}
+                                </select>
+
+                            </div>
+                        </div>
+
+                        <Button
+                            variant="outlined"
+                            align="center"
+                            type="submit"
+                            onClick={handleSubmit}
+                        >
+                            Submit
+                        </Button>
+
+                    </FormControl>
+                </div>
+            </Box>
         </div>
-        </>
     )
 }
