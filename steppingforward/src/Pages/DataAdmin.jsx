@@ -1,14 +1,16 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
+import Box from '@mui/material/Box';
+import Button from "@mui/material/Button";
 import '../Css/DataAdmin.css';
 import 'react-datepicker/dist/react-datepicker.css';
 
-function DataAdmin (){
+function DataAdmin() {
     const [startDate, setStartDate] = useState(null);
-    const [endDate,   setEndDate]   = useState(null);
-    const [y,         setYValue]    = useState(null);
-    const [x,         setXValue]    = useState(null);
-    const [R,         setRValue]    = useState(null);
+    const [endDate, setEndDate] = useState(null);
+    const [y, setYValue] = useState(null);
+    const [x, setXValue] = useState(null);
+    const [R, setRValue] = useState(null);
 
     function handleExcelExport() {
         alert('Export Successful');
@@ -32,54 +34,63 @@ function DataAdmin (){
     }
 
     return (
-        <div className='DataAdmin'>
-            <div className='title'>
-            <h1>Data Admin</h1>
-            </div>
+        <div className='Admin'>
 
-            <div className='startDate'>
-            <h3>Select Start Date</h3>
-            <DatePicker selected={startDate} onChange={date => setStartDate(date)} />
-            </div>
-            
-            <div className='endDate'>
-            <h3>Select End Date</h3>
-            <DatePicker selected={endDate} onChange={date => setEndDate(date)} />
-            </div>
-            
-            <div className='exportExcel'>
-            <button onClick={handleExcelExport}>Export to Excel</button>
-            </div>
+            <Box marginTop={10} marginBottom={10}
+                className='adminBox'
+                sx={{
+                    backgroundColor: 'white',
+                    width: 500,
+                    marginLeft: 'auto',
+                    marginRight: 'auto',
+                    height: 800,
+                    overflow: 'auto',
+                    borderRadius: 2
+                }}>
 
-            <div className='ageRange'>
-            <h3>Age range equation</h3>
-            </div>
+                <h5 className='adminTitle'>Data Admin</h5>
 
-            <div className='ageRangeY'>
-            <label>
-            y=
-            <input type="text" value={y} onChange={handleYTextChange} />
-            </label>
-            </div>
+                <div className="adminForm">
+                    <p>Start Date:</p>
+                    <div className='adminInputSection'>
+                        <DatePicker selected={startDate} onChange={date => setStartDate(date)} />
+                    </div>
 
-            <div className='ageRangeX'>
-            <label>
-            x-exponent 
-            <input type="text" value={x} onChange={handleXTextChange} />
-            </label>
-            </div>
+                    <p>Select End Date:</p>
+                    <div className='adminInputSection'>
+                        <DatePicker selected={endDate} onChange={date => setEndDate(date)} />
+                    </div>
 
-            <div className='ageRangeR'>
-            <label>
-            R=
-            <input type="text" value={R} onChange={handleRTextChange} />
-            </label>
-            </div>
+                    <Box textAlign={'center'} marginTop={5}>
 
-            <div className='submitEquation'>
-            <button onClick={handleEquationSubmit}>Submit to Database</button>
-            </div>
+                        <Button variant="outlined" onClick={handleExcelExport}>Export to Excel</Button>
+
+                    </Box>
+
+                    <p>Age range equation:</p>
+
+                    <div className='adminInputSection'>
+                        <label htmlFor="y">y =</label>
+                        <input type="text" value={y} onChange={handleYTextChange} />
+                    </div>
+
+                    <div className='adminInputSection'>
+                        <label htmlFor="x">x exponent =</label>
+                        <input type="text" value={x} onChange={handleXTextChange} />
+                    </div>
+
+                    <div className='adminInputSection'>
+                        <label htmlFor="R">R =</label>
+                        <input type="text" value={R} onChange={handleRTextChange} />
+                    </div>
+
+                    <Box textAlign={'center'} marginTop={5}>
+                        <Button variant="outlined" onClick={handleEquationSubmit}>Submit to Database</Button>
+                    </Box>
+                </div>
+            </Box>
         </div>
+
     );
 }
 
