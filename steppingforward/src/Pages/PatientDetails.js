@@ -153,7 +153,8 @@ const PatientDetails = () => {
                     width: 500,
                     marginLeft: 'auto',
                     marginRight: 'auto',
-                    height: 900,
+                    minHeight: 950,
+                    height: 'auto',
                     overflow: 'auto',
                     borderRadius: 2
                 }}>
@@ -180,7 +181,7 @@ const PatientDetails = () => {
                             </select>                              
                         </div>
                         {
-                            (ageError) && <div style={{color: 'red'}} className='error'>You must select a valid option</div>   
+                            (ageError) && <div style={{color: 'red'}} className='detailsError'>You must select a valid option</div>   
                         }    
                         <div className='detailsInputSection'>
                             <label htmlFor="sex">Sex</label>
@@ -194,9 +195,9 @@ const PatientDetails = () => {
                             </select>      
                         </div>
                         {
-                            (sexError) && <div style={{ color: 'red' }} className='error'>You must select a valid option</div>
+                            (sexError) && <div style={{ color: 'red' }} className='detailsError'>You must select a valid option</div>
                         }
-                        <div className='inputSection'>
+                        <div className='detailsInputSection'>
                             <label htmlFor="race">Race</label>
                             <select id='race' value={race} onChange={(e) => handleRaceChange(e)}>
                                 <option value=""></option>
@@ -210,7 +211,7 @@ const PatientDetails = () => {
                             </select>
                         </div>
                         {
-                            (raceError) && <div style={{ color: 'red' }} className='error'>You must select a valid option</div>
+                            (raceError) && <div style={{ color: 'red' }} className='detailsError'>You must select a valid option</div>
                         }
                         <div className='detailsInputSection'>
                             <label htmlFor='neck'>Neck Circumference(cm)</label>
@@ -228,7 +229,7 @@ const PatientDetails = () => {
                             <input id='height' type='number' placeholder='cm' onChange={(e) => handleHeightChange(e)} /> 
                         </div>
                         {
-                            (heightError) && <div style={{ color: 'red' }} className='error'>You must select a valid height</div>
+                            (heightError) && <div style={{ color: 'red' }} className='detailsError'>You must select a valid height</div>
                         }
                        
                         <div className='detailsInputSection'>
@@ -236,7 +237,7 @@ const PatientDetails = () => {
                             <input id='weight' type='number' placeholder='lb' onChange={(e) => handleWeightChange(e)} /> 
                         </div>
                         {
-                            (weightError) && <div style={{ color: 'red' }} className='error'>You must select a valid weight</div>
+                            (weightError) && <div style={{ color: 'red' }} className='detailsError'>You must select a valid weight</div>
                         }
                        
                         <div className='detailsInputSection'>
@@ -244,7 +245,7 @@ const PatientDetails = () => {
                             <input id='bodyFatPerc' type='number' placeholder='%' onChange={(e) => handleBodyFatChange(e)} />
                         </div>
                         {
-                            (bodyFatError) && <div style={{ color: 'red' }} className='error'>You must select a valid body fat %</div>
+                            (bodyFatError) && <div style={{ color: 'red' }} className='detailsError'>You must select a valid body fat %</div>
                         }
 
                         <p>For Target Weight Loss, please choose a number between 5% through 10% </p>
@@ -253,14 +254,18 @@ const PatientDetails = () => {
                             <input id='targetWeightLossPerc' type='number' placeholder='%' onChange={(e) => handleTargetWeightChange(e)} />
                         </div>
                         {
-                            (targetWeightError) && <div style={{ color: 'red' }} className='error'>You must select a valid target weight %</div>
+                            (targetWeightError) && <div style={{ color: 'red' }} className='detailsError'>You must select a valid target weight %</div>
                         }
                     </div>
+
+                    <Box textAlign={'center'} marginTop={5}>
                     <Button
+                        variant = "outlined"
                         onClick={validate}
                     >
                         Get Results!
                     </Button>
+                    </Box>
                 </FormControl>    
                 {
                     (result !== null) && 

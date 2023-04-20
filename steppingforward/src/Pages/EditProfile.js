@@ -17,6 +17,7 @@ const EditProfile = () => {
 
     const age = "Age"      //Settings should not be changed; setters are not necessary, only display of saved values
     const sex = "Sex"
+    const race = "Race"
 
     const navigate = useNavigate();
 
@@ -60,7 +61,7 @@ const EditProfile = () => {
                     width: 500,
                     marginLeft: 'auto',
                     marginRight: 'auto',
-                    height: 700,
+                    height: 675,
                     overflow: 'auto',
                     borderRadius: 2
                 }}>
@@ -108,11 +109,26 @@ const EditProfile = () => {
 
                             </div>
 
+                            <div className="profileInputSection">
+
+                                <label htmlFor="Race">Race:</label>
+                                <input id="Race" disabled defaultValue={race} />
+
+                            </div>
+
                         </div>
 
-                        <Button onClick={cancelEditing}>Go Back</Button>
+                        <Box textAlign={'center'}>
 
-                        <Button onClick={saveChanges}>Save</Button>
+                        <Button variant = "outlined" onClick={cancelEditing}>Go Back</Button>
+
+                        </Box>
+
+                        <Box textAlign={'center'}>
+
+                        <Button variant = "outlined" onClick={saveChanges}>Save</Button>
+
+                        </Box>
 
                     </FormControl>
 

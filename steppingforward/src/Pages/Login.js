@@ -72,7 +72,7 @@ const Login = () => {
           width: 500,
           marginLeft: 'auto',
           marginRight: 'auto',
-          height: 550,
+          height: 500,
           overflow: 'auto',
           borderRadius: 2
         }}>

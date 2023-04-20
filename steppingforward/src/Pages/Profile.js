@@ -1,10 +1,9 @@
-import React, {useState } from "react"
-import { collection, doc, setDoc, addDoc, updateDoc, deleteDoc, getDoc, getDocs, where, query } from "firebase/firestore"; 
-import Button from "@mui/material/Button";
+import React, { useState } from "react"
+import { collection, doc, setDoc, addDoc, updateDoc, deleteDoc, getDoc, getDocs, where, query } from "firebase/firestore";
+import { FormControl, Button, Typography, withTheme } from '@mui/material'
 import Box from '@mui/material/Box';
-import {FormControl, Typography} from "@mui/material";
 import { useAuth } from "./AuthContext"
-import {db} from '../firebase'
+import { db } from '../firebase'
 import { Link, useNavigate } from "react-router-dom"
 import Navbar from "./Navbar";
 import '../Css/Profile.css'
@@ -17,6 +16,7 @@ const Profile = () => {
   //const password = "Password" ((Password should be hidden))
   const age = ""
   const sex = ""
+  const race = ""
 
   const navigate = useNavigate()
 
@@ -28,75 +28,88 @@ const Profile = () => {
 
   return (
 
-    <div classname = "Profile">
+    <div classname="Profile">
 
-      <Navbar/>
+      <Navbar />
 
       <Box marginTop={10} marginBottom={10}
         className='profileBox'
         justifyContent={"center"}
         sx={{
-        backgroundColor: 'white', 
-        width: 500,
-        marginLeft: 'auto',
-        marginRight: 'auto',
-        height: 675,
-        overflow: 'auto',
-        borderRadius: 2
-      }}>
+          backgroundColor: 'white',
+          width: 500,
+          marginLeft: 'auto',
+          marginRight: 'auto',
+          height: 650,
+          overflow: 'auto',
+          borderRadius: 2
+        }}>
 
-        <div className = "profileDisplay">
+        <div className="profileDisplay">
 
-        <h5 className='profileTitle'>Profile</h5>
+          <h5 className='profileTitle'>Profile</h5>
 
-        <FormControl sx = {{display: "flex"}}>
+          <FormControl sx={{ display: "flex" }}>
 
-        <div className="profileForm">
+            <div className="profileForm">
 
-        <div className="profileInputSection">
+              <div className="profileInputSection">
 
-          <label>Name: {name}</label>
+                <label>Name: {name}</label>
 
-        </div>
+              </div>
 
-        <div className="profileInputSection">
+              <div className="profileInputSection">
 
-          <label>Username: {username}</label>
+                <label>Username: {username}</label>
 
-        </div>
+              </div>
 
-        <div className="profileInputSection">
+              <div className="profileInputSection">
 
-          <label>Email: {email}</label>
+                <label>Email: {email}</label>
 
-        </div>
+              </div>
 
-        <div className="profileInputSection">
+              <div className="profileInputSection">
 
-          <label>Password: ******</label>
+                <label>Password: ******</label>
 
-        </div>
+              </div>
 
-        <div className="profileInputSection">
+              <div className="profileInputSection">
 
-          <label>Age: {age}</label>
+                <label>Age: {age}</label>
 
-        </div>
+              </div>
 
-        <div className="profileInputSection">
+              <div className="profileInputSection">
 
-          <label>Sex: {sex}</label>
+                <label>Sex: {sex}</label>
 
-        </div>
+              </div>
 
-          </div>
+              <div className="profileInputSection">
 
-          
-          <Button onClick={() => navigate(-1)}>Go back</Button>
+                <label>Race: {race}</label>
 
-          <Button onClick = {enableEditing}>Edit profile</Button>
+              </div>
 
-        </FormControl>
+            </div>
+
+            <Box textAlign={'center'} padding={1}>
+
+              <Button className = "profilebtn" variant="outlined" onClick={() => navigate(-1)}>Go back</Button>
+
+            </Box>
+
+            <Box textAlign={'center'} padding={1}>
+
+              <Button className = "profilebtn" variant="outlined" onClick={enableEditing}>Edit profile</Button>
+
+            </Box>
+
+          </FormControl>
 
         </div>
 

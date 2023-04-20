@@ -13,7 +13,7 @@ export default function HomeHeader() {
       <ul>
    
 
-      <CustomLink to="/signup"> Sign Up </CustomLink> 
+      <CustomLink to="/ageCheck"> Sign Up </CustomLink> 
       <CustomLink to="/login"> Log In </CustomLink>    
     
           </ul>
