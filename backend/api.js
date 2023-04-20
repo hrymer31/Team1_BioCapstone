@@ -29,9 +29,9 @@ router.route('/patients').get((request, response) => {
     })
 })
 
-router.route('/patientsresults/').get((request, response) => {
+router.route('/patientsresults/:startDate/:endDate').get((request, response) => {
     dbqueries.getPatientsResults(request.params['startDate,endDate']).then(result => {
-        response.json(result[0])
+        response.json(result)
     })
 })
 
