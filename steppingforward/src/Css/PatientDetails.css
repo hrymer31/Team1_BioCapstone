@@ -67,3 +67,8 @@ p {
     display: flex;
     justify-content: center;
 }
+
+.PatientDetails Button {
+    margin-bottom: 10px;
+    width: 45%;
+}
