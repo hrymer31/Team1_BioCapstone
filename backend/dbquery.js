@@ -21,6 +21,20 @@ async function getPatient(patientUID) {
         console.log(error)
     }
 }
+
+async function getPatientsResults(startDate,endDate){
+    try {
+        let pool = await sql.connect(config);
+        let patients = await pool.request()
+        .input('sDate', sql.Date, startDate)
+        .input('eDate', sql.Date, endDate)
+        .query("SELECT * from patientResults WHERE date between @sDate and @eDate")
+        return patients.recordsets[0];
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 async function addPatient(patientInfo) {
     try {
         let pool = await sql.connect(config);
