@@ -22,13 +22,13 @@ async function getPatient(patientUID) {
     }
 }
 
-async function getPatientsResults(startDate,endDate){
+async function getPatientsResults(data){
     try {
         let pool = await sql.connect(config);
         let patients = await pool.request()
-        .input('sDate', sql.Date, startDate)
-        .input('eDate', sql.Date, endDate)
-        .query("SELECT * from patientResults WHERE date between @sDate and @eDate")
+        .input('sDate', sql.Date, data.dateS)
+        .input('eDate', sql.Date, data.dateE)
+        .query("SELECT * from patientResults WHERE date BETWEEN @sDate AND @eDate")
         return patients.recordsets[0];
     } catch (error) {
         console.log(error);
@@ -152,5 +152,6 @@ module.exports = {
     addPatientDetails: addPatientDetails,
     getSteps: getSteps,
     addSteps: addSteps,
-    updateSteps: updateSteps
+    updateSteps: updateSteps,
+    getPatientsResults: getPatientsResults
 }

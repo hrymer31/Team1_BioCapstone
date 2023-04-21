@@ -5,6 +5,8 @@ import Button from "@mui/material/Button";
 import '../Css/DataAdmin.css';
 import {utils, writeFile} from 'sheetjs-style';
 import 'react-datepicker/dist/react-datepicker.css';
+import moment from 'moment';
+import { json } from 'react-router-dom';
 
 function DataAdmin() {
     const [startDate, setStartDate] = useState(null);
@@ -12,51 +14,36 @@ function DataAdmin() {
     const [y,         setYValue]    = useState(null);
     const [x,         setXValue]    = useState(null);
     const [R,         setRValue]    = useState(null);
-    const userData = {
-        patientID: '',
-        currentWeight: '',
-        endOfStudyWeight: '',
-        targetStepCount: '',
-        weeklyStepCount: '',
-        date: '',
-        age: '',
-        sex: '',
-        race: ''
-      }
+    const dataParams ={
+        dateS: moment(startDate).format('M-DD-YYYY'),
+        dataE: moment(endDate).format('M-DD-YYYY')
+    }
 
-    function handleExcelExport(event) {
-        if(event.onClick == true)
-        {
+    function exportExcel(excelData,fileName){
+        const workbook = utils.book_new();
+        const worksheet = utils.json_to_sheet(excelData);
+        //add data to workbook
+        utils.book_append_sheet(workbook,worksheet, fileName)
+        //save file
+        writeFile(workbook, fileName +".xlsx");
+    }
+
+    function handleExcelExport() {
         if(startDate === undefined || endDate === undefined){
             console.log('start or end date is null')
           } else {
-            fetch('api/patientsresults/'+ startDate + endDate, {
+            fetch('api/patientsresults/' + JSON.stringify(dataParams), {
               method: 'GET',
               headers: {
                 "Content-Type": "application/json",
               }
+              
             }).then(response => 
-              response.clone().json()
-          ).then((data) => {
-              userData.patientID        = data[0].patientID;
-              userData.currentWeight    = data[0].currentWeight;
-              userData.endOfStudyWeight = data[0].endOfStudyWeight;
-              userData.targetStepCount  = data[0].targetStepCount;
-              userData.weeklyStepCount  = data[0].weeklyStepCount;
-              userData.date             = data[0].date;
-              userData.age              = data[0].age;
-              userData.sex              = data[0].sex;
-              userData.race             = data[0].race;
+                response.clone().json())
+              .then((data) => {
+                exportExcel(data,"DataExport");
           })
         }
-        //create Excel workbook and worksheet
-        let workbook = utils.book_new(),
-        worksheet = utils.json_to_sheet(userData);
-        //add data to workbook
-        utils.book_append_sheet(workbook,worksheet, "DataExport")
-        //save file
-        writeFile(workbook, "DataExport.xlsx");
-    }
     }
     function handleYTextChange(event) {
         setYValue(event.target.value);
