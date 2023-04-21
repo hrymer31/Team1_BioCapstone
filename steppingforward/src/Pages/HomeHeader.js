@@ -6,7 +6,7 @@ export default function HomeHeader() {
   return (
     <nav className="nav">
       <img src={feetlogo} alt="footprint" width="70px" />
-      <Link to="/home" className="site-title">
+      <Link to="/" className="site-title">
         Stepping Forward
       </Link>
       <img src={feetlogo} alt="footprint" width="70px" />
