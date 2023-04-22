@@ -32,8 +32,8 @@ router.route('/patients').get((request, response) => {
 router.route('/patientsresults/:data').get((request, response) => {
     console.log(JSON.parse(request.params.data))
     dbqueries.getPatientsResults(request.params.data).then(result => {
-        response.json(result)
-        console.log(result)
+        response.status(201).json(result);
+        console.log(result);
     })
 })
 

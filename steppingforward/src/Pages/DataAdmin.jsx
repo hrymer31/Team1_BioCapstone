@@ -15,8 +15,8 @@ function DataAdmin() {
     const [x,         setXValue]    = useState(null);
     const [R,         setRValue]    = useState(null);
     const dataParams ={
-        dateS: moment(startDate).format('M-DD-YYYY'),
-        dataE: moment(endDate).format('M-DD-YYYY')
+        dateS: moment(startDate).format('YYYY-MM-DD'),
+        dataE: moment(endDate).format('YYYY-MM-DD')
     }
 
     function exportExcel(excelData,fileName){
@@ -28,21 +28,19 @@ function DataAdmin() {
         writeFile(workbook, fileName +".xlsx");
     }
 
-    function handleExcelExport() {
+    async function handleExcelExport() {
         if(startDate === undefined || endDate === undefined){
             console.log('start or end date is null')
           } else {
-            fetch('api/patientsresults/' + JSON.stringify(dataParams), {
+            const response = await fetch('api/patientsresults/' + JSON.stringify(dataParams), {
               method: 'GET',
               headers: {
                 "Content-Type": "application/json",
               }
               
-            }).then(response => 
-                response.clone().json())
-              .then((data) => {
-                exportExcel(data,"DataExport");
-          })
+            })
+            const data =  await response.json();
+            exportExcel(data,"DataExport");
         }
     }
     function handleYTextChange(event) {
