@@ -1,31 +1,39 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { collection, doc, setDoc, addDoc, updateDoc, deleteDoc, getDoc, getDocs, where, query } from "firebase/firestore";
 import { FormControl, Button, Typography, withTheme } from '@mui/material'
 import Box from '@mui/material/Box';
-import { useAuth } from "./AuthContext"
+import { UserAuth } from "./AuthContext"
 import { db } from '../firebase'
 import { Link, useNavigate } from "react-router-dom"
 import Navbar from "./Navbar";
 import '../Css/Profile.css'
 
 const Profile = () => {
-
-  const name = ""
+  const { user } = UserAuth();
   const username = ""    // <-- Values must be replaced with data pulled from database
-  const email = ""
-  //const password = "Password" ((Password should be hidden))
-  const age = ""
-  const sex = ""
-  const race = ""
+  const [userInfo, setUserInfo] = useState({})
 
   const navigate = useNavigate()
 
   const enableEditing = () => {
-
     navigate("/edit")
-
   }
 
+  useEffect(() => {
+    fetch('/api/patients/' + user.uid, { //getting user details
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      }
+    }).then(
+      response => response.clone().json()
+    ).then(
+      data => {
+        setUserInfo(data[0])
+      }
+    )
+  }, [user])
+  
   return (
 
     <div classname="Profile">
@@ -46,79 +54,42 @@ const Profile = () => {
         }}>
 
         <div className="profileDisplay">
-
           <h5 className='profileTitle'>Profile</h5>
-
           <FormControl sx={{ display: "flex" }}>
-
             <div className="profileForm">
-
               <div className="profileInputSection">
-
-                <label>Name: {name}</label>
-
+                <label>Name: {userInfo.name}</label>
               </div>
-
               <div className="profileInputSection">
-
                 <label>Username: {username}</label>
-
               </div>
-
               <div className="profileInputSection">
-
-                <label>Email: {email}</label>
-
+                <label>Email: {userInfo.email}</label>
               </div>
-
               <div className="profileInputSection">
-
                 <label>Password: ******</label>
-
               </div>
-
               <div className="profileInputSection">
-
-                <label>Age: {age}</label>
-
+                <label>Age: {userInfo.age}</label>
               </div>
-
               <div className="profileInputSection">
-
-                <label>Sex: {sex}</label>
-
+                <label>Sex: {userInfo.sex}</label>
               </div>
-
               <div className="profileInputSection">
-
-                <label>Race: {race}</label>
-
+                <label>Race: {userInfo.race}</label>
               </div>
-
             </div>
-
             <Box textAlign={'center'} padding={1}>
-
               <Button className = "profilebtn" variant="outlined" onClick={() => navigate(-1)}>Go back</Button>
-
             </Box>
-
             <Box textAlign={'center'} padding={1}>
-
               <Button className = "profilebtn" variant="outlined" onClick={enableEditing}>Edit profile</Button>
-
             </Box>
-
           </FormControl>
-
         </div>
-
       </Box>
-
     </div>
-
   )
-
 };
 
 export default Profile;

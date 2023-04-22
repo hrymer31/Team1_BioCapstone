@@ -19,11 +19,11 @@ const SignUp = () => {
     const navigate = useNavigate();
 
     const [goToLogin, setgoToLogin] = useState(false);
-    if (goToLogin) {
+     if (goToLogin) {
         navigate('/login')
-    };
+    }; 
 
-    const [AccessCode, setAccessCode] = ("")
+    const [AccessCode, setAccessCode] = useState("")
     const [name, setName] = useState("")
     const [UserId, setUserId] = useState("")
     const [Email, setEmail] = useState("")
@@ -41,6 +41,7 @@ const SignUp = () => {
     }
 
     const handleSumbit = async (e) => {
+        console.log(userInfo)
         e.preventDefault()
         setError("")
         if (passwordStrength < 2) {
@@ -49,7 +50,8 @@ const SignUp = () => {
         }
         try {
             await createUser(Email, Password, userInfo);
-            navigate('/home')
+            setgoToLogin(true)
+            //navigate('/home')
         } catch (e) {
             setError(e.message)
             console.log(e.message)
@@ -155,7 +157,7 @@ const SignUp = () => {
                             variant='outlined'
                             type='submit'
                             startIcon={<DoneIcon />}
-                            onClick={() => { setgoToLogin(true) }}
+                            onClick={handleSumbit}
                             sx={{ ':hover': { bgcolor: 'rgb(161, 252, 134,0.2)' } }}
                         >
                             Submit Request

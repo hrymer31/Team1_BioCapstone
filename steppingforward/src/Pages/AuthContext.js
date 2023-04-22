@@ -1,20 +1,14 @@
-import React, { useContext, useState, useEffect } from "react";
-
+import React, { useContext, useState } from "react";
 import { auth, db } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
+  sendPasswordResetEmail,
+  updateEmail,
+  updatePassword
 } from "firebase/auth";
-import {
-  collection,
-  getDocs,
-  setDoc,
-  doc,
-  query,
-  where,
-} from "firebase/firestore";
 
 const AuthContext = React.createContext();
 
@@ -40,27 +34,28 @@ export const AuthProvider = ({ children }) => {
 
     const createUser = async (email, password, userInfo) => {
       const userCredential = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-      const user = userCredential.user;
-      const patientInfo = {
-        uid: user.uid,
-        accessCode: user.accessCode,
-        name: userInfo.name,
-        email: userInfo.Email
-      }
-      console.log(patientInfo)
-      fetch("api/patients/add", {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify(patientInfo)
-      }).then((response) => {
-        alert(response.statusText)
-      })
+            auth,
+            email,
+            password
+          );
+          const user = userCredential.user;
+          console.log(userInfo)
+          const patientInfo = {
+            uid: user.uid,
+            accessCode: userInfo.accessCode,
+            name: userInfo.Name,
+            email: userInfo.email
+          }
+          console.log(patientInfo)
+          fetch("api/patients/add", {
+            method: "POST",
+            headers: {
+              "Content-type": "application/json",
+            },
+            body: JSON.stringify(patientInfo)
+          }).then((response) => {
+            alert(response.statusText)
+          })
     };
 
     const logout = () => {
@@ -97,10 +92,16 @@ export const AuthProvider = ({ children }) => {
         });
   };
 
-  const forgotPassword = async (email, username, secretQ1A, secretQ2A) => {
-    const q = query(collection(db, "users"), where("userId", "==", username));
-    const querySnapshot = await getDocs(q);
-    
+  const forgotPassword = async (email) => {
+    sendPasswordResetEmail(auth, email)
+      .then(() => {
+        alert('password reset link sent')
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        alert(errorMessage)
+      });
   };
 
   const newPassword = async (email, username, password) => {

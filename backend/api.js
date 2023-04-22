@@ -53,7 +53,6 @@ router.route('/patients/add').post((request, response) => {
 
 router.route('/patients/addDetails').post((request, response) => {
     console.log("post is starting")
-
     let patientDetails = request.body
     dbqueries.addPatientDetails(patientDetails).then(result => {
         response.status(201).json(result);
@@ -70,7 +69,6 @@ router.route('/patients/updateSteps').post((request, response) => {
 
 router.route('/patients/addSteps').post((request, response) => {
     console.log("post is starting")
-
     let stepInfo = request.body
     dbqueries.addSteps(stepInfo).then(result => {
         response.status(201).json(result);
@@ -79,6 +77,14 @@ router.route('/patients/addSteps').post((request, response) => {
 
 router.route('/patients/getSteps/:patientData').get((request, response) => {
     dbqueries.getSteps(JSON.parse(request.params.patientData)).then(result => {
+        response.status(201).json(result);
+    })
+})
+
+router.route('/patients/updateProfile').post((request, response) => {
+    let patientInfo = request.body
+    console.log(patientInfo)
+    dbqueries.updatePatientProfile(patientInfo).then(result => {
         response.status(201).json(result);
     })
 })

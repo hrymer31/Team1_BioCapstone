@@ -44,23 +44,8 @@ async function addPatient(patientInfo) {
             .input('accessCode', sql.VarChar, patientInfo.accessCode)
             .input('name', sql.VarChar, patientInfo.name)
             .input('email', sql.VarChar, patientInfo.email)
-            /* .input('patientID', sql.Int, patientInfo.patientID)
-            .input('currentWeight', sql.Float, patientInfo.currentWeight)
-            .input('targetWeight', sql.Float, patientInfo.targetWeight)
-            .input('waistCircumference', sql.Float, patientInfo.waistCircumference)
-            .input('neckCircumference', sql.Float, patientInfo.neckCircumference)
-            .input('bodyMassIndex', sql.Float, patientInfo.bodyMassIndex)
-            .input('age', sql.Int, patientInfo.age)
-            .input('height', sql.Float, patientInfo.height)
-            .input('sex', sql.NChar, patientInfo.sex)
-            .input('race', sql.NVarChar, patientInfo.race)
-            .input('username', sql.NVarChar, patientInfo.username)
-            .input('password', sql.NVarChar, patientInfo.password) */
             .query("INSERT INTO patientDetails " +
                "(uid, name, email, accessCode)" + "VALUES(@uid, @name, @email, @accessCode)")
-            /* 
-                "(patientId, currentWeight, targetWeight, waistCircumference, neckCircumference, bodyMassIndex, age,sex,race,username,password) " +
-                "VALUES (@patientId, @currentWeight, @targetWeight, @waistCircumference, @neckCircumference, @bodyMassIndex, @age,@sex,@race,@username,@password)") */
         return insertPatient.recordsets;
     } catch (error) {
         console.log(error)
@@ -138,9 +123,21 @@ async function getSteps(patientData){
             .input('uid', sql.VarChar, patientData.uid)
             .input('date', sql.Date, patientData.date)
             .query("SELECT * FROM patientSteps WHERE uid=@uid AND date=@date")
-        //console.log(patient)
         return patient.recordsets[0];
     } catch (error) {
+        console.log(error)
+    }
+}
+
+async function updatePatientProfile(patientDetails){
+    try{
+        let pool = await sql.connect(config);
+        let patient = await pool.request()
+            .input('email', sql.VarChar, patientDetails.newEmail)
+            .input('name', sql.VarChar, patientDetails.newName)
+            .input('uid', sql.VarChar, patientDetails.uid)
+            .query("UPDATE patientDetails SET name=@name, email=@email WHERE uid=@uid")
+    }catch (error){
         console.log(error)
     }
 }
@@ -153,5 +150,6 @@ module.exports = {
     getSteps: getSteps,
     addSteps: addSteps,
     updateSteps: updateSteps,
-    getPatientsResults: getPatientsResults
+    getPatientsResults: getPatientsResults,
+    updatePatientProfile: updatePatientProfile
 }
