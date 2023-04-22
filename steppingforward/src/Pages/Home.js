@@ -55,12 +55,12 @@ const Home = () => {
                     </FormControl>
                 </Box>
 
-                <div style={{ 'display': 'flex', 'flexDirection': 'column', 'flexWrap': 'wrap', 'alignContent': 'center' }}>
+                <div style={{ 'display': 'flex', 'flexDirection': 'row', 'flexWrap': 'wrap', 'alignContent': 'center', 'justifyContent': 'center' }}>
                     <div style={{ 'display': 'flex', 'alignItems': 'center' }}>
                         <span style={{ 'fontSize': 18 }}>Brought To You By</span>
                         <img src={ksulogo} alt="KSU" width='300px' height='150px' />
                     </div>
-                    <div style={{ 'display': 'flex', 'alignItems': 'center', 'marginLeft': 30, 'marginTop': -60 }}>
+                    <div style={{ 'display': 'flex', 'alignItems': 'center', 'marginLeft': 30, }}>
                         <span style={{ 'fontSize': 18 }}>In Partnership With</span>
                         <img src={wellstarlogo} alt="KSU" width='250px' height='150px' />
                     </div>
