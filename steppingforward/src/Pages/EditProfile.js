@@ -1,23 +1,31 @@
-import React, { useState } from "react"
-import { collection, doc, setDoc, addDoc, updateDoc, deleteDoc, getDoc, getDocs, where, query } from "firebase/firestore";
-import { FormControl, Button, Typography, withTheme } from '@mui/material'
+import React, {useState } from "react"
+import { collection, doc, setDoc, addDoc, updateDoc, deleteDoc, getDoc, getDocs, where, query } from "firebase/firestore"; 
+import { FormControl, Button, Typography } from '@mui/material'
 import Box from '@mui/material/Box';
 import { useAuth } from "./AuthContext"
-import { db } from '../firebase'
+import {db} from '../firebase'
 import { Link, useNavigate } from "react-router-dom"
+import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
+import ClearIcon from "@mui/icons-material/Clear";
 import Navbar from "./Navbar";
 import '../Css/Profile.css'
 
+
+
+const validatePassword = (password) => {
+    const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{6,}$/;
+    return passwordRegex.test(password);
+  };
+  
 const EditProfile = () => {
 
-    const [name, setName] = useState("");           //Initial state should be the value previously stored in the database
-    const [username, setUsername] = useState("");
-    const [email, setEmail] = useState("");
+    const [name, setName] = useState("Name");           //Initial state should be the value previously stored in the database
+    const [username, setUsername] = useState("Username");
+    const [email, setEmail] = useState("johndoe@email.com");
     const [password, setPassword] = useState("");
 
     const age = "Age"      //Settings should not be changed; setters are not necessary, only display of saved values
     const sex = "Sex"
-    const race = "Race"
 
     const navigate = useNavigate();
 
@@ -27,13 +35,21 @@ const EditProfile = () => {
 
     }
 
+    
+
     const saveChanges = (e) => {
-
         e.preventDefault();
-        //Update profile information in the database, then redirect back to profile info page
-        navigate("/profile")
-
-    }
+      
+        if (!validatePassword(password)) {
+          // Display error message or handle the error
+          console.log("Password must be at least 6 characters long and contain at least one uppercase letter");
+          return;
+        }
+      
+        // Update profile information in the database, then redirect back to profile info page
+        navigate("/profile");
+      };
+      
 
     /*updateDoc(doc(db, "users"), {     
         name: name,
@@ -49,94 +65,86 @@ const EditProfile = () => {
             console.log(error);
       });*/
 
-    return (
-        <div className="Profile">
+      return(
+        <div className= "Profile">
+      
+            <Navbar/>
 
-            <Navbar />
-
-            <Box marginTop={10} marginBottom={10}
-                className='profileBox'
+            <Box marginTop={10}
+                className='box'
                 sx={{
-                    backgroundColor: 'white',
+                    backgroundColor: 'white', 
                     width: 500,
                     marginLeft: 'auto',
                     marginRight: 'auto',
-                    height: 675,
+                    height: 550,
                     overflow: 'auto',
                     borderRadius: 2
                 }}>
 
-                    <h5 className='profileTitle'>Edit Profile</h5>
+                    <div className = "ProfileDisplay">
 
-                    <FormControl sx={{ display: 'flex' }}>
+                    <Typography variant = "h5" align = "center" gutterBottom>Edit Profile</Typography>
 
-                        <div className="profileForm">
+                    <FormControl fullWidth sx={{display: 'flex'}}>
 
-                            <div className="profileInputSection">
+                        <div className = "form">
+
+                            <div className = "inputSection">
 
                                 <label htmlFor="Name">Name:</label>
-                                <input id="Name" type="text" defaultValue={name} onChange={(e) => setName(e.target.value)} />
+                                <input id = "Name" type = "text" defaultValue={name} onChange={(e) => setName(e.target.value)}/>
 
                             </div>
-                            <div className="profileInputSection">
+                            <div className = "inputSection">
 
-                                <label htmlFor="Username">Username:</label>
-                                <input id="Username" type="text" defaultValue={username} onChange={(e) => setUsername(e.target.value)} />
-
-                            </div>
-                            <div className="profileInputSection">
-
-                                <label htmlFor="Email">Email:</label>
-                                <input id="Email" type="email" defaultValue={email} onChange={(e) => setEmail(e.target.value)} />
+                                <label htmlFor = "Username">Username:</label>
+                                <input id = "Username" type = "text" defaultValue={username} onChange={(e) => setUsername(e.target.value)}/>
 
                             </div>
-                            <div className="profileInputSection">
+                            <div className = "inputSection">
 
-                                <label htmlFor="Password">Password:</label>
-                                <input sx = {{backgroundColor: 'white'}} id="Password" type="password" onChange={(e) => setPassword(e.target.value)} />
-
-                            </div>
-                            <div className="profileInputSection">
-
-                                <label htmlFor="Age">Age:</label>
-                                <input id="Age" disabled defaultValue={age} />
+                                <label htmlFor = "Email">Email:</label>
+                                <input id = "Email" type = "email" defaultValue={email} onChange={(e) => setEmail(e.target.value)}/>
 
                             </div>
-                            <div className="profileInputSection">
+                            <div className = "inputSection">
+  <label htmlFor = "Password">Password:</label>
+  <input id = "Password" type = "password" onChange={(e) => setPassword(e.target.value)}/>
+  <p style={{ color: !validatePassword(password) ? "red" : "green" }}>
+    Password must be at least 6 characters long and contain at least one uppercase letter
+  </p>
+</div>
+                            <h4>Password Requirements:</h4>
 
-                                <label htmlFor="Sex">Sex:</label>
-                                <input id="Sex" disabled defaultValue={sex} />
+                            <div className = "inputSection">
+
+                                <label htmlFor = "Age">Age:</label>
+                                <input id = "Age" disabled defaultValue={age}/>
 
                             </div>
+                            <div className = "inputSection">
 
-                            <div className="profileInputSection">
-
-                                <label htmlFor="Race">Race:</label>
-                                <input id="Race" disabled defaultValue={race} />
+                                <label htmlFor = "Sex">Sex:</label>
+                                <input id = "Sex" disabled defaultValue={sex}/>
 
                             </div>
 
                         </div>
 
-                        <Box textAlign={'center'}>
+                        <Button onClick = {cancelEditing}>Go Back</Button>
 
-                        <Button variant = "outlined" onClick={cancelEditing}>Go Back</Button>
-
-                        </Box>
-
-                        <Box textAlign={'center'}>
-
-                        <Button variant = "outlined" onClick={saveChanges}>Save</Button>
-
-                        </Box>
+                        <Button onClick={saveChanges}>Save</Button>
 
                     </FormControl>
 
-            </Box>
+                    </div>
 
+                </Box>
+      
         </div>
 
-    )
+      )
 
 
 }
