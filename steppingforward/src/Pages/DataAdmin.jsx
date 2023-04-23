@@ -6,6 +6,7 @@ import '../Css/DataAdmin.css';
 import {utils, writeFile} from 'sheetjs-style';
 import 'react-datepicker/dist/react-datepicker.css';
 import moment from 'moment';
+import Navbar from './Navbar';
 
 function DataAdmin() {
     const [startDate, setStartDate] = useState(null);
@@ -79,8 +80,9 @@ function DataAdmin() {
     }
 
     return (
+       
         <div className='Admin'>
-
+  <Navbar />
             <Box marginTop={10} marginBottom={10}
                 className='adminBox'
                 sx={{
