@@ -10,9 +10,6 @@ import moment from 'moment';
 function DataAdmin() {
     const [startDate, setStartDate] = useState(null);
     const [endDate,   setEndDate]   = useState(null);
-    const [y,         setYValue]    = useState(null);
-    const [x,         setXValue]    = useState(null);
-    const [R,         setRValue]    = useState(null);
     const [patientCollection, setPatientCollection] = useState([{}])
     const dataParams ={
         dateS: startDate,
@@ -58,22 +55,6 @@ function DataAdmin() {
            exportExcel(patientCollection,"PatientExport " + formattedToday);          
         }   
     }
-    function handleYTextChange(event) {
-        setYValue(event.target.value);
-    }
-
-    function handleXTextChange(event) {
-        setXValue(event.target.value);
-    }
-
-    function handleRTextChange(event) {
-        setRValue(event.target.value);
-    }
-
-    function handleEquationSubmit() {
-        alert('Submit Successful');
-        window.location.reload();
-    }
 
     return (
         <div className='Admin'>
@@ -85,7 +66,7 @@ function DataAdmin() {
                     width: 500,
                     marginLeft: 'auto',
                     marginRight: 'auto',
-                    height: 800,
+                    height: 500,
                     overflow: 'auto',
                     borderRadius: 2
                 }}>
@@ -107,27 +88,6 @@ function DataAdmin() {
 
                         <Button variant="outlined" onClick={handleExcelExport}>Export to Excel</Button>
 
-                    </Box>
-
-                    <p>Age range equation:</p>
-
-                    <div className='adminInputSection'>
-                        <label htmlFor="y">y =</label>
-                        <input type="text" value={y} onChange={handleYTextChange} />
-                    </div>
-
-                    <div className='adminInputSection'>
-                        <label htmlFor="x">x exponent =</label>
-                        <input type="text" value={x} onChange={handleXTextChange} />
-                    </div>
-
-                    <div className='adminInputSection'>
-                        <label htmlFor="R">R =</label>
-                        <input type="text" value={R} onChange={handleRTextChange} />
-                    </div>
-
-                    <Box textAlign={'center'} marginTop={5}>
-                        <Button variant="outlined" onClick={handleEquationSubmit}>Submit to Database</Button>
                     </Box>
                 </div>
             </Box>
