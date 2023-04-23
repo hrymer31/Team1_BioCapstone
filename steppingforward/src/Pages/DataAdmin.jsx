@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import DatePicker from 'react-datepicker';
 import Box from '@mui/material/Box';
 import Button from "@mui/material/Button";
@@ -6,7 +6,6 @@ import '../Css/DataAdmin.css';
 import {utils, writeFile} from 'sheetjs-style';
 import 'react-datepicker/dist/react-datepicker.css';
 import moment from 'moment';
-import { json } from 'react-router-dom';
 
 function DataAdmin() {
     const [startDate, setStartDate] = useState(null);
@@ -14,9 +13,10 @@ function DataAdmin() {
     const [y,         setYValue]    = useState(null);
     const [x,         setXValue]    = useState(null);
     const [R,         setRValue]    = useState(null);
+    const [patientCollection, setPatientCollection] = useState([{}])
     const dataParams ={
-        dateS: moment(startDate).format('YYYY-MM-DD'),
-        dataE: moment(endDate).format('YYYY-MM-DD')
+        dateS: startDate,
+        dateE: endDate 
     }
 
     function exportExcel(excelData,fileName){
@@ -25,23 +25,38 @@ function DataAdmin() {
         //add data to workbook
         utils.book_append_sheet(workbook,worksheet, fileName)
         //save file
-        writeFile(workbook, fileName +".xlsx");
+        writeFile(workbook, fileName +".xlsx"); 
     }
 
     async function handleExcelExport() {
         if(startDate === undefined || endDate === undefined){
             console.log('start or end date is null')
-          } else {
-            const response = await fetch('api/patientsresults/' + JSON.stringify(dataParams), {
+        } else {
+            //fetches data from database between selected dates
+            fetch('api/patientsresults/' + JSON.stringify(dataParams), {
               method: 'GET',
               headers: {
                 "Content-Type": "application/json",
               }
               
-            })
-            const data =  await response.json();
-            exportExcel(data,"DataExport");
-        }
+            }).then(
+                response => response.clone().json()
+            ).then(
+                data => {
+                    setPatientCollection(data)
+                }
+            )
+            //reformats dates into ISOString
+            patientCollection.forEach((element) => {
+                element.date = moment(element.date).format('YYYY-MM-DD')
+                }
+            )
+            //this gets date for export file name
+            const today = new Date().toISOString()
+            let formattedToday = moment(today).format('MM-YY')
+            //begins export
+           exportExcel(patientCollection,"PatientExport " + formattedToday);          
+        }   
     }
     function handleYTextChange(event) {
         setYValue(event.target.value);

@@ -35,25 +35,11 @@ const ForgotPassword = () => {
     const handleForgotPassword = (e) => {
         e.preventDefault();
         setError("")
-        if (username === "") {
-            alert("Username can't be empty");
-        } else if (email === "") {
+       if (email === "") {
             alert("Email can't be empty");
         }
         try {
             forgotPassword(email, username)
-        } catch (e) {
-            setError(e.message)
-            console.log(error)
-        }
-    }
-
-    const handleNewPassword = (e) => {
-        e.preventDefault();
-        setError("")
-        try {
-            newPassword(email, username, password)
-
         } catch (e) {
             setError(e.message)
             console.log(error)
@@ -80,7 +66,6 @@ const ForgotPassword = () => {
                 <h5 className='authTitle'>Forgot Password</h5>
                 <p>Please fill out this form to change your password:</p>
 
-                {!isVerified &&
                     <FormControl sx={{ display: 'flex' }}>
 
                         <div className="authForm">
@@ -94,14 +79,6 @@ const ForgotPassword = () => {
                                 />
                             </div>
 
-                            <div className="authInputSection">
-                                <label htmlFor="Username">Username:</label>
-                                <input
-                                    id="outlined-password-input Username"
-                                    type="text"
-                                    onChange={(e) => setUserName(e.target.value)}
-                                />
-                            </div>
                         </div>
 
                         <div>
@@ -135,60 +112,7 @@ const ForgotPassword = () => {
 
                         </div>
                     </FormControl>
-                }
-
-                {isVerified &&
-                    <FormControl sx={{ display: 'flex' }}>
-                        <div className="authForm">
-                            <div className = "authInputSection">
-                            <label htmlFor = "Password">Password:</label>
-                            <input
-                                id="outlined-password-input password"
-                                type="password"
-                                autoComplete="current-password"
-                                onChange={e => setPassword(e.target.value)}
-                            />
-                            </div>
-                            <div className = "authInputSection">
-                            <input htmlFor = "Confirm password">Confirm password:</input>
-                            <input
-                                id="outlined-password-input password"
-                                type="password"
-                                autoComplete="current-password"
-                                onChange={e => setPasswordAgain(e.target.value)}
-                            />
-                            </div>
-
-                        </div>
-                        
-                        <Box textAlign={'center'} marginTop={5}>
-
-                            <Button
-                                variant='outlined'
-                                type='submit'
-                                startIcon={<DoneIcon />}
-                                onClick={handleNewPassword}
-                                sx={{ ':hover': { bgcolor: 'rgb(161, 252, 134,0.2)' } }}
-                            >
-                                Submit
-                            </Button>
-
-                        </Box>
-
-                        <Box textAlign={'center'}>
-                            
-                            <Button
-                                variant='outlined'
-                                startIcon={<ClearIcon />}
-                                onClick={() => { setgoToHome(true) }}
-                                sx={{ ':hover': { bgcolor: 'rgb(252, 83, 83,0.2)' } }}
-                            >
-                                Cancel
-                            </Button>
-
-                        </Box>
-                    </FormControl>
-                }
+            
             </Box>
         </div>
 

@@ -26,10 +26,11 @@ async function getPatientsResults(data){
     try {
         let pool = await sql.connect(config);
         let patients = await pool.request()
-        .input('sDate', sql.Date, data.dateS)
-        .input('eDate', sql.Date, data.dateE)
-        .query("SELECT accessCode,age,sex,race,stepsPerDay,totalStepTarget,currentWeight,date FROM patientDetails WHERE date BETWEEN @sDate AND @eDate")
-        return patients.recordsets[0];
+            .input('sDate', sql.Date, data.dateS)
+            .input('eDate', sql.Date, data.dateE)
+            .query("SELECT accessCode,age,sex,race,stepsPerDay,totalStepTarget,currentWeight,date FROM patientDetails WHERE date BETWEEN @sDate AND @eDate")  
+        console.log(patients.recordsets[0])     
+        return patients.recordsets[0]; 
     } catch (error) {
         console.log(error);
     }

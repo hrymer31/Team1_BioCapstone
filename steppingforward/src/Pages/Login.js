@@ -13,7 +13,7 @@ import '../Css/Auth.css'
 const Login = () => {
   const navigate = useNavigate();
 
-  const [username, setUserName] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const { signIn, user, isLoggedIn, userData, isDisabled } = UserAuth();
@@ -38,25 +38,19 @@ const Login = () => {
 
   const handleSignIn = (e) => {
     e.preventDefault();
-    if (username === "") {
+    if (email === "") {
       alert("Username can't be empty");
     } else if (password === "") {
       alert("Password can't be empty");
     }
     try {
-      signIn(username, password)
-      handleNavigation()
+      signIn(email, password)
     } catch (error) {
       console.log(error)
     }
 
   }
 
-  function handleNavigation() {
-    if (isLoggedIn) {
-      navigate('/home')
-    }
-  }
 
 
 
@@ -86,11 +80,11 @@ const Login = () => {
 
               <div className="authInputSection">
 
-                <label htmlFor="Username">Username:</label>
+                <label htmlFor="Username">Email:</label>
                 <input
                   id="outlined-password-input Username"
                   type="text"
-                  onChange={(e) => setUserName(e.target.value)}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
 
               </div>
@@ -170,7 +164,7 @@ const Login = () => {
                   disabled
                   id="outlined-disabled Username"
                   type="text"
-                  onChange={(e) => setUserName(e.target.value)}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
 
               </div>

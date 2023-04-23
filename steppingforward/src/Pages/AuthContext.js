@@ -9,10 +9,12 @@ import {
   updateEmail,
   updatePassword
 } from "firebase/auth";
+import { useNavigate } from 'react-router-dom';
 
 const AuthContext = React.createContext();
 
 export const AuthProvider = ({ children }) => {
+  const navigate = useNavigate();
   const [user, setUser] = useState({});
   const [userData, setUserData] = useState({});
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -78,6 +80,7 @@ export const AuthProvider = ({ children }) => {
           const user = userCredential.user;
           setUser(user);
           setIsLoggedIn(true);
+          navigate('/home')
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -96,6 +99,7 @@ export const AuthProvider = ({ children }) => {
     sendPasswordResetEmail(auth, email)
       .then(() => {
         alert('password reset link sent')
+        navigate('/login')
       })
       .catch((error) => {
         const errorCode = error.code;
