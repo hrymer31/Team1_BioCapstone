@@ -97,15 +97,20 @@ const SignUp = () => {
                 <FormControl onSubmit={handleSumbit} sx={{ display: 'flex' }}>
 
                     <div className="authForm">
-
+       
                         <div className="authInputSection">
+                            
                             <label htmlFor = "Access code">Access code:</label>
+                            
                             <input
                                 id="outlined-password-input Access"
                                 type="text"
                                 onChange={(e) => setAccessCode(e.target.value)}
+                                
                             />
-                        </div>
+                            </div>
+                            <p> Access code is found in Welcome Email from Dr. Buresh.</p>
+                        
                         <div className="authInputSection">
                             <label htmlFor = "Name">Name:</label>
                             <input
@@ -151,7 +156,7 @@ const SignUp = () => {
                             </ul>
                         </div>
                     </div>
-
+                    
                     <Box textAlign={'center'} marginTop={2}>
                         <Button
                             variant='outlined'
@@ -173,10 +178,14 @@ const SignUp = () => {
                         >
                             Cancel
                         </Button>
+                        
                     </Box>
                 </FormControl>
+                
             </Box>
+            
         </div>
+        
     );
 }
 
