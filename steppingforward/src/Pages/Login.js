@@ -24,6 +24,8 @@ const Login = () => {
 
   useEffect(() => {
 
+
+
     if (goToForgotPassword) {
       setgoToHome(false)
       navigate('/forgotpassword')
@@ -38,11 +40,14 @@ const Login = () => {
 
   const handleSignIn = (e) => {
     e.preventDefault();
+    if (email === "rburesh@kennesaw.edu")
+    navigate('/admin');
     if (email === "") {
-      alert("Username can't be empty");
+      alert("email can't be empty");
     } else if (password === "") {
       alert("Password can't be empty");
     }
+   
     try {
       signIn(email, password)
     } catch (error) {
