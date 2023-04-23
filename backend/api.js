@@ -80,6 +80,12 @@ router.route('/patients/getSteps/:patientData').get((request, response) => {
     })
 })
 
+router.route('/patients/getAllSteps/:data').get((request, response) => {
+    dbqueries.getAllSteps(JSON.parse(request.params.data)).then(result => {
+        response.json(result)
+    }) 
+})
+
 router.route('/patients/updateProfile').post((request, response) => {
     let patientInfo = request.body
     console.log(patientInfo)

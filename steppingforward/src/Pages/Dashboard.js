@@ -115,7 +115,7 @@ const Dashboard = () => {
       headers: {
         "Content-type": "application/json",
       },
-      body: JSON.stringify(addUserSteps)
+      body: JSON.stringify(userDetails)
     }).then((response) => {
       console.log(response.statusText)
     }) 
@@ -129,6 +129,7 @@ const Dashboard = () => {
 
   function handleStepUpdate(){ //this adds and updates step count
     addUserSteps.stepCount = Number(updateSteps) + currentStepCount
+    addUserSteps.accessCode = userDetails.accessCode
     if(currentStepCount === 0){ //if there is no step count today 
       setCurrentStepCount(addUserSteps.stepCount)
       fetch("api/patients/addSteps", {

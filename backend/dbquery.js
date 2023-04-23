@@ -89,7 +89,7 @@ async function addPatientDetails(patientDetails) {
     }
 }
 async function updateSteps(stepInfo){
-    try {
+     try {
         let pool = await sql.connect(config);
         let inputSteps = await pool.request()
             .input('uid', sql.VarChar, stepInfo.uid)
@@ -108,10 +108,11 @@ async function addSteps(stepInfo) {
         let pool = await sql.connect(config);
         let inputSteps = await pool.request()
             .input('uid', sql.VarChar, stepInfo.uid)
+            .input('accessCode', sql.VarChar, stepInfo.accessCode)
             .input('date', sql.Date, stepInfo.date)
             .input('stepCount', sql.Int, stepInfo.stepCount)
             .query("INSERT INTO patientSteps " 
-            + "(uid, date, stepCount) " + "VALUES(@uid, @date, @stepCount)")
+            + "(uid, date, stepCount, accessCode) " + "VALUES(@uid, @date, @stepCount, @accessCode)")
         return inputSteps.recordsets;
     } catch (error) {
         console.log(error)
@@ -125,6 +126,18 @@ async function getSteps(patientData){
             .input('uid', sql.VarChar, patientData.uid)
             .input('date', sql.Date, patientData.date)
             .query("SELECT * FROM patientSteps WHERE uid=@uid AND date=@date")
+        return patient.recordsets[0];
+    } catch (error) {
+        console.log(error)
+    }
+}
+async function getAllSteps(data) {
+    try {
+        let pool = await sql.connect(config);
+        let patient = await pool.request()
+            .input('sDate', sql.Date, data.dateS)
+            .input('eDate', sql.Date, data.dateE)
+            .query("SELECT accessCode, stepCount, date FROM patientSteps WHERE date BETWEEN @sDate AND @eDate")
         return patient.recordsets[0];
     } catch (error) {
         console.log(error)
@@ -153,5 +166,6 @@ module.exports = {
     addSteps: addSteps,
     updateSteps: updateSteps,
     getPatientsResults: getPatientsResults,
-    updatePatientProfile: updatePatientProfile
+    updatePatientProfile: updatePatientProfile,
+    getAllSteps: getAllSteps
 }

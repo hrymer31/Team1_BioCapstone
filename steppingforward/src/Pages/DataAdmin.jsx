@@ -11,25 +11,28 @@ function DataAdmin() {
     const [startDate, setStartDate] = useState(null);
     const [endDate,   setEndDate]   = useState(null);
     const [patientCollection, setPatientCollection] = useState([{}])
+    const [stepCollection, setStepCollection] = useState([{}])
     const dataParams ={
         dateS: startDate,
         dateE: endDate 
     }
 
-    function exportExcel(excelData,fileName){
-        const workbook = utils.book_new();
-        const worksheet = utils.json_to_sheet(excelData);
+    function exportExcel(fileName){
+        const workbook = utils.book_new(); //creates a new workbook
+        const worksheet1 = utils.json_to_sheet(patientCollection); //transforms data into sheet
+        const worksheet2 = utils.json_to_sheet(stepCollection)
         //add data to workbook
-        utils.book_append_sheet(workbook,worksheet, fileName)
+        utils.book_append_sheet(workbook,worksheet1, 'Details') //adds sheet to workbook
+        utils.book_append_sheet(workbook,worksheet2, 'Steps')
         //save file
-        writeFile(workbook, fileName +".xlsx"); 
+        writeFile(workbook, fileName +".xlsx"); //downloads workbook
     }
 
     async function handleExcelExport() {
-        if(startDate === undefined || endDate === undefined){
-            console.log('start or end date is null')
+        if(startDate === null || endDate === null){
+            alert('start or end date is null')
         } else {
-            //fetches data from database between selected dates
+            //fetches patient details from database between selected dates
             fetch('api/patientsresults/' + JSON.stringify(dataParams), {
               method: 'GET',
               headers: {
@@ -45,15 +48,34 @@ function DataAdmin() {
             )
             //reformats dates into ISOString
             patientCollection.forEach((element) => {
-                element.date = moment(element.date).format('YYYY-MM-DD')
+                    element.date = moment(element.date).format('YYYY-MM-DD')
+                }
+            )
+            //fetches steps from database between selected dates
+            fetch('api/patients/getAllSteps/' + JSON.stringify(dataParams), {
+                method: 'GET',
+                headers: {
+                    "Content-Type": "application/json",
+                }
+            }).then(
+                response => response.clone().json()
+            ).then(
+                data => {
+                    console.log(data)
+                    setStepCollection(data)
+                }
+            )
+            //reformats dates into ISOString
+            stepCollection.forEach((element) => {
+                    element.date = moment(element.date).format('YYYY-MM-DD')
                 }
             )
             //this gets date for export file name
             const today = new Date().toISOString()
             let formattedToday = moment(today).format('MM-YY')
             //begins export
-           exportExcel(patientCollection,"PatientExport " + formattedToday);          
-        }   
+           exportExcel("PatientExport " + formattedToday);          
+        }
     }
 
     return (
