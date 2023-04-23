@@ -46,7 +46,8 @@ export const AuthProvider = ({ children }) => {
             uid: user.uid,
             accessCode: userInfo.accessCode,
             name: userInfo.Name,
-            email: userInfo.email
+            email: userInfo.email,
+            date: userInfo.date
           }
           console.log(patientInfo)
           fetch("api/patients/add", {

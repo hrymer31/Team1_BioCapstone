@@ -45,8 +45,9 @@ async function addPatient(patientInfo) {
             .input('accessCode', sql.VarChar, patientInfo.accessCode)
             .input('name', sql.VarChar, patientInfo.name)
             .input('email', sql.VarChar, patientInfo.email)
+            .input('date', sql.Date, patientInfo.date)
             .query("INSERT INTO patientDetails " +
-               "(uid, name, email, accessCode)" + "VALUES(@uid, @name, @email, @accessCode)")
+               "(uid, name, email, accessCode, date)" + "VALUES(@uid, @name, @email, @accessCode, @date)")
         return insertPatient.recordsets;
     } catch (error) {
         console.log(error)

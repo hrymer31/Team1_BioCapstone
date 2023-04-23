@@ -37,11 +37,12 @@ const SignUp = () => {
     const userInfo = {
         accessCode: AccessCode,
         Name: name,
-        email: Email,
+        email: Email
     }
 
     const handleSumbit = async (e) => {
-        console.log(userInfo)
+        const date = new Date().toISOString().slice(0, 10)
+        userInfo.date = date;
         e.preventDefault()
         setError("")
         if (passwordStrength < 2) {
