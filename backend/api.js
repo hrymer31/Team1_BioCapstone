@@ -90,7 +90,7 @@ router.route('/patients/updateProfile').post((request, response) => {
 //Also think I have an issue with Disqualify not being called correctly
 router.route('/patientsFuture').post((request, response) => {
     console.log("Post is starting.")
-    let Disqualify = request.body
+    let patientsFuture = request.body
     dbqueries.addFuturePatient(patientsFuture).then(result => {
         response.status(201).json(result);
     })

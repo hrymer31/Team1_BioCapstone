@@ -114,28 +114,6 @@ export const AuthProvider = ({ children }) => {
    
   };
 
-  const CurrentUser = () => {
-    const [user, loading, error] = useAuthState(auth);
-    if (loading) {
-      return (
-        <div>
-          <p>Loading...</p>
-        </div>
-      );
-    }
-    if (error) {
-      return (
-        <div>
-          <p>Error: {error}</p>
-        </div>
-      );
-    }
-    if (user) {
-      console.log(user);
-      setUser(user);
-      console.log(user);
-    }
-  };
 
   const value = {
     createUser,

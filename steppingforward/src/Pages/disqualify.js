@@ -1,7 +1,6 @@
-import * as React from 'react'
+import React from 'react'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-import { UserAuth } from './AuthContext'
 import Typography from '@mui/material/Typography';
 import { FormControl, Button } from '@mui/material';
 import Box from '@mui/material/Box';
@@ -9,43 +8,31 @@ import '../Css/agePages.css'
 import HomeHeader from './HomeHeader';
 
 const Disqualify = () => {
-
-    const [email, setEmail] = useState(null)
-    const [age, setAge] = useState(null)
+    const [email, setEmail] = useState('')
+    const [age, setAge] = useState('')
         
-    const {disqualifyUser} = UserAuth();
-
     const navigate = useNavigate();
 
-    const [disqualifyInfo, setDisqualifyInfo] = useState({
-        email: '',
-        age: 0,
-    })
-
-
-    //Handle Submit does not navigate back to landing page. I think the try and catch has an issue
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        //Store information in database
-        try {
-            await disqualifyUser(email, age);
-        } catch (e) {
-            console.log(e)
-        }
-        navigate('/')
+    const disqualifyInfo = {
+        newEmail: email,
+        newAge: age,
     }
 
-    
-    fetch("api/patientsFuture",{
-        method: "POST",
-        headers: {
-            "Content-type": "application/json"
-        },
-        body: JSON.stringify(disqualifyInfo)
-        
-    }).then((response) => {
-        console.log(response.statusText)
-    })
+    //Handle Submit does not navigate back to landing page. I think the try and catch has an issue
+    async function handleSubmit(){
+        //Store information in database
+        fetch("api/patientsFuture", {
+            method: "POST",
+            headers: {
+                "Content-type": "application/json"
+            },
+            body: JSON.stringify(disqualifyInfo)
+
+        }).then((response) => {
+            alert('Your information has been saved, Thank you!')
+            navigate('/')
+        })
+    }
 
     return (
         <div className="agePages">
@@ -85,13 +72,12 @@ const Disqualify = () => {
                             <div className="ageInputSection">
                                 <label>Please enter your age:</label>
                                 <input id="Age" type="number" defaultValue={age} required onChange={(e) => setAge(e.target.value)} />
-
                             </div>
 
                             <Button
                                 variant="outlined"
                                 type="submit"
-                                onSubmit={handleSubmit}
+                                onClick={handleSubmit}
                             >
                                 Submit
                             </Button>
