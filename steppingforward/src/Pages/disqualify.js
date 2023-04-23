@@ -1,5 +1,7 @@
 import * as React from 'react'
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
+import { UserAuth } from './AuthContext'
 import Typography from '@mui/material/Typography';
 import { FormControl, Button } from '@mui/material';
 import Box from '@mui/material/Box';
@@ -10,11 +12,40 @@ const Disqualify = () => {
 
     const [email, setEmail] = useState(null)
     const [age, setAge] = useState(null)
+        
+    const {disqualifyUser} = UserAuth();
 
-    const handleSubmit = (e) => {
+    const navigate = useNavigate();
+
+    const [disqualifyInfo, setDisqualifyInfo] = useState({
+        email: '',
+        age: 0,
+    })
+
+
+    //Handle Submit does not navigate back to landing page. I think the try and catch has an issue
+    const handleSubmit = async (e) => {
         e.preventDefault();
         //Store information in database
+        try {
+            await disqualifyUser(email, age);
+        } catch (e) {
+            console.log(e)
+        }
+        navigate('/')
     }
+
+    
+    fetch("api/patientsFuture",{
+        method: "POST",
+        headers: {
+            "Content-type": "application/json"
+        },
+        body: JSON.stringify(disqualifyInfo)
+        
+    }).then((response) => {
+        console.log(response.statusText)
+    })
 
     return (
         <div className="agePages">

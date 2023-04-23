@@ -80,16 +80,18 @@ router.route('/patients/getSteps/:patientData').get((request, response) => {
     })
 })
 
-router.route('/patients/getAllSteps/:data').get((request, response) => {
-    dbqueries.getAllSteps(JSON.parse(request.params.data)).then(result => {
-        response.json(result)
-    }) 
-})
-
 router.route('/patients/updateProfile').post((request, response) => {
     let patientInfo = request.body
     console.log(patientInfo)
     dbqueries.updatePatientProfile(patientInfo).then(result => {
+        response.status(201).json(result);
+    })
+})
+//Also think I have an issue with Disqualify not being called correctly
+router.route('/patientsFuture').post((request, response) => {
+    console.log("Post is starting.")
+    let Disqualify = request.body
+    dbqueries.addFuturePatient(patientsFuture).then(result => {
         response.status(201).json(result);
     })
 })
