@@ -1,13 +1,10 @@
 import React, { useContext, useState } from "react";
-import { auth, db } from "../firebase";
-import { useAuthState } from "react-firebase-hooks/auth";
+import { auth} from "../firebase";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
   sendPasswordResetEmail,
-  updateEmail,
-  updatePassword
 } from "firebase/auth";
 import { useNavigate } from 'react-router-dom';
 
@@ -24,7 +21,6 @@ export const AuthProvider = ({ children }) => {
 
     auth.onAuthStateChanged(user => {
         if(user) {
-          console.log(user.auth.currentUser)
           setUser(user.auth.currentUser)
             /* const data = JSON.parse(window.localStorage.getItem('userData'));
             setUserData(data) */
@@ -32,7 +28,6 @@ export const AuthProvider = ({ children }) => {
             console.log('user logged out')
         }  
     })
-    console.log(user)
 
     const createUser = async (email, password, userInfo) => {
       const userCredential = await createUserWithEmailAndPassword(
@@ -41,7 +36,6 @@ export const AuthProvider = ({ children }) => {
             password
           );
           const user = userCredential.user;
-          console.log(userInfo)
           const patientInfo = {
             uid: user.uid,
             accessCode: userInfo.accessCode,
@@ -49,7 +43,6 @@ export const AuthProvider = ({ children }) => {
             email: userInfo.email,
             date: userInfo.date
           }
-          console.log(patientInfo)
           fetch("api/patients/add", {
             method: "POST",
             headers: {
@@ -80,18 +73,19 @@ export const AuthProvider = ({ children }) => {
         .then((userCredential) => {
           const user = userCredential.user;
           setUser(user);
-          setIsLoggedIn(true);
-          navigate('/home')
+          setIsLoggedIn(true);         
         })
         .catch((error) => {
           const errorCode = error.code;
+          console.log(errorCode)
           //const errorMessage = error.message;
+          if (errorCode === "auth/user-not-found"){
+            alert("Account not found, please try again")
+          } else 
           if (errorCode === "auth/wrong-password") {
             alert(
               "Incorrect password, please try again"
-              
-            );
-        
+            );    
           }
         });
   };
@@ -103,7 +97,6 @@ export const AuthProvider = ({ children }) => {
         navigate('/login')
       })
       .catch((error) => {
-        const errorCode = error.code;
         const errorMessage = error.message;
         alert(errorMessage)
       });
@@ -111,9 +104,7 @@ export const AuthProvider = ({ children }) => {
 
   const newPassword = async (email, username, password) => {
     console.log(auth.currentUser);
-   
   };
-
 
   const value = {
     createUser,

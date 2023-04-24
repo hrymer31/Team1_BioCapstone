@@ -93,19 +93,6 @@ const EditProfile = () => {
             }
         )
     }, [user])
-    /*updateDoc(doc(db, "users"), {     
-        name: name,
-        username: username, 
-        email: email,
-        password: password
-      }).then(() => { 
-       
-        console.log('data updated');  
-  
-      }).catch((error) => {
-           
-            console.log(error);
-      });*/
 
       return(
         <div className= "Profile">

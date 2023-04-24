@@ -1,9 +1,7 @@
 import React , {useEffect, useState} from 'react'
 import Quotes from '../InspirationalQuotes';
-import result from './PatientDetails';
 import '../Css/dashboard.css'
 import { Box } from '@mui/system';
-import Link from '@mui/material/Link'
 import Navbar from './Navbar';
 import {
   FormControl,
@@ -92,7 +90,6 @@ const Dashboard = () => {
       response => response.clone().json()
     ).then(
       data => {
-        //console.log(data)
         if(data.length === 0){
           setCurrentStepCount(0)
         } else {
@@ -101,7 +98,6 @@ const Dashboard = () => {
       }
     )
   }
-
   useEffect(() => {
     getPatientDetails()
     getDate(todaysSteps)

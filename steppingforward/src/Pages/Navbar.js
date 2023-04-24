@@ -8,6 +8,7 @@ import { UserAuth } from './AuthContext';
 const Navbar = () => {
   const { logout } = UserAuth();
   const navigate = useNavigate();
+
   const handleLogout = () => {
     try {
       logout()
@@ -16,6 +17,20 @@ const Navbar = () => {
       console.log(e.message)
     }
   }
+
+  function CustomLink({ to, children, ...props }) {
+    const resolvedPath = useResolvedPath(to)
+    const isActive = useMatch({ path: resolvedPath.pathname, end: true })
+
+    return (
+      <li className={isActive ? "active" : ""}>
+        <Link to={to} {...props}>
+          {children}
+        </Link>
+      </li>
+    )
+  }
+
   return (
     <nav className="nav">
       <img src={feetlogo} alt="footprint" width="70px" />
@@ -23,33 +38,18 @@ const Navbar = () => {
         Stepping Forward
       </Link>
       <img src={feetlogo} alt="footprint" width="70px" />
-      <ul>
-   
-              
-             
-      <CustomLink to="/details"> Calculate Steps </CustomLink>  
-      <CustomLink to="/resources"> Resources </CustomLink>  
-      <CustomLink to="/goals"> Goals </CustomLink>  
-      <CustomLink to="/contactForm"> Email Reminders </CustomLink>  
-      <CustomLink to="/profile"> My Account </CustomLink> 
-      <CustomLink to="/" onClick={handleLogout}> Log Out </CustomLink>    
-     
-          </ul>
+      <ul>        
+        <CustomLink to="/details"> Calculate Steps </CustomLink>  
+        <CustomLink to="/resources"> Resources </CustomLink>  
+        <CustomLink to="/goals"> Goals </CustomLink>  
+        <CustomLink to="/contactForm"> Email Reminders </CustomLink>  
+        <CustomLink to="/profile"> My Account </CustomLink> 
+        <CustomLink to="/" onClick={handleLogout}> Log Out </CustomLink>    
+      </ul>
     </nav>
   )
 }
   
-function CustomLink({ to, children, ...props }) {
-  const resolvedPath = useResolvedPath(to)
-  const isActive = useMatch({ path: resolvedPath.pathname, end: true })
 
-  return (
-    <li className={isActive ? "active" : ""}>
-      <Link to={to} {...props}>
-        {children}
-      </Link>
-    </li>
-  )
-}
 
 export default Navbar;

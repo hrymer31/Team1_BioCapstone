@@ -29,7 +29,6 @@ async function getPatientsResults(data){
             .input('sDate', sql.Date, data.dateS)
             .input('eDate', sql.Date, data.dateE)
             .query("SELECT accessCode,age,sex,race,stepsPerDay,totalStepTarget,currentWeight,date FROM patientDetails WHERE date BETWEEN @sDate AND @eDate")  
-        console.log(patients.recordsets[0])     
         return patients.recordsets[0]; 
     } catch (error) {
         console.log(error);
@@ -117,13 +116,26 @@ async function addSteps(stepInfo) {
     }
 }
 async function getSteps(patientData){
-    //console.log(patientData.uid)
     try {
         let pool = await sql.connect(config);
         let patient = await pool.request()
             .input('uid', sql.VarChar, patientData.uid)
             .input('date', sql.Date, patientData.date)
             .query("SELECT * FROM patientSteps WHERE uid=@uid AND date=@date")
+        return patient.recordsets[0];
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+async function getAllSteps(data) {
+    console.log(data)
+    try {
+        let pool = await sql.connect(config);
+        let patient = await pool.request()
+            .input('sDate', sql.Date, data.dateS)
+            .input('eDate', sql.Date, data.dateE)
+            .query("SELECT accessCode, stepCount, date FROM patientSteps WHERE date BETWEEN @sDate AND @eDate")
         return patient.recordsets[0];
     } catch (error) {
         console.log(error)
@@ -138,12 +150,12 @@ async function updatePatientProfile(patientDetails){
             .input('name', sql.VarChar, patientDetails.newName)
             .input('uid', sql.VarChar, patientDetails.uid)
             .query("UPDATE patientDetails SET name=@name, email=@email WHERE uid=@uid")
+        return patient.recordsets[0]
     }catch (error){
         console.log(error)
     }
 }
 
-//I think there is an issue with this code. I think i might need a return statement for patients?
 async function addFuturePatient(patientsFuture){
     try{
         let pool = await sql.connect(config);
@@ -158,6 +170,18 @@ async function addFuturePatient(patientsFuture){
     }
 }
 
+async function getFuturePatients() {
+    try {
+        let pool = await sql.connect(config);
+        console.log('connecting...')
+        let patient = await pool.request()
+            .query("Select * from patientsFuture")
+        return patient.recordsets[0]
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 module.exports = {
     getPatients: getPatients,
     getPatient: getPatient,
@@ -165,8 +189,10 @@ module.exports = {
     addPatientDetails: addPatientDetails,
     getSteps: getSteps,
     addSteps: addSteps,
+    getAllSteps: getAllSteps,
     updateSteps: updateSteps,
     getPatientsResults: getPatientsResults,
     updatePatientProfile: updatePatientProfile,
     addFuturePatient: addFuturePatient,
+    getFuturePatients: getFuturePatients
 }

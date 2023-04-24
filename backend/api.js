@@ -80,6 +80,12 @@ router.route('/patients/getSteps/:patientData').get((request, response) => {
     })
 })
 
+router.route('/patients/getAllSteps/:data').get((request, response) => {
+    dbqueries.getAllSteps(JSON.parse(request.params.data)).then(result => {
+        response.json(result)
+    })
+})
+
 router.route('/patients/updateProfile').post((request, response) => {
     let patientInfo = request.body
     console.log(patientInfo)
@@ -93,6 +99,12 @@ router.route('/patientsFuture').post((request, response) => {
     let patientsFuture = request.body
     dbqueries.addFuturePatient(patientsFuture).then(result => {
         response.status(201).json(result);
+    })
+})
+
+router.route('/allPatientsFuture').get((request, response) => {
+    dbqueries.getFuturePatients().then(result => {
+        response.json(result)
     })
 })
 

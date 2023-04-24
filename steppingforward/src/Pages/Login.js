@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate, Link, useLocation } from "react-router-dom";
+import React, {  useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { UserAuth } from "./AuthContext";
 import { FormControl } from "@mui/material";
 import Button from "@mui/material/Button";
@@ -16,32 +16,23 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { signIn, user, isLoggedIn, userData, isDisabled } = UserAuth();
+  const { signIn, user, isDisabled } = UserAuth();
   const [goToForgotPassword, setgoToForgotPassword] = useState(false);
   const [goToHome, setgoToHome] = useState(false);
-  const [goToDashboard, setGoToDashboard] = useState(true);
 
+  if (goToForgotPassword) {
+    setgoToHome(false)
+    navigate('/forgotpassword')
+  }
 
-  useEffect(() => {
-
-
-
-    if (goToForgotPassword) {
-      setgoToHome(false)
-      navigate('/forgotpassword')
-    }
-
-    if (goToHome) {
-      setgoToForgotPassword(false)
-      navigate('/home')
-    }
-  }, [goToForgotPassword, goToHome])
-
+  if (goToHome) {
+    setgoToForgotPassword(false)
+    navigate('/')
+  }
 
   const handleSignIn = (e) => {
     e.preventDefault();
-    if (email === "rburesh@kennesaw.edu")
-    navigate('/admin');
+
     if (email === "") {
       alert("email can't be empty");
     } else if (password === "") {
@@ -50,6 +41,13 @@ const Login = () => {
    
     try {
       signIn(email, password)
+      if(user){ //if user is logged in
+        if (email === "rburesh@kennesaw.edu") {
+          navigate('/admin');
+        } else {
+          navigate('/home')
+        }
+      }
     } catch (error) {
       console.log(error)
     }

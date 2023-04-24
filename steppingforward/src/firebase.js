@@ -18,5 +18,4 @@ export const app = initializeApp(firebaseConfig);
 export const auth = initializeAuth(app, {
     persistence: browserLocalPersistence
 });
-console.log(auth);
 export const db = getFirestore(app);

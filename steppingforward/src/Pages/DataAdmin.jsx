@@ -7,12 +7,18 @@ import {utils, writeFile} from 'sheetjs-style';
 import 'react-datepicker/dist/react-datepicker.css';
 import moment from 'moment';
 import Navbar from './Navbar';
+import Checkbox from '@mui/material/Checkbox';
+import FormControlLabel from '@mui/material/FormControlLabel';
+
 
 function DataAdmin() {
     const [startDate, setStartDate] = useState(null);
     const [endDate,   setEndDate]   = useState(null);
     const [patientCollection, setPatientCollection] = useState([{}])
     const [stepCollection, setStepCollection] = useState([{}])
+    const [disqualifiedCollection, setDisqualifiedCollection] = useState([{}])
+    const [checked, setChecked] = useState(false)
+
     const dataParams ={
         dateS: startDate,
         dateE: endDate 
@@ -25,64 +31,78 @@ function DataAdmin() {
         //add data to workbook
         utils.book_append_sheet(workbook,worksheet1, 'Details') //adds sheet to workbook
         utils.book_append_sheet(workbook,worksheet2, 'Steps')
+
+        if(checked){
+            const worksheet3 = utils.json_to_sheet(disqualifiedCollection)
+            utils.book_append_sheet(workbook,worksheet3, 'Future Patients')
+        }
         //save file
         writeFile(workbook, fileName +".xlsx"); //downloads workbook
     }
-
+   
     async function handleExcelExport() {
         if(startDate === null || endDate === null){
             alert('start or end date is null')
+            return
         } else {
-            //fetches patient details from database between selected dates
-            fetch('api/patientsresults/' + JSON.stringify(dataParams), {
-              method: 'GET',
-              headers: {
-                "Content-Type": "application/json",
-              }
-              
-            }).then(
-                response => response.clone().json()
-            ).then(
-                data => {
-                    setPatientCollection(data)
-                }
-            )
-            //reformats dates into ISOString
-            patientCollection.forEach((element) => {
-                    element.date = moment(element.date).format('YYYY-MM-DD')
-                }
-            )
-            //fetches steps from database between selected dates
-            fetch('api/patients/getAllSteps/' + JSON.stringify(dataParams), {
-                method: 'GET',
-                headers: {
-                    "Content-Type": "application/json",
-                }
-            }).then(
-                response => response.clone().json()
-            ).then(
-                data => {
-                    console.log(data)
-                    setStepCollection(data)
-                }
-            )
-            //reformats dates into ISOString
-            stepCollection.forEach((element) => {
-                    element.date = moment(element.date).format('YYYY-MM-DD')
-                }
-            )
-            //this gets date for export file name
-            const today = new Date().toISOString()
-            let formattedToday = moment(today).format('MM-YY')
-            //begins export
-           exportExcel("PatientExport " + formattedToday);          
-        }
+            await Promise.all([
+                //fetches patient details from database between selected dates
+                fetch('api/patientsresults/' + JSON.stringify(dataParams), {
+                    method: 'GET',
+                    headers: {
+                        "Content-Type": "application/json",
+                    }
+                }).then(
+                    response => response.clone().json()
+                ).then(
+                    data => { setPatientCollection(data) },
+                    //reformats dates into ISOString
+                    patientCollection.forEach((element) => {
+                        element.date = (element.date).slice(0, 10)
+                    })
+                ),
+                //fetches steps from database between selected dates
+                fetch('api/patients/getAllSteps/' + JSON.stringify(dataParams), {
+                    method: 'GET',
+                    headers: {
+                        "Content-Type": "application/json",
+                    }
+                }).then(
+                    response => response.clone().json()
+                ).then(
+                    data => { setStepCollection(data) },
+                    //reformats dates into ISOString
+                    stepCollection.forEach((element) => {
+                        element.date = (element.date).slice(0, 10)
+                    })
+                ),
+                //fetches disqualified patients from database
+                fetch('api/allPatientsFuture', {
+                    method: 'GET',
+                    headers: {
+                        "Content-Type": "application/json",
+                    }
+                }).then(
+                    response => response.clone().json()
+                ).then(
+                    data => { setDisqualifiedCollection(data) }
+                )
+            ])             
+        }            
+        //this gets date for export file name
+        const today = new Date().toISOString()
+        let formattedToday = moment(today).format('MM-YY')
+        //begins export
+        exportExcel("PatientExport " + formattedToday);   
     }
 
+    function handleChange(){
+        setChecked(current => !current)
+    }
     return (
        
         <div className='Admin'>
-  <Navbar />
+            <Navbar />
             <Box marginTop={10} marginBottom={10}
                 className='adminBox'
                 sx={{
@@ -108,11 +128,16 @@ function DataAdmin() {
                         <DatePicker selected={endDate} onChange={date => setEndDate(date)} />
                     </div>
 
-                    <Box textAlign={'center'} marginTop={5}>
+                    <Box textAlign={'center'} marginTop={5} alignContent={'center'} alignItems={'center'} display={'flex'} flexDirection={'column'}>
 
-                        <Button variant="outlined" onClick={handleExcelExport}>Export to Excel</Button>
-
-                    </Box>
+                        <Button variant="outlined" onClick={handleExcelExport}>Export to Excel</Button>  
+                        <FormControlLabel
+                            control={
+                                <Checkbox checked={checked} name="disqualified" onChange={handleChange}/>
+                            }
+                            label="Include Sheet for Disqualified Patients Info"
+                        />
+                    </Box>                    
                 </div>
             </Box>
         </div>

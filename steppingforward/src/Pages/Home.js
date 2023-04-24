@@ -27,14 +27,11 @@ const Home = () => {
                         borderRadius: 2
                     }}>
                     <FormControl
-                        
                         sx={{
                             display: 'flex'
                         }}
                     >
-
                         <h5 className="homeTitle">Welcome to Stepping Forward!</h5>
-
                         <p style={{ 'margin': 5 }}>
                             Hi, thank you so much for joining Stepping Forward.
                         </p>
