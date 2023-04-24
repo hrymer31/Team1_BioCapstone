@@ -94,7 +94,6 @@ export const AuthProvider = ({ children }) => {
     sendPasswordResetEmail(auth, email)
       .then(() => {
         alert('password reset link sent')
-        navigate('/login')
       })
       .catch((error) => {
         const errorMessage = error.message;

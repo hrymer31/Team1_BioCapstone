@@ -54,9 +54,6 @@ const Login = () => {
 
   }
 
-
-
-
   return (
     <div className="Auth">
 

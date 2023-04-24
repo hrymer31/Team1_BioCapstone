@@ -14,7 +14,7 @@ app.use(bodyParser.json())
 app.use(cors())
 app.use('/api', router)
 
-//app.use(express.static(path.resolve(__dirname, '../steppingforward/build')));
+app.use(express.static(path.resolve(__dirname, '../steppingforward/build')));
 
 //use this to test API is working on call
 router.use((request, response, next) => {
