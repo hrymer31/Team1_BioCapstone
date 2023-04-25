@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react"
-import { collection, doc, setDoc, addDoc, updateDoc, deleteDoc, getDoc, getDocs, where, query } from "firebase/firestore";
 import { FormControl, Button, Typography, withTheme } from '@mui/material'
 import Box from '@mui/material/Box';
 import { UserAuth } from "./AuthContext"
@@ -20,6 +19,7 @@ const Profile = () => {
   }
 
   useEffect(() => {
+    console.log(user)
     fetch('/api/patients/' + user.uid, { //getting user details
       method: "GET",
       headers: {
@@ -29,6 +29,7 @@ const Profile = () => {
       response => response.clone().json()
     ).then(
       data => {
+        console.log(data)
         setUserInfo(data[0])
       }
     )
@@ -36,7 +37,7 @@ const Profile = () => {
   
   return (
 
-    <div classname="Profile">
+    <div className="Profile">
 
       <Navbar />
 
@@ -59,9 +60,6 @@ const Profile = () => {
             <div className="profileForm">
               <div className="profileInputSection">
                 <label>Name: {userInfo.name}</label>
-              </div>
-              <div className="profileInputSection">
-                <label>Username: {username}</label>
               </div>
               <div className="profileInputSection">
                 <label>Email: {userInfo.email}</label>

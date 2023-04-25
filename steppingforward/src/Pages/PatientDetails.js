@@ -111,14 +111,14 @@ const PatientDetails = () => {
         (userDetails.targetBodyFatPerc = ((userDetails.newFatMass / userDetails.targetBodyWeightkg)*100).toFixed(1));
 
         if (sex === 'Male') {
-           (userDetails.stepsPerDay = (39377.34 / (userDetails.targetBodyFatPerc ** 1.3405)).toFixed(1))
+           userDetails.stepsPerDay = ((39377.34) / (Math.pow(userDetails.targetBodyFatPerc, 1.3405)).toFixed(1))
          
         } else if (sex === 'Female') {
             userDetails.stepsPerDay = ((261425.4) / (Math.pow(userDetails.targetBodyFatPerc, 1.8797)).toFixed(1))
           
         }
-        
-        setResult (userDetails.totalStepTarget = (userDetails.stepsPerDay * userDetails.currentFatMass))
+        userDetails.totalStepTarget = (userDetails.stepsPerDay * userDetails.currentFatMass)
+        setResult(userDetails.totalStepTarget)
 
         setAgeError(false)
         setSexError(false)
@@ -225,8 +225,8 @@ const PatientDetails = () => {
                         </div>
                        <p> Enter all calculations below to the nearest tenths place (e.g. 250.5, 22.0)</p>
                         <div className='detailsInputSection'>
-                            <label htmlFor='height'>Height(cm)</label>
-                            <input id='height' type='number' placeholder='cm' onChange={(e) => handleHeightChange(e)} /> 
+                            <label htmlFor='height'>Height(in)</label>
+                            <input id='height' type='number' placeholder='in' onChange={(e) => handleHeightChange(e)} /> 
                         </div>
                         {
                             (heightError) && <div style={{ color: 'red' }} className='detailsError'>You must select a valid height</div>

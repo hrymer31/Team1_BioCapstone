@@ -129,7 +129,6 @@ async function getSteps(patientData){
 }
 
 async function getAllSteps(data) {
-    console.log(data)
     try {
         let pool = await sql.connect(config);
         let patient = await pool.request()

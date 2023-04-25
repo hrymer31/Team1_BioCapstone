@@ -21,8 +21,8 @@ import Home from "./Pages/Home.js";
 function App() {
   return (
     <>
+    <Router>
      <AuthProvider>
-        <Router>
           <Routes>
             <Route path='/' element={<Home/>} />
             <Route path='/home'  element={<Dashboard />} />
@@ -40,8 +40,8 @@ function App() {
             <Route path = '/edit' element = {<EditProfile/>}/>
             <Route path='/forgotpassword' element={<ForgotPassword/>}/>
           </Routes>
-        </Router>
       </AuthProvider>
+      </Router>
     </>
   );
 }
