@@ -6,12 +6,10 @@ import {
   signOut,
   sendPasswordResetEmail,
 } from "firebase/auth";
-import { useNavigate } from 'react-router-dom';
 
 const AuthContext = React.createContext();
 
 export const AuthProvider = ({ children }) => {
-  const navigate = useNavigate();
   const [user, setUser] = useState({});
   const [userData, setUserData] = useState({});
   const [isLoggedIn, setIsLoggedIn] = useState(false);

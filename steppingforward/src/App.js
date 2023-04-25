@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './Css/App.css';
 import './Css/contactForm.css';
-import { Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router,Routes, Route } from "react-router-dom";
 import Resources from './Pages/Resources'
 import { AuthProvider } from "./Pages/AuthContext";
 import PatientDetails from './Pages/PatientDetails';
@@ -22,6 +22,7 @@ function App() {
   return (
     <>
      <AuthProvider>
+        <Router>
           <Routes>
             <Route path='/' element={<Home/>} />
             <Route path='/home'  element={<Dashboard />} />
@@ -39,6 +40,7 @@ function App() {
             <Route path = '/edit' element = {<EditProfile/>}/>
             <Route path='/forgotpassword' element={<ForgotPassword/>}/>
           </Routes>
+        </Router>
       </AuthProvider>
     </>
   );
