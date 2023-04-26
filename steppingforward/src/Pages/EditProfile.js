@@ -14,8 +14,8 @@ import { updateEmail } from "firebase/auth";
 const validatePassword = (password) => {
     const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{6,}$/;
     return passwordRegex.test(password);
-  };
-  
+};
+
 const EditProfile = () => {
     const { user, auth, updatePassword } = UserAuth();
     const [userInfo, setUserInfo] = useState({})
@@ -23,9 +23,6 @@ const EditProfile = () => {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-
-    const age = "Age"      //Settings should not be changed; setters are not necessary, only display of saved values
-    const sex = "Sex"
 
     const navigate = useNavigate();
 
@@ -43,26 +40,26 @@ const EditProfile = () => {
             newEmail: ''
         }
         //email and password requires recent sign in
-        if(password !== ""){ //this updates password in firebase
-            try{
+        if (password !== "") { //this updates password in firebase
+            try {
                 await updatePassword(auth.currentUser, password)
             } catch (error) {
                 console.log(error)
-            } 
+            }
         }
 
-        if(email !== ""){ //this updates password in firebase and sets email variable for azure
+        if (email !== "") { //this updates password in firebase and sets email variable for azure
             try {
-                 await updateEmail(auth.currentUser, email)
+                await updateEmail(auth.currentUser, email)
                 updatedProfile.newEmail = email; //updates email in object
             } catch (error) {
                 console.log(error)
             }
-        } else { updatedProfile.newEmail = userInfo.email} //if email field is empty keeps email the same
-        
-        if(name !== ""){ //if name field is not empty update object
+        } else { updatedProfile.newEmail = userInfo.email } //if email field is empty keeps email the same
+
+        if (name !== "") { //if name field is not empty update object
             updatedProfile.newName = name;
-        } else { updatedProfile.newName = userInfo.name} // if its empty keep it the same
+        } else { updatedProfile.newName = userInfo.name } // if its empty keep it the same
 
         fetch("/api/patients/updateProfile", {
             method: "POST",
@@ -74,7 +71,7 @@ const EditProfile = () => {
             console.log(response.statusText)
         })
         e.preventDefault();
-        
+
         //Update profile information in the database, then redirect back to profile info page
         navigate("/profile")
     }
@@ -94,86 +91,81 @@ const EditProfile = () => {
         )
     }, [user])
 
-      return(
-        <div className= "Profile">
-      
-            <Navbar/>
+    return (
+        <div className="Profile">
 
-            <Box marginTop={10}
-                className='box'
+            <Navbar />
+
+            <Box marginTop={10} marginBottom={10}
+                className='profileBox'
                 sx={{
-                    backgroundColor: 'white', 
+                    backgroundColor: 'white',
                     width: 500,
                     marginLeft: 'auto',
                     marginRight: 'auto',
-                    height: 550,
+                    height: 650,
                     overflow: 'auto',
                     borderRadius: 2
                 }}>
 
-                    <div className = "ProfileDisplay">
+                <div className="ProfileDisplay">
 
-                    <Typography variant = "h5" align = "center" gutterBottom>Edit Profile</Typography>
+                <h5 className='profileTitle'>Edit Profile</h5>
 
-                    <FormControl fullWidth sx={{display: 'flex'}}>
+                    <FormControl fullWidth sx={{ display: 'flex' }}>
 
-                        <div className = "form">
+                        <div className="profileForm">
 
-                            <div className = "inputSection">
+                            <div className="profileInputSection">
 
                                 <label htmlFor="Name">Name:</label>
-                                <input id = "Name" type = "text" defaultValue={name} onChange={(e) => setName(e.target.value)}/>
+                                <input id="Name" type="text" defaultValue={name} onChange={(e) => setName(e.target.value)} />
 
                             </div>
-                            <div className = "inputSection">
+                            <div className="profileInputSection">
 
-                                <label htmlFor = "Username">Username:</label>
-                                <input id = "Username" type = "text" defaultValue={username} onChange={(e) => setUsername(e.target.value)}/>
-
-                            </div>
-                            <div className = "inputSection">
-
-                                <label htmlFor = "Email">Email:</label>
-                                <input id = "Email" type = "email" defaultValue={email} onChange={(e) => setEmail(e.target.value)}/>
+                                <label htmlFor="Username">Username:</label>
+                                <input id="Username" type="text" defaultValue={username} onChange={(e) => setUsername(e.target.value)} />
 
                             </div>
-                            <div className = "inputSection">
-  <label htmlFor = "Password">Password:</label>
-  <input id = "Password" type = "password" onChange={(e) => setPassword(e.target.value)}/>
-  <p style={{ color: !validatePassword(password) ? "red" : "green" }}>
-    Password must be at least 6 characters long and contain at least one uppercase letter
-  </p>
-</div>
-                            <h4>Password Requirements:</h4>
+                            <div className="profileInputSection">
 
-                            <div className = "inputSection">
-
-                                <label htmlFor = "Age">Age:</label>
-                                <input id = "Age" disabled defaultValue={age}/>
+                                <label htmlFor="Email">Email:</label>
+                                <input id="Email" type="email" defaultValue={email} onChange={(e) => setEmail(e.target.value)} />
 
                             </div>
-                            <div className = "inputSection">
-
-                                <label htmlFor = "Sex">Sex:</label>
-                                <input id = "Sex" disabled defaultValue={sex}/>
-
+                            <div className="profileInputSection">
+                                <label htmlFor="Password">Password:</label>
+                                <input id="Password" type="password" onChange={(e) => setPassword(e.target.value)} />
                             </div>
+                            <h5>Password Requirements:</h5>
+                            <p style={{ color: !validatePassword(password) ? "red" : "green" }} align = "center">
+                                    Password must be at least 6 characters long and contain at least one uppercase letter
+                                </p>
 
                         </div>
 
-                        <Button onClick = {cancelEditing}>Go Back</Button>
+                        <Box textAlign={'center'} padding={1}>
 
-                        <Button onClick={saveChanges}>Save</Button>
+                        <Button className = "profilebtn" variant = "outlined" onClick={cancelEditing}>Go Back</Button>
+
+                        </Box>
+
+                        <Box textAlign={'center'} padding={1}>
+
+                        <Button className = "profilebtn" variant = "outlined" onClick={saveChanges}>Save</Button>
+
+                        </Box>
 
                     </FormControl>
 
-                    </div>
+                </div>
 
-                </Box>
-      
+            </Box>
+
         </div>
 
-      )
+    )
 
 
 }
