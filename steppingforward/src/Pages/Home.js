@@ -44,7 +44,7 @@ const Home = () => {
                         </p>
                         <p style={{ 'margin': 15 }}>
                             Second, we would like to credit Dr. Robert Buresh for creating the equation we've used to calculate the steps needed for weight loss.
-                            He suggests that you only update your current weight every 2 to 3 months or after appoinment with your medical professional.
+                            He suggests that you only update your current weight every 2 to 3 months or after appointment with your medical professional.
                         </p>
                         <p style={{ 'margin': 5 }}>
                             Lastly, happy stepping.
