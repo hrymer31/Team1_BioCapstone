@@ -122,12 +122,7 @@ const EditProfile = () => {
                                 <input id="Name" type="text" defaultValue={name} onChange={(e) => setName(e.target.value)} />
 
                             </div>
-                            <div className="profileInputSection">
-
-                                <label htmlFor="Username">Username:</label>
-                                <input id="Username" type="text" defaultValue={username} onChange={(e) => setUsername(e.target.value)} />
-
-                            </div>
+                            
                             <div className="profileInputSection">
 
                                 <label htmlFor="Email">Email:</label>
