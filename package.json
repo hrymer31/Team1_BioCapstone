@@ -15,5 +15,8 @@
     "react-password-checklist": "^1.4.3",
     "simplebar-react": "^3.2.3",
     "styled-components": "^5.3.10"
+  },
+  "devDependencies": {
+    "gh-pages": "^5.0.0"
   }
 }
