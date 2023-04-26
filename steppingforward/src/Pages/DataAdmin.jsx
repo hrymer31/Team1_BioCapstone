@@ -55,11 +55,11 @@ function DataAdmin() {
                 }).then(
                     response => response.clone().json()
                 ).then(
-                    data => { setPatientCollection(data) },
+                    data => { setPatientCollection(data) }
                     //reformats dates into ISOString
-                    patientCollection.forEach((element) => {
-                        element.date = (element.date).slice(0, 10)
-                    })
+                    //patientCollection.forEach((element) => {
+                        //element.date = (element.date).slice(0, 10)
+                   // })
                 ),
                 //fetches steps from database between selected dates
                 fetch('api/patients/getAllSteps/' + JSON.stringify(dataParams), {
@@ -70,11 +70,11 @@ function DataAdmin() {
                 }).then(
                     response => response.clone().json()
                 ).then(
-                    data => { setStepCollection(data) },
+                    data => { setStepCollection(data) }
                     //reformats dates into ISOString
-                    stepCollection.forEach((element) => {
-                        element.date = (element.date).slice(0, 10)
-                    })
+                    //stepCollection.forEach((element) => {
+                       // element.date = (element.date).slice(0, 10)
+                   // })
                 ),
                 //fetches disqualified patients from database
                 fetch('api/allPatientsFuture', {
