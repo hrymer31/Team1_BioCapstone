@@ -1,22 +1,20 @@
-import { Link, useMatch, useResolvedPath } from "react-router-dom"
+
+  import React from 'react';
+  import {  Link } from "react-router-dom";
+
 import feetlogo from '../footprint.png';
 
-const HomeHeader = () => {
 
-  function CustomLink({ to, children, ...props }) {
-    const resolvedPath = useResolvedPath(to)
-    const isActive = useMatch({ path: resolvedPath.pathname, end: true })
+const navbar= () =>{
 
-    return (
-      <li className={isActive ? "active" : ""}>
-        <Link to={to} {...props}>
-          {children}
-        </Link>
-      </li>
-    )
-  }
+  const linkStyle = {
+   
+    textDecoration: "none",
+    color: 'black'
+  };
 
   return (
+   
     <nav className="nav">
       <img src={feetlogo} alt="footprint" width="70px" />
       <Link to="/" className="site-title">
@@ -24,11 +22,22 @@ const HomeHeader = () => {
       </Link>
       <img src={feetlogo} alt="footprint" width="70px" />
       <ul>
-        <CustomLink to="/ageCheck"> Sign Up </CustomLink> 
-        <CustomLink to="/login"> Log In </CustomLink>       
-      </ul>
+    
+    <li>
+      <Link to="/login" style={linkStyle}>Login </Link>
+    </li>
+    <li>
+      <Link to="/ageCheck"style={linkStyle}>Sign Up</Link>
+      
+    </li>
+  
+    </ul>
     </nav>
-  )
+  );
 }
+export default navbar;
 
-export default HomeHeader
+
+
+
+

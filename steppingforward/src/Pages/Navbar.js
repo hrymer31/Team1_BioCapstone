@@ -45,7 +45,7 @@ const Navbar = () => {
         <CustomLink to="/contactForm"> Email Reminders </CustomLink>  
         <CustomLink to="/profile"> My Account </CustomLink> 
         <CustomLink to="/" onClick={handleLogout}> Log Out </CustomLink>    
-      </ul>
+        </ul>
     </nav>
   )
 }

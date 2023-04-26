@@ -24,6 +24,7 @@
     "sheetjs": "^2.0.0",
     "sheetjs-style": "^0.15.8",
     "sql": "file:../backend",
+    "styled-components": "^5.3.10",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
