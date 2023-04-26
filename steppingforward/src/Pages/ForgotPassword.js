@@ -13,7 +13,6 @@ import '../Css/Auth.css'
 const ForgotPassword = () => {
     const navigate = useNavigate();
     const [error, setError] = React.useState('')
-    const [username, setUserName] = React.useState("")
     const [email, setEmail] = React.useState("")
     const { forgotPassword, isVerified, newPassword } = UserAuth();
     const [password, setPassword] = React.useState("")
@@ -39,7 +38,7 @@ const ForgotPassword = () => {
             alert("Email can't be empty");
         }
         try {
-            forgotPassword(email, username)
+            forgotPassword(email)
             navigate('/login')
         } catch (e) {
             setError(e.message)
