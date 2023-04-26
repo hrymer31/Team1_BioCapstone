@@ -43,7 +43,7 @@ const Navbar = () => {
         <CustomLink to="/resources"> Resources </CustomLink>  
         <CustomLink to="/goals"> Goals </CustomLink>  
         <CustomLink to="/contactForm"> Email Reminders </CustomLink>  
-        <CustomLink to="/profile"> My Account </CustomLink> 
+        <CustomLink to="/profile"> My Profile </CustomLink> 
         <CustomLink to="/" onClick={handleLogout}> Log Out </CustomLink>    
         </ul>
     </nav>

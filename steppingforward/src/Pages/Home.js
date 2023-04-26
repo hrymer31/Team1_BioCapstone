@@ -37,14 +37,14 @@ const Home = () => {
                         </p>
                         <p style={{ 'margin': 15 }}>
                             We hope this helps aid you on your weight loss journey.
-                            We have a few things to note before "stepping forward."
+                            We have a couple things to note before "stepping forward."
                         </p>
                         <p style={{ 'margin': 15 }}>
-                            First, your step count, starting weight, and weight loss achieved will be occasionally monitored and recorded for up to twelve months.
+                        First, variables like your step count, starting weight, and any weight loss achieved will be occasionally monitored and recorded for up to twelve months.
                         </p>
                         <p style={{ 'margin': 15 }}>
-                            Second, we would like to credit Dr. Robert Buresh for creating the equation we've used to calculate the steps needed for weight loss.
-                            He suggests that you only update your current weight every 2 to 3 months or after appointment with your medical professional.
+                            Second, we would like to credit Dr. Bob Buresh for creating the equation we've used to calculate the steps needed for weight loss.
+                            He suggests you only update your weight every 2 to 3 months or after an appointment with your medical professional.
                         </p>
                         <p style={{ 'margin': 5 }}>
                             Lastly, happy stepping.
