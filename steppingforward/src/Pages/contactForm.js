@@ -43,8 +43,11 @@ export const ContactUs = () => {
 
   const sendEmail = (e) => {
     e.preventDefault();
-
-    emailjs.sendForm('service_fuy3hz8', 'template_6hm8uge', form.current, 'EAlgO9m60ZlBwxMQ_')
+  
+    const formData = new FormData(form.current);
+    const toEmail = formData.get('to_email');
+  
+    emailjs.sendForm('service_fuy3hz8', 'template_6hm8uge', form.current, 'EAlgO9m60ZlBwxMQ_', {to_email: toEmail})
       .then((result) => {
         console.log(result.text);
       }, (error) => {
@@ -52,6 +55,7 @@ export const ContactUs = () => {
       });
     e.target.reset();
   };
+  
 
   return (
     <div className="Remind">
@@ -79,7 +83,7 @@ export const ContactUs = () => {
             <div className = "remindInputSection">
 
           <label htmlFor="email">Email Address:</label>
-          <input type="email" id="email" name="email" value="example@example.com" />
+          <input type="email" id="email" name="to_email"  />
 
           </div>
 
