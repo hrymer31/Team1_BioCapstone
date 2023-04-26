@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "proxy": "http://localhost:1433",
   "private": true,
-  "homepage": "http://{hrymer31}.github.io/{Team1_BioCapstone}",
+  "homepage": "https://{hrymer31}.github.io/Team1_BioCapstone",
   "dependencies": {
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
